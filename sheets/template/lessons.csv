@@ -1,0 +1,5 @@
+id,topic_id,subject_id,title,description,duration_min,type,sort_order
+les-akar-1,top-persamaan-kuadrat,matematika,Akar-akar Persamaan Kuadrat,Mengenal bentuk umum dan akar persamaan kuadrat,15,lesson,1
+les-akar-2,top-persamaan-kuadrat,matematika,Memfaktorkan & Rumus ABC,Cara menentukan akar secara aljabar,20,lesson,2
+les-stat-1,top-statistika,matematika,"Rata-rata, Median, Modus",Ukuran pemusatan data tunggal,15,lesson,1
+les-eks-1,top-teks-eksposisi,bahasa-indonesia,Struktur Teks Eksposisi,"Tesis, argumentasi, penegasan ulang",10,lesson,1

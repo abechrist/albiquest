@@ -1,0 +1,7 @@
+id,lesson_id,subject_id,type,prompt,options,answer,explanation,source,difficulty
+q-pk-1,les-akar-2,matematika,mcq,Akar-akar persamaan x^2 - 5x + 6 = 0 adalah ...,"[""2 dan 3"",""-2 dan -3"",""1 dan 6"",""-1 dan -6""]","[""0""]","Faktorkan: (x - 2)(x - 3) = 0, sehingga x = 2 atau x = 3.","Adaptasi BSE Matematika SMP/MTs Kelas IX, Kemdikbud",2
+q-st-1,les-stat-1,matematika,numeric,"Median dari data 3, 5, 7, 9, 11 adalah ...",[],"[""7""]",Data sudah terurut; nilai tengah (data ke-3) adalah 7.,"Format AKM Numerasi, Pusmenjar Kemdikbud - adaptasi",1
+q-pk-2,les-akar-1,matematika,true_false,"Persamaan x^2 = 16 memiliki dua akar berbeda, yaitu 4 dan -4.",[],"[""true""]","Benar: x^2 = 16 -> x = 4 atau x = -4, dua akar berbeda.","Adaptasi BSE Matematika SMP/MTs Kelas IX, Kemdikbud",1
+q-eks-1,les-eks-1,bahasa-indonesia,mcq,Bagian teks eksposisi yang berisi pendapat penulis disebut ...,"[""Tesis"",""Argumentasi"",""Penegasan ulang"",""Orientasi""]","[""0""]",Tesis adalah pernyataan pendapat penulis di awal teks eksposisi.,"Format AKM Literasi, Pusmenjar Kemdikbud - adaptasi",2
+q-eks-2,les-eks-1,bahasa-indonesia,short,Sebutkan satu ciri khas sebuah teks eksposisi.,[],"[""pendapat"",""opini"",""fakta""]",Teks eksposisi memuat pendapat/opini penulis yang didukung fakta.,"Format AKM Literasi, Pusmenjar Kemdikbud - adaptasi",2
+q-st-2,les-stat-1,matematika,mcq,"Modus dari data 2, 2, 3, 4, 4, 4, 5 adalah ...","[""2"",""3"",""4"",""5""]","[""2""]",Nilai yang paling sering muncul: 4 (muncul tiga kali).,"Format AKM Numerasi, Pusmenjar Kemdikbud - adaptasi",1

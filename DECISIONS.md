@@ -147,3 +147,21 @@ Spreadsheet kurikulum di-seed sesuai daftar ini dengan prioritas mapel inti dulu
 **Alternatives:** Membatasi app hanya 4 mapel nasional (mengurangi cakupan ujian sekolah).
 
 **Consequences:** Ada 9 mapel di UI; 4 mapel lanjutan ditandai "Menyusul" sampai kontennya di-seed.
+
+---
+
+## D-012: Google Sheets — publish-to-web gviz CSV, tanpa API key, cache lokal
+
+**Context:** Phase 2 data layer. Butuh sumber konten dari Google Sheets (D-002, D-005) yang bisa dibaca murni dari browser tanpa backend.
+
+**Decision:**
+1. **Provider:** endpoint publik "Publish to web" Google Sheets (`gviz/tq?tqx=out:csv&sheet=<nama>`) — read-only, tanpa API key, CORS aman.
+2. **Repository pattern:** `src/lib/store.tsx` = satu pintu data (loadDataSet + useData + helper bySubject/byTopic/byLesson). Sumber di-resolve dari env `VITE_SHEETS_ID`; tanpa env → seed lokal (`src/lib/seed.ts`) yang melewati jalur validasi identik.
+3. **Schema:** 6 sheet — subjects, curriculum, competencies, topics, lessons, questions. IDs unik, referensi via `*_id` divalidasi silang (typo ditolak dengan pesan sheet+baris).
+4. **Konten fleksibel:** opsi/jawaban soal JSON array; mapel tambahan cukup tambah baris di sheet (sesuai D-009/D-011).
+5. **Caching:** localStorage TTL 1 jam + fallback cache basi saat offline (selaras D-006 local-first).
+6. **Template:** CSV template di `sheets/template/` di-generate dari seed (satu sumber kebenaran) via script.
+
+**Alternatives:** Google Sheets API v4 (butuh API key/OAuth & backend proxy — overkill untuk app pribadi).
+
+**Consequences:** Pemilik konten (orang tua) edit spreadsheet → otomatis terlihat di app (maks 1 jam). Mode dev tanpa spreadsheet tetap jalan via seed.

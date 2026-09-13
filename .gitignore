@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# env lokal (VITE_SHEETS_ID dsb)
+.env
+.env.*
+!.env.example

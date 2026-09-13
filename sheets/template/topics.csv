@@ -1,0 +1,5 @@
+id,curriculum_id,subject_id,title,description,sort_order
+top-persamaan-kuadrat,cur-mtk-1,matematika,Persamaan Kuadrat,"Bentuk umum, akar, dan aplikasi",1
+top-statistika,cur-mtk-2,matematika,Statistika & Peluang,"Penyajian data, ukuran pemusatan, peluang",2
+top-teks-eksposisi,cur-bindo-1,bahasa-indonesia,Teks Eksposisi,"Struktur, unsur kebahasaan, dan isi",1
+top-listrik-dinamis,cur-ipa-1,ipa,Listrik Dinamis,"Arus, tegangan, hambatan, rangkaian",1
