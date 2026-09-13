@@ -16,22 +16,44 @@ export interface DataSet {
   questions: Question[]
 }
 
-export type DataSource = { kind: 'seed' } | { kind: 'sheets'; id: string }
+export type DataSource =
+  | { kind: 'neon'; url: string }
+  | { kind: 'sheets'; id: string }
+  | { kind: 'seed' }
 
-// ponytail: kalau nanti perlu multi-spreadsheet (mis. konten terpisah per mapel),
-// ganti VITE_SHEETS_ID dengan VITE_SHEETS_CONFIG (JSON map sheet->id).
+// Prioritas resolusi data source:
+// 1. Neon PostgreSQL (VITE_NEON_DATABASE_URL)
+// 2. Google Sheets (VITE_SHEETS_ID)
+// 3. Seed offline fallback
 export function resolveSource(): DataSource {
-  const id = import.meta.env.VITE_SHEETS_ID?.trim()
-  return id ? { kind: 'sheets', id } : { kind: 'seed' }
+  const neonUrl = import.meta.env.VITE_NEON_DATABASE_URL?.trim()
+  if (neonUrl) return { kind: 'neon', url: neonUrl }
+
+  const sheetsId = import.meta.env.VITE_SHEETS_ID?.trim()
+  if (sheetsId) return { kind: 'sheets', id: sheetsId }
+
+  return { kind: 'seed' }
 }
 
 export async function loadDataSet(source: DataSource): Promise<DataSet> {
+  if (source.kind === 'neon') {
+    try {
+      const { fetchDataSetFromNeon } = await import('./neon')
+      const ds = await fetchDataSetFromNeon(source.url)
+      assertRefs(ds)
+      return ds
+    } catch (e) {
+      console.warn('Gagal memuat data dari Neon Postgres, menggunakan seed fallback:', e)
+      // fallback ke seed lokal jika offline dan belum tercache
+    }
+  }
+
   const rows = {} as SheetRows
   for (const name of Object.keys(seedRows) as SheetName[]) {
     rows[name] =
-      source.kind === 'seed'
-        ? seedRows[name]
-        : await new SheetsClient(source.id).get(name)
+      source.kind === 'sheets'
+        ? await new SheetsClient(source.id).get(name)
+        : seedRows[name]
   }
   const ds = parseSheetRows(rows)
   assertRefs(ds)

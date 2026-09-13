@@ -1,6 +1,6 @@
 {
-  "name": "Personal Learning Adventure — Albert",
-  "short_name": "QuestLearn",
+  "name": "AlbiQuest — Petualangan Belajar Albert",
+  "short_name": "AlbiQuest",
   "description": "Aplikasi belajar petualangan personal untuk Albert (SMP Kelas 9) — Kurikulum Merdeka, Latihan Soal, Simulasi Ujian ANBK, dan Parent Area.",
   "start_url": "./",
   "scope": "./",

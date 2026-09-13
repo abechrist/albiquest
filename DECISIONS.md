@@ -379,3 +379,32 @@ Spreadsheet kurikulum di-seed sesuai daftar ini dengan prioritas mapel inti dulu
 **Alternatives:** Pengujian manual sepotong-sepotong tanpa automasi lintas modul.
 
 **Consequences:** Webapp memiliki fondasi kode yang kokoh, stabil, teruji regresi 100%, siap dirilis untuk produksi atau asesmen mandiri siswa.
+
+---
+
+## D-022: Database Migration to Neon Serverless PostgreSQL & Rebranding to AlbiQuest
+
+**Context:** Database Migration. Menggantikan backend Google Sheets publik dengan **Neon Console Serverless PostgreSQL** untuk project **`AlbiQuest`** demi keandalan data relasional, integritas referensial (foreign keys), kueri terstruktur, dan skalabilitas tanpa mengorbankan ketahanan offline-first.
+
+**Decision:**
+1. **Skema Relasional PostgreSQL di Neon:**
+   - Dibuat 6 tabel relasional dengan constraint Foreign Key & Cascade:
+     - `subjects` (id, name, emoji, color_from, color_to, description, priority, status, sort_order)
+     - `curriculum` (id, subject_id, title, description, sort_order)
+     - `topics` (id, curriculum_id, subject_id, title, description, sort_order)
+     - `competencies` (id, topic_id, code, description, sort_order)
+     - `lessons` (id, topic_id, subject_id, title, description, duration_min, type, sort_order)
+     - `questions` (id, lesson_id, subject_id, type, prompt, options JSONB, answer JSONB, explanation, hints JSONB, xp, source, difficulty)
+2. **Seeding & Sinkronisasi Otomatis (`scripts/migrate-neon.ts`):**
+   - Menjalankan migrasi DDL dan batch upsert (`ON CONFLICT DO UPDATE`) untuk 9 mata pelajaran, 7 kurikulum, 6 topik, 6 kompetensi, 10 modul pelajaran, dan 10 bank soal seed ke Neon Cloud.
+3. **Klien Serverless & Strategi Caching (`src/lib/neon.ts`):**
+   - Menggunakan driver modern `@neondatabase/serverless` yang mendukung query cepat via HTTP/WebSocket tanpa bottleneck connection pool di browser.
+   - Dilengkapi *localStorage Caching* (TTL 1 jam) + auto-fallback ke cache offline saat disconnected, menjaga keselarasan dengan prinsip PWA offline-first.
+4. **Data Layer Prioritization (`src/lib/store.tsx`):**
+   - Prioritas deteksi: (1) `VITE_NEON_DATABASE_URL` (Neon Postgres) $\rightarrow$ (2) `VITE_SHEETS_ID` (Google Sheets) $\rightarrow$ (3) `seed` lokal.
+5. **Rebranding Identitas ke AlbiQuest:**
+   - Manifest PWA, title browser (`index.html`), dan dokumentasi resmi diperbarui menjadi **AlbiQuest — Petualangan Belajar Albert (SMP Kelas 9)**.
+
+**Alternatives:** Tetap mengandalkan Google Sheets publik (rentan limitasi rate limit, tanpa skema tipe relasional dan foreign keys).
+
+**Consequences:** Database sekarang berskala enterprise di cloud PostgreSQL Neon, memiliki integritas ACID, kueri cepat dengan latensi rendah, serta tetap dapat diakses 100% saat offline melalui browser cache.
