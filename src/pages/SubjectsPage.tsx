@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { useData, resolveSource } from '../lib/store'
 import type { Subject } from '../lib/domain'
 
@@ -60,11 +61,13 @@ function SubjectGroup({ prio, subjects }: { prio: 1 | 2 | 3; subjects: Subject[]
 }
 
 function SubjectCard({ subject }: { subject: Subject }) {
+  const navigate = useNavigate()
   const comingSoon = subject.status === 'coming'
   return (
     <button
       disabled={comingSoon}
       aria-disabled={comingSoon}
+      onClick={() => navigate(`/student/subjects/${subject.id}`)}
       className={`card w-full flex items-center gap-3 p-3 text-left transition-transform ${comingSoon ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer active:translate-y-[1px]'}`}
     >
       <div

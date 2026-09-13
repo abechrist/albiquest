@@ -3,9 +3,13 @@ import { createRoot } from 'react-dom/client'
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './index.css'
 import { ProfileProvider, useProfile } from './lib/auth'
+import { ProgressProvider } from './lib/progress'
 import { Login } from './pages/Login'
 import { StudentHome } from './pages/StudentHome'
+import { JourneyHome } from './pages/JourneyHome'
 import { SubjectsPage } from './pages/SubjectsPage'
+import { SubjectDetailPage } from './pages/SubjectDetailPage'
+import { LessonPage } from './pages/LessonPage'
 import { Placeholder } from './pages/Placeholder'
 import { ParentHome } from './pages/ParentHome'
 
@@ -26,9 +30,11 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/login" element={<Login />} />
 
           {/* Area siswa */}
-          <Route path="/student" element={<Gate role="student"><StudentHome /></Gate>}>
-            <Route index element={<Placeholder title="Peta Petualangan" subtitle="Modul siap dimulai — konten menyusul di Phase 3." />} />
+          <Route path="/student" element={<Gate role="student"><ProgressProvider><StudentHome /></ProgressProvider></Gate>}>
+            <Route index element={<JourneyHome />} />
             <Route path="subjects" element={<SubjectsPage />} />
+            <Route path="subjects/:subjectId" element={<SubjectDetailPage />} />
+            <Route path="subjects/:subjectId/lessons/:lessonId" element={<LessonPage />} />
             <Route path="practice" element={<Placeholder title="Arena Latihan" subtitle="Soal latihan menyusul di Phase 5." />} />
             <Route path="mistakes" element={<Placeholder title="My Mistakes" subtitle="Kumpulan kesalahan untuk direview (Phase 5)." />} />
             <Route path="profile" element={<Placeholder title="Profil Albert" subtitle="Pengaturan PIN & profil." />} />
