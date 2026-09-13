@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;min-height:100%;margin:0;padding:0;background-color:#faf8ff;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:calc(env(safe-area-inset-bottom, 0px) + 0.75rem);}.pt-safe{padding-top:env(safe-area-inset-top, 0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'secondary-container': '#6cf8bb', 'on-secondary-fixed': '#002113', 'surface-container-lowest': '#ffffff', 'on-error-container': '#93000a', 'on-surface': '#131b2e', 'tertiary-fixed': '#ffddb8', 'inverse-primary': '#c3c0ff', 'on-tertiary': '#ffffff', 'on-primary-fixed-variant': '#3323cc', 'secondary-fixed': '#6ffbbe', 'surface-container-highest': '#dae2fd', 'primary-container': '#4f46e5', 'inverse-surface': '#283044', 'primary-fixed': '#e2dfff', 'background': '#faf8ff', 'on-primary-container': '#dad7ff', 'on-tertiary-fixed-variant': '#653e00', 'primary-fixed-dim': '#c3c0ff', 'on-secondary-fixed-variant': '#005236', 'surface-variant': '#dae2fd', 'on-primary': '#ffffff', 'tertiary-container': '#885500', 'secondary': '#006c49', 'outline': '#777587', 'on-primary-fixed': '#0f0069', 'inverse-on-surface': '#eef0ff', 'surface': '#faf8ff', 'surface-container-low': '#f2f3ff', 'surface-bright': '#faf8ff', 'on-error': '#ffffff', 'secondary-fixed-dim': '#4edea3', 'surface-container-high': '#e2e7ff', 'on-tertiary-container': '#ffd4a4', 'surface-tint': '#4d44e3', 'surface-dim': '#d2d9f4', 'on-background': '#131b2e', 'error': '#ba1a1a', 'primary': '#3525cd', 'error-container': '#ffdad6', 'on-surface-variant': '#464555', 'on-secondary-container': '#00714d', 'tertiary-fixed-dim': '#ffb95f', 'outline-variant': '#c7c4d8', 'on-tertiary-fixed': '#2a1700', 'on-secondary': '#ffffff', 'surface-container': '#eaedff', 'tertiary': '#684000' }, borderRadius: { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, spacing: { 'space-2xl': '3rem', 'margin': '1.5rem', 'space-md': '1rem', 'space-sm': '0.5rem', 'space-xl': '2rem', 'space-xs': '0.25rem', 'gutter': '1rem', 'gutter-mobile': '0.75rem', 'space-lg': '1.5rem', 'margin-mobile': '1rem' }, fontFamily: { 'label-md': ['Plus Jakarta Sans'], 'display-lg': ['Plus Jakarta Sans'], 'label-lg': ['Plus Jakarta Sans'], 'headline-sm': ['Plus Jakarta Sans'], 'display-lg-mobile': ['Plus Jakarta Sans'], 'body-sm': ['Plus Jakarta Sans'], 'label-sm': ['Plus Jakarta Sans'], 'headline-md': ['Plus Jakarta Sans'], 'stat-counter': ['Plus Jakarta Sans'], 'body-lg': ['Plus Jakarta Sans'], 'headline-lg': ['Plus Jakarta Sans'], 'body-md': ['Plus Jakarta Sans'] }, fontSize: { 'label-md': ['12px', { lineHeight: '16px', letterSpacing: '0.02em', fontWeight: '600' }], 'display-lg': ['40px', { lineHeight: '48px', letterSpacing: '-0.03em', fontWeight: '800' }], 'label-lg': ['14px', { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '700' }], 'headline-sm': ['18px', { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' }], 'display-lg-mobile': ['32px', { lineHeight: '40px', letterSpacing: '-0.02em', fontWeight: '800' }], 'body-sm': ['12px', { lineHeight: '16px', fontWeight: '400' }], 'label-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.04em', fontWeight: '700' }], 'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '-0.015em', fontWeight: '700' }], 'stat-counter': ['20px', { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '800' }], 'body-lg': ['16px', { lineHeight: '24px', fontWeight: '400' }], 'headline-lg': ['28px', { lineHeight: '36px', letterSpacing: '-0.02em', fontWeight: '700' }], 'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-background font-body-md text-on-surface flex flex-col min-h-screen antialiased selection:bg-primary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_4px_20px_rgba(79,70,229,0.06)] pt-safe"><div class="h-20 max-w-[480px] mx-auto px-4 flex items-center justify-between gap-2"><div class="flex items-center gap-2.5 min-w-0"><img alt="QuestLearn Shield Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1VvTBVF1grtN-rq8zBVnQkgebOrjxPVc44CmGrcmgqjrSxS0TsHDpfZ2KRHYD5skbgOGwvV1V9VQ_FTnKm5d3UFpoevuKUHEkiSp3jMKvsBUN84EvRL9zGB63AJRiI1KCOOTLi76O_HkW5n_Z9i7bXkpPW8IkfdSJfQn1QO347x79xmBbVSFdItwdc9XmyuCkJMSPYHFzGzCnIVCXd68icGEeJb82mdGCU8HbJk38ptmMFczSKkdZNo1mWh"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-1"><span class="font-label-sm text-primary text-label-sm uppercase tracking-wider">QuestLearn</span><span class="font-label-sm text-outline text-label-sm">•</span><span class="font-label-sm text-outline text-label-sm truncate">Albert</span></div><span class="font-headline-sm text-headline-sm text-on-surface truncate">Petualangan</span></div></div><div class="flex items-center gap-2 flex-shrink-0"><div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high shadow-[0_2px_8px_rgba(255,185,95,0.15)]"><span class="material-symbols-outlined text-[16px] text-tertiary-container fill-1">local_fire_department</span><span class="font-label-sm text-label-sm text-tertiary font-bold">7H</span></div><div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container shadow-[0_2px_8px_rgba(79,70,229,0.12)]"><span class="material-symbols-outlined text-[16px] text-primary fill-1">star</span><span class="font-label-sm text-label-sm text-primary font-bold">1.2k</span></div><div class="w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-primary to-secondary-container shadow-[0_2px_8px_rgba(79,70,229,0.2)] flex-shrink-0"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOKQRqRvGx52PrCxAKhwg9r7zED3Ce2NMHTQJQdv9h2jrAr1mvZ_iHsUsezLmm2QKktxjKalo0xgbDxas2w4Slw6RYPzbdsoy6dsjncMSGFQ_FT2l5GPvcnU6iD5NQ66Fh6Rf6cjHcXH8SfVnm78jexZttczmsVupzubWRgTh-VZJAhCwmkKky3A7QZTUx65zFSsGo0yUnNvbDvFykpu6l1Zu4e89TJxUuKiXrR4tziNXk3jKhQesiCQ"/></div></div></div></header><main class="flex flex-col flex-1 w-full max-w-[480px] mx-auto px-4 pt-20 pb-28 bg-surface"><div class="flex flex-col w-full space-y-4">
+<div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary via-primary-container to-secondary p-4 text-on-primary shadow-xl">
+<div class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
+<div class="relative z-10 flex items-center justify-between gap-3">
+<div class="flex items-center gap-2">
+<span class="flex items-center justify-center w-8 h-8 rounded-full bg-white/20 text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-[20px]">castle</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm tracking-wider uppercase opacity-90 block">Mastery Checkpoint • Bab 4</span>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-primary leading-tight">Golem Titik Puncak</h2>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/25 backdrop-blur-md text-on-primary">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed fill-1 animate-pulse">timer</span>
+<span class="font-stat-counter text-stat-counter text-white font-mono tracking-tight" id="boss-timer">12:45</span>
+</div>
+</div>
+<div class="mt-4 grid grid-cols-2 gap-3 items-center">
+<div class="relative w-full h-28 rounded-lg overflow-hidden shadow-inner bg-surface-dim">
+<img class="w-full h-full object-cover" data-alt="A magical stone quadratic golem boss with glowing blue runic algebraic equations carved into its granite chest and illuminated eyes, standing in an ancient crystalline temple academy, digital anime game art style with bright indigo atmospheric lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxozgdyenXu21jZ9N4tNR8WcVUJiaohRJ-oE-_AD8hlsMnWukqQQUt2gFjvySNi-pDV1a_Jaxm-IgmlGMtHOm5Canupq44n424Dk1pLv5lDr2PfCGAKEPv-iD1Dd3zSX_3xwHOwzxWegwRWsQcY7_SSxxbFTeu82HF9gLfTh6_lWeqzQnU5R8e3mnmmESLsXy-Owlxr5QIj5D-WsbYrFNPO2HHDEoJTyQHBinSWLX4szjGrcOEOSo51A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-2">
+<span class="font-label-sm text-label-sm text-tertiary-fixed-dim font-bold">Shadow Quadratic Titan</span>
+<span class="font-body-sm text-body-sm text-white/90">Level 9 • SMP PL Salatiga</span>
+</div>
+</div>
+<div class="flex flex-col justify-between h-28 py-0.5">
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-sm text-label-sm font-bold tracking-wide uppercase opacity-90">Boss HP</span>
+<span class="font-label-sm text-label-sm font-extrabold text-secondary-container">800 / 1000</span>
+</div>
+<div class="w-full h-3.5 bg-black/30 rounded-full p-0.5 overflow-hidden shadow-inner">
+<div class="h-full bg-gradient-to-r from-secondary-container via-secondary-fixed to-secondary-fixed-dim rounded-full transition-all duration-500 shadow-sm" id="boss-hp-bar" style="width: 80%;"></div>
+</div>
+</div>
+<div class="pt-2">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-sm text-label-sm font-bold">Nyawa Albert</span>
+<span class="font-label-sm text-label-sm text-tertiary-fixed font-bold">Combo x3 🔥</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[20px] text-error-container fill-1 drop-shadow">favorite</span>
+<span class="material-symbols-outlined text-[20px] text-error-container fill-1 drop-shadow">favorite</span>
+<span class="material-symbols-outlined text-[20px] text-error-container fill-1 drop-shadow">favorite</span>
+<span class="ml-auto px-2 py-0.5 rounded-full bg-white/20 font-label-sm text-label-sm text-white">Target 80%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-surface-container shadow-sm">
+<div class="flex items-center gap-2">
+<span class="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-on-primary">
+<span class="material-symbols-outlined text-[16px]">swords</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wide block">Giliran 6 dari 10</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Tantangan Titik Ekstrem Parabola</span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+</div>
+</div>
+<div class="rounded-xl bg-surface-container-lowest p-4 shadow-md relative overflow-hidden">
+<div class="flex items-center justify-between gap-2 mb-2">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-primary">
+<span class="material-symbols-outlined text-[14px]">psychology</span>
+<span class="font-label-sm text-label-sm font-bold">Fungsi &amp; Persamaan Kuadrat</span>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary font-bold">+25 ATK Point</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface font-semibold leading-snug">
+      Tentukan <span class="text-primary font-bold">titik balik minimum</span> dan <span class="text-primary font-bold">pembuat nol</span> dari kurva fungsi kuadrat:
+    </p>
+<div class="my-3 px-4 py-3 rounded-lg bg-surface-container flex items-center justify-center shadow-inner">
+<span class="font-headline-md text-headline-md font-bold tracking-wide text-on-surface select-all">f(x) = x² - 6x + 8</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+      Petunjuk Ksatria: Koordinat puncak adalah (x_p, y_p) dengan sumbu simetri x = -b/(2a), dan pembuat nol dicari saat f(x) = 0.
+    </p>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between px-1">
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider text-outline">Pilih Jurus Jawaban Serangan</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">1 Jawaban Tepat</span>
+</div>
+<div class="grid grid-cols-1 gap-2.5" id="options-group">
+<button class="option-card group relative w-full text-left p-3.5 rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all duration-150 flex items-center justify-between active:translate-y-0.5" data-option="A" onclick="selectCard(this)" type="button">
+<div class="flex items-center gap-3">
+<span class="badge-letter flex items-center justify-center w-8 h-8 rounded-full bg-surface-container text-primary font-bold font-label-md text-label-md">A</span>
+<div>
+<div class="font-label-lg text-label-lg text-on-surface">Titik Balik (3, -1) &amp; Pembuat Nol x = 2 atau x = 4</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Jurus Panah Ekstrem Presisi</div>
+</div>
+</div>
+<span class="select-indicator material-symbols-outlined text-[22px] text-outline-variant">radio_button_unchecked</span>
+</button>
+<button class="option-card group relative w-full text-left p-3.5 rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all duration-150 flex items-center justify-between active:translate-y-0.5" data-option="B" onclick="selectCard(this)" type="button">
+<div class="flex items-center gap-3">
+<span class="badge-letter flex items-center justify-center w-8 h-8 rounded-full bg-surface-container text-on-surface-variant font-bold font-label-md text-label-md">B</span>
+<div>
+<div class="font-label-lg text-label-lg text-on-surface">Titik Balik (-3, 1) &amp; Pembuat Nol x = -2 atau x = -4</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Jurus Cermin Sumbu Terbalik</div>
+</div>
+</div>
+<span class="select-indicator material-symbols-outlined text-[22px] text-outline-variant">radio_button_unchecked</span>
+</button>
+<button class="option-card group relative w-full text-left p-3.5 rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all duration-150 flex items-center justify-between active:translate-y-0.5" data-option="C" id="opt-c" onclick="selectCard(this)" type="button">
+<div class="flex items-center gap-3">
+<span class="badge-letter flex items-center justify-center w-8 h-8 rounded-full bg-surface-container text-on-surface-variant font-bold font-label-md text-label-md">C</span>
+<div>
+<div class="font-label-lg text-label-lg text-on-surface">Titik Balik (6, -8) &amp; Pembuat Nol x = 1 atau x = 8</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Hantaman Diskriminan Keliru</div>
+</div>
+</div>
+<span class="select-indicator material-symbols-outlined text-[22px] text-outline-variant">radio_button_unchecked</span>
+</button>
+<button class="option-card group relative w-full text-left p-3.5 rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all duration-150 flex items-center justify-between active:translate-y-0.5" data-option="D" id="opt-d" onclick="selectCard(this)" type="button">
+<div class="flex items-center gap-3">
+<span class="badge-letter flex items-center justify-center w-8 h-8 rounded-full bg-surface-container text-on-surface-variant font-bold font-label-md text-label-md">D</span>
+<div>
+<div class="font-label-lg text-label-lg text-on-surface">Titik Balik (3, 1) &amp; Pembuat Nol x = -2 atau x = 4</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Lompatan Parabola Goyang</div>
+</div>
+</div>
+<span class="select-indicator material-symbols-outlined text-[22px] text-outline-variant">radio_button_unchecked</span>
+</button>
+</div>
+</div>
+<div class="rounded-xl bg-surface-container-low p-3.5 space-y-2.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary">auto_fix_high</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">Jurus Khusus Albert</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Pilih 1 buff per ronde</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button class="p-2.5 rounded-lg bg-surface-container-lowest shadow-sm hover:bg-secondary-container transition flex flex-col items-center text-center group active:scale-95" id="btn-buff-shield" onclick="useShield()" type="button">
+<span class="material-symbols-outlined text-[22px] text-secondary group-hover:scale-110 transition">shield</span>
+<span class="font-label-sm text-label-sm text-on-surface font-bold mt-1">Perisai 50:50</span>
+<span class="font-label-sm text-label-sm text-outline mt-0.5 text-[10px] leading-tight">Eliminir 2 opsi (1x)</span>
+</button>
+<button class="p-2.5 rounded-lg bg-surface-container-lowest shadow-sm hover:bg-tertiary-fixed transition flex flex-col items-center text-center group active:scale-95" onclick="toggleScroll()" type="button">
+<span class="material-symbols-outlined text-[22px] text-tertiary group-hover:scale-110 transition">menu_book</span>
+<span class="font-label-sm text-label-sm text-on-surface font-bold mt-1">Gulungan ABC</span>
+<span class="font-label-sm text-label-sm text-outline mt-0.5 text-[10px] leading-tight">Buka rumus cepat</span>
+</button>
+<button class="p-2.5 rounded-lg bg-surface-container-lowest shadow-sm hover:bg-primary-fixed transition flex flex-col items-center text-center group active:scale-95" onclick="activateCritical(this)" type="button">
+<span class="material-symbols-outlined text-[22px] text-primary group-hover:scale-110 transition">bolt</span>
+<span class="font-label-sm text-label-sm text-on-surface font-bold mt-1">Fokus Kritis</span>
+<span class="font-label-sm text-label-sm text-outline mt-0.5 text-[10px] leading-tight">+50% Dmg (&lt;30d)</span>
+</button>
+</div>
+<div class="hidden p-3 rounded-lg bg-surface-container-highest text-on-surface space-y-1 transition-all" id="formula-scroll">
+<div class="flex items-center justify-between font-label-sm text-label-sm font-bold text-primary">
+<span>📜 Gulungan Rahasia Aljabar:</span>
+<button class="text-outline hover:text-on-surface" onclick="toggleScroll()" type="button">Tutup</button>
+</div>
+<p class="font-body-sm text-body-sm">
+        • Sumbu Simetri: <b>x = -b / (2a) = -(-6) / 2 = 3</b><br/>
+        • Nilai Ekstrem: <b>y = (3)² - 6(3) + 8 = 9 - 18 + 8 = -1</b><br/>
+        • Pembuat Nol (Faktorisasi): <b>(x - 2)(x - 4) = 0 → x = 2 atau x = 4</b>
+</p>
+</div>
+</div>
+<div class="pt-1 space-y-2">
+<button class="w-full py-3.5 px-4 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:opacity-95 active:translate-y-1 transition duration-150" id="btn-attack" onclick="launchAttack()" type="button">
+<span class="material-symbols-outlined text-[20px]">flash_on</span>
+<span>Luncurkan Serangan Jawaban ⚡</span>
+</button>
+<div class="flex items-center justify-between gap-2">
+<button class="flex-1 py-2 px-3 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition" onclick="useHint()" type="button">
+<span class="material-symbols-outlined text-[16px] text-tertiary">lightbulb</span>
+<span>Petunjuk Kunci (-10 Mana)</span>
+</button>
+<button class="py-2 px-3 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition" type="button">
+<span class="material-symbols-outlined text-[16px] text-outline">flag</span>
+<span>Simpan &amp; Istirahat</span>
+</button>
+</div>
+</div>
+<div class="rounded-xl bg-surface-container-lowest p-3.5 shadow-sm space-y-2.5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase font-bold tracking-wider text-outline">Hadiah Kemenangan Boss</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">Terbuka Saat Tamat</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<div class="p-2 rounded-lg bg-surface-container-low flex items-center gap-2">
+<span class="flex items-center justify-center w-7 h-7 rounded-full bg-primary-fixed text-primary">
+<span class="material-symbols-outlined text-[16px]">stars</span>
+</span>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm font-extrabold text-on-surface block">+150 XP</span>
+<span class="font-body-sm text-body-sm text-outline truncate block">Level Up</span>
+</div>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-low flex items-center gap-2">
+<span class="flex items-center justify-center w-7 h-7 rounded-full bg-tertiary-fixed text-tertiary-container">
+<span class="material-symbols-outlined text-[16px]">military_tech</span>
+</span>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm font-extrabold text-on-surface block truncate">Master Badge</span>
+<span class="font-body-sm text-body-sm text-outline truncate block">SMP PL</span>
+</div>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-low flex items-center gap-2">
+<span class="flex items-center justify-center w-7 h-7 rounded-full bg-secondary-fixed text-secondary">
+<span class="material-symbols-outlined text-[16px]">lock_open</span>
+</span>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm font-extrabold text-on-surface block truncate">Peti Kristal</span>
+<span class="font-body-sm text-body-sm text-outline truncate block">Loot Khusus</span>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden fixed bottom-24 left-1/2 -translate-x-1/2 w-[90%] max-w-[420px] p-3 rounded-xl bg-inverse-surface text-inverse-on-surface shadow-2xl items-center gap-3 z-50 transition-all" id="battle-toast">
+<span class="material-symbols-outlined text-secondary-container text-[24px]" id="toast-icon">verified</span>
+<div class="min-w-0 flex-1">
+<h4 class="font-label-lg text-label-lg font-bold text-inverse-on-surface leading-none" id="toast-title">Serangan Kritis!</h4>
+<p class="font-body-sm text-body-sm text-inverse-on-surface/80 mt-0.5" id="toast-desc">Boss menerima 200 Damage.</p>
+</div>
+</div>
+</div>
+<script>
+  let selectedOption = null;
+  let criticalActive = false;
+
+  function selectCard(button) {
+    const cards = document.querySelectorAll('.option-card');
+    cards.forEach(card => {
+      card.classList.remove('bg-primary-fixed', 'shadow-md');
+      card.classList.add('bg-surface-container-lowest');
+      const badge = card.querySelector('.badge-letter');
+      const icon = card.querySelector('.select-indicator');
+      if (badge) {
+        badge.classList.remove('bg-primary', 'text-on-primary');
+        badge.classList.add('bg-surface-container', 'text-on-surface-variant');
+      }
+      if (icon) {
+        icon.innerText = 'radio_button_unchecked';
+        icon.classList.remove('text-primary');
+        icon.classList.add('text-outline-variant');
+      }
+    });
+
+    button.classList.remove('bg-surface-container-lowest');
+    button.classList.add('bg-primary-fixed', 'shadow-md');
+    const badge = button.querySelector('.badge-letter');
+    const icon = button.querySelector('.select-indicator');
+    if (badge) {
+      badge.classList.remove('bg-surface-container', 'text-on-surface-variant');
+      badge.classList.add('bg-primary', 'text-on-primary');
+    }
+    if (icon) {
+      icon.innerText = 'check_circle';
+      icon.classList.remove('text-outline-variant');
+      icon.classList.add('text-primary');
+    }
+    selectedOption = button.getAttribute('data-option');
+  }
+
+  function toggleScroll() {
+    const scrollEl = document.getElementById('formula-scroll');
+    scrollEl.classList.toggle('hidden');
+  }
+
+  function useShield() {
+    const optC = document.getElementById('opt-c');
+    const optD = document.getElementById('opt-d');
+    const btn = document.getElementById('btn-buff-shield');
+    if (optC && optD) {
+      optC.style.opacity = '0.35';
+      optC.style.pointerEvents = 'none';
+      optD.style.opacity = '0.35';
+      optD.style.pointerEvents = 'none';
+      btn.style.opacity = '0.4';
+      btn.style.pointerEvents = 'none';
+      showToast('Perisai Aktif!', '2 opsi jawaban salah telah dihilangkan oleh perisai.', 'shield');
+    }
+  }
+
+  function activateCritical(btn) {
+    criticalActive = !criticalActive;
+    if (criticalActive) {
+      btn.classList.add('bg-primary-fixed', 'text-primary');
+      showToast('Fokus Kritis Terpicu!', 'Jawab sekarang untuk damage ekstra +50%!', 'bolt');
+    } else {
+      btn.classList.remove('bg-primary-fixed', 'text-primary');
+    }
+  }
+
+  function useHint() {
+    showToast('Petunjuk Ksatria (-10 Mana)', 'Cari x = -b/(2a). Nilai b=-6, jadi x = 6/2 = 3. Cek opsi yang x-nya 3!', 'lightbulb');
+  }
+
+  function launchAttack() {
+    if (!selectedOption) {
+      showToast('Pilih Serangan Dulu!', 'Sentuh salah satu kartu jawaban sebelum meluncurkan serangan.', 'warning');
+      return;
+    }
+    if (selectedOption === 'A') {
+      const bossHp = document.getElementById('boss-hp-bar');
+      bossHp.style.width = '60%';
+      showToast('SERANGAN TELAK!', 'Rumus tepat! Boss terkena 200 Titik Damage Kuadrat!', 'celebration');
+    } else {
+      showToast('Tangkisan Boss!', 'Jawaban kurang tepat. Periksa kembali tanda positif/negatif koordinat.', 'sentiment_dissatisfied');
+    }
+  }
+
+  function showToast(title, desc, iconName) {
+    const toast = document.getElementById('battle-toast');
+    const tTitle = document.getElementById('toast-title');
+    const tDesc = document.getElementById('toast-desc');
+    const tIcon = document.getElementById('toast-icon');
+    tTitle.innerText = title;
+    tDesc.innerText = desc;
+    tIcon.innerText = iconName || 'info';
+    toast.classList.remove('hidden');
+    toast.classList.add('flex');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+      toast.classList.remove('flex');
+    }, 3200);
+  }
+
+  // Pre-select Option A by default for rich state presentation
+  document.addEventListener('DOMContentLoaded', () => {
+    const defaultBtn = document.querySelector('[data-option="A"]');
+    if (defaultBtn) selectCard(defaultBtn);
+  });
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe pointer-events-none" data-active-classes="text-primary font-bold scale-105"><div class="max-w-[480px] mx-auto px-4 mb-2 pointer-events-auto"><div class="h-16 rounded-full bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_12px_32px_-4px_rgba(79,70,229,0.18)] px-2 flex items-center justify-around"><a aria-current="page" class="flex flex-col items-center justify-center w-16 h-12 rounded-full transition-all duration-200 text-primary font-bold scale-105" data-path="petualangan" href="#"><span class="material-symbols-outlined text-[22px]">explore</span><span class="font-label-sm text-label-sm mt-0.5">Petualangan</span></a><a class="flex flex-col items-center justify-center w-16 h-12 rounded-full text-on-surface-variant transition-all duration-200" data-path="latihan" href="#"><span class="material-symbols-outlined text-[22px]">bolt</span><span class="font-label-sm text-label-sm mt-0.5">Latihan</span></a><a class="flex flex-col items-center justify-center w-16 h-12 rounded-full text-on-surface-variant transition-all duration-200" data-path="bank-salah" href="#"><span class="material-symbols-outlined text-[22px]">published_with_changes</span><span class="font-label-sm text-label-sm mt-0.5">Bank Salah</span></a><a class="flex flex-col items-center justify-center w-16 h-12 rounded-full text-on-surface-variant transition-all duration-200" data-path="orang-tua" href="#"><span class="material-symbols-outlined text-[22px]">supervisor_account</span><span class="font-label-sm text-label-sm mt-0.5">Orang Tua</span></a></div></div></nav></body></html>

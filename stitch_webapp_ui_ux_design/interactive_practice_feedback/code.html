@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;min-height:100%;margin:0;padding:0;background-color:#faf8ff;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:calc(env(safe-area-inset-bottom, 0px) + 0.75rem);}.pt-safe{padding-top:env(safe-area-inset-top, 0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'secondary-container': '#6cf8bb', 'on-secondary-fixed': '#002113', 'surface-container-lowest': '#ffffff', 'on-error-container': '#93000a', 'on-surface': '#131b2e', 'tertiary-fixed': '#ffddb8', 'inverse-primary': '#c3c0ff', 'on-tertiary': '#ffffff', 'on-primary-fixed-variant': '#3323cc', 'secondary-fixed': '#6ffbbe', 'surface-container-highest': '#dae2fd', 'primary-container': '#4f46e5', 'inverse-surface': '#283044', 'primary-fixed': '#e2dfff', 'background': '#faf8ff', 'on-primary-container': '#dad7ff', 'on-tertiary-fixed-variant': '#653e00', 'primary-fixed-dim': '#c3c0ff', 'on-secondary-fixed-variant': '#005236', 'surface-variant': '#dae2fd', 'on-primary': '#ffffff', 'tertiary-container': '#885500', 'secondary': '#006c49', 'outline': '#777587', 'on-primary-fixed': '#0f0069', 'inverse-on-surface': '#eef0ff', 'surface': '#faf8ff', 'surface-container-low': '#f2f3ff', 'surface-bright': '#faf8ff', 'on-error': '#ffffff', 'secondary-fixed-dim': '#4edea3', 'surface-container-high': '#e2e7ff', 'on-tertiary-container': '#ffd4a4', 'surface-tint': '#4d44e3', 'surface-dim': '#d2d9f4', 'on-background': '#131b2e', 'error': '#ba1a1a', 'primary': '#3525cd', 'error-container': '#ffdad6', 'on-surface-variant': '#464555', 'on-secondary-container': '#00714d', 'tertiary-fixed-dim': '#ffb95f', 'outline-variant': '#c7c4d8', 'on-tertiary-fixed': '#2a1700', 'on-secondary': '#ffffff', 'surface-container': '#eaedff', 'tertiary': '#684000' }, borderRadius: { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, spacing: { 'space-2xl': '3rem', 'margin': '1.5rem', 'space-md': '1rem', 'space-sm': '0.5rem', 'space-xl': '2rem', 'space-xs': '0.25rem', 'gutter': '1rem', 'gutter-mobile': '0.75rem', 'space-lg': '1.5rem', 'margin-mobile': '1rem' }, fontFamily: { 'label-md': ['Plus Jakarta Sans'], 'display-lg': ['Plus Jakarta Sans'], 'label-lg': ['Plus Jakarta Sans'], 'headline-sm': ['Plus Jakarta Sans'], 'display-lg-mobile': ['Plus Jakarta Sans'], 'body-sm': ['Plus Jakarta Sans'], 'label-sm': ['Plus Jakarta Sans'], 'headline-md': ['Plus Jakarta Sans'], 'stat-counter': ['Plus Jakarta Sans'], 'body-lg': ['Plus Jakarta Sans'], 'headline-lg': ['Plus Jakarta Sans'], 'body-md': ['Plus Jakarta Sans'] }, fontSize: { 'label-md': ['12px', { lineHeight: '16px', letterSpacing: '0.02em', fontWeight: '600' }], 'display-lg': ['40px', { lineHeight: '48px', letterSpacing: '-0.03em', fontWeight: '800' }], 'label-lg': ['14px', { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '700' }], 'headline-sm': ['18px', { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' }], 'display-lg-mobile': ['32px', { lineHeight: '40px', letterSpacing: '-0.02em', fontWeight: '800' }], 'body-sm': ['12px', { lineHeight: '16px', fontWeight: '400' }], 'label-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.04em', fontWeight: '700' }], 'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '-0.015em', fontWeight: '700' }], 'stat-counter': ['20px', { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '800' }], 'body-lg': ['16px', { lineHeight: '24px', fontWeight: '400' }], 'headline-lg': ['28px', { lineHeight: '36px', letterSpacing: '-0.02em', fontWeight: '700' }], 'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-background font-body-md text-on-surface flex flex-col min-h-screen antialiased selection:bg-primary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_4px_20px_rgba(79,70,229,0.06)] pt-safe"><div class="h-20 max-w-[480px] mx-auto px-4 flex items-center justify-between gap-2"><div class="flex items-center gap-2.5 min-w-0"><img alt="QuestLearn Shield Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1VvTBVF1grtN-rq8zBVnQkgebOrjxPVc44CmGrcmgqjrSxS0TsHDpfZ2KRHYD5skbgOGwvV1V9VQ_FTnKm5d3UFpoevuKUHEkiSp3jMKvsBUN84EvRL9zGB63AJRiI1KCOOTLi76O_HkW5n_Z9i7bXkpPW8IkfdSJfQn1QO347x79xmBbVSFdItwdc9XmyuCkJMSPYHFzGzCnIVCXd68icGEeJb82mdGCU8HbJk38ptmMFczSKkdZNo1mWh"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-1"><span class="font-label-sm text-primary text-label-sm uppercase tracking-wider">QuestLearn</span><span class="font-label-sm text-outline text-label-sm">•</span><span class="font-label-sm text-outline text-label-sm truncate">Albert</span></div><span class="font-headline-sm text-headline-sm text-on-surface truncate">Latihan</span></div></div><div class="flex items-center gap-2 flex-shrink-0"><div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high shadow-[0_2px_8px_rgba(255,185,95,0.15)]"><span class="material-symbols-outlined text-[16px] text-tertiary-container fill-1">local_fire_department</span><span class="font-label-sm text-label-sm text-tertiary font-bold">7H</span></div><div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container shadow-[0_2px_8px_rgba(79,70,229,0.12)]"><span class="material-symbols-outlined text-[16px] text-primary fill-1">star</span><span class="font-label-sm text-label-sm text-primary font-bold">1.2k</span></div><div class="w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-primary to-secondary-container shadow-[0_2px_8px_rgba(79,70,229,0.2)] flex-shrink-0"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOKQRqRvGx52PrCxAKhwg9r7zED3Ce2NMHTQJQdv9h2jrAr1mvZ_iHsUsezLmm2QKktxjKalo0xgbDxas2w4Slw6RYPzbdsoy6dsjncMSGFQ_FT2l5GPvcnU6iD5NQ66Fh6Rf6cjHcXH8SfVnm78jexZttczmsVupzubWRgTh-VZJAhCwmkKky3A7QZTUx65zFSsGo0yUnNvbDvFykpu6l1Zu4e89TJxUuKiXrR4tziNXk3jKhQesiCQ"/></div></div></div></header><main class="flex flex-col flex-1 w-full max-w-[480px] mx-auto px-4 pt-20 pb-28 bg-surface"><div class="flex flex-col w-full">
+<!-- Interactive Practice Screen Wrapper -->
+<div class="flex flex-col gap-3.5 pb-6">
+<!-- Top Session Info & Vital Signs Bar -->
+<div class="flex flex-col gap-2 bg-surface-container-lowest p-3 rounded-xl shadow-sm">
+<div class="flex items-center justify-between">
+<!-- Topic Chip -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 bg-surface-container rounded-full">
+<span class="material-symbols-outlined text-[15px] text-primary" style="font-variation-settings: 'FILL' 1;">functions</span>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wide">Matematika • Persamaan Kuadrat</span>
+</div>
+<!-- Timer & Lives -->
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1 px-2 py-0.5 bg-surface-container-high rounded-full">
+<span class="material-symbols-outlined text-[15px] text-on-surface-variant">timer</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold tabular-nums" id="sessionTimer">04:12</span>
+</div>
+<!-- 3 Hearts / Stamina -->
+<div class="flex items-center gap-0.5 px-2 py-0.5 bg-error-container/60 rounded-full">
+<span class="material-symbols-outlined text-[15px] text-error" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="material-symbols-outlined text-[15px] text-error" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="material-symbols-outlined text-[15px] text-error" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+</div>
+<!-- Segmented Level Progress Bar -->
+<div class="flex items-center justify-between gap-3 pt-0.5">
+<div class="flex-1 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-secondary-fixed-dim rounded-full transition-all duration-500" style="width: 50%;"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex-shrink-0">Soal <strong class="text-on-surface">4</strong> dari 8</span>
+</div>
+</div>
+<!-- Question Card -->
+<div class="flex flex-col bg-surface-container-lowest rounded-xl p-4 shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between mb-2.5">
+<span class="px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+          Sedang • Aljabar IX
+        </span>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-label-sm text-label-sm font-bold">+20 XP</span>
+</div>
+</div>
+<p class="font-headline-sm text-headline-sm text-on-surface leading-snug">
+        Akar-akar dari persamaan kuadrat berikut adalah:
+      </p>
+<div class="my-3 px-3 py-2.5 rounded-lg bg-surface-container-low flex items-center justify-center">
+<span class="font-stat-counter text-stat-counter text-primary tracking-wide">
+          x² - 5x + 6 = 0
+        </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Pilihlah himpunan penyelesaian <em class="italic">x</em> yang memenuhi nilai nol persamaan di atas.
+      </p>
+</div>
+<!-- Interactive Answer Options Grid (PRD Option states) -->
+<div class="flex flex-col gap-2.5" id="optionsContainer">
+<!-- Option A (Normal) -->
+<button class="group option-btn w-full text-left p-3.5 rounded-xl bg-surface-container-lowest shadow-[0_3px_0_0_#dae2fd] active:translate-y-0.5 active:shadow-[0_1px_0_0_#dae2fd] transition-all flex items-center justify-between gap-3" onclick="selectOption(this, 'A', false)" type="button">
+<div class="flex items-center gap-3 min-w-0">
+<span class="opt-badge w-8 h-8 rounded-lg bg-surface-container text-primary flex items-center justify-center font-label-lg text-label-lg flex-shrink-0">A</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">x = -2  atau  x = -3</span>
+</div>
+<span class="material-symbols-outlined text-[20px] text-outline opacity-40 group-hover:opacity-100">radio_button_unchecked</span>
+</button>
+<!-- Option B (Correct Answer Selected State) -->
+<button class="group option-btn is-correct w-full text-left p-3.5 rounded-xl bg-secondary-container/20 shadow-[0_3px_0_0_#00714d] active:translate-y-0.5 active:shadow-[0_1px_0_0_#00714d] transition-all flex items-center justify-between gap-3" onclick="selectOption(this, 'B', true)" type="button">
+<div class="flex items-center gap-3 min-w-0">
+<span class="opt-badge w-8 h-8 rounded-lg bg-secondary text-on-secondary flex items-center justify-center font-label-lg text-label-lg flex-shrink-0 shadow-sm">B</span>
+<span class="font-body-md text-body-md text-on-surface font-bold">x = 2  atau  x = 3</span>
+</div>
+<div class="w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[16px] font-bold">check</span>
+</div>
+</button>
+<!-- Option C (Normal) -->
+<button class="group option-btn w-full text-left p-3.5 rounded-xl bg-surface-container-lowest shadow-[0_3px_0_0_#dae2fd] active:translate-y-0.5 active:shadow-[0_1px_0_0_#dae2fd] transition-all flex items-center justify-between gap-3" onclick="selectOption(this, 'C', false)" type="button">
+<div class="flex items-center gap-3 min-w-0">
+<span class="opt-badge w-8 h-8 rounded-lg bg-surface-container text-primary flex items-center justify-center font-label-lg text-label-lg flex-shrink-0">C</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">x = 1  atau  x = 6</span>
+</div>
+<span class="material-symbols-outlined text-[20px] text-outline opacity-40">radio_button_unchecked</span>
+</button>
+<!-- Option D (Subtle Incorrect feedback state demonstration) -->
+<button class="group option-btn w-full text-left p-3.5 rounded-xl bg-surface-container-lowest shadow-[0_3px_0_0_#dae2fd] active:translate-y-0.5 active:shadow-[0_1px_0_0_#dae2fd] transition-all flex items-center justify-between gap-3" onclick="selectOption(this, 'D', false)" type="button">
+<div class="flex items-center gap-3 min-w-0">
+<span class="opt-badge w-8 h-8 rounded-lg bg-surface-container text-primary flex items-center justify-center font-label-lg text-label-lg flex-shrink-0">D</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">x = -1  atau  x = -6</span>
+</div>
+<span class="material-symbols-outlined text-[20px] text-outline opacity-40">radio_button_unchecked</span>
+</button>
+</div>
+<!-- Progressive Hint Accordion (PRD Section 19) -->
+<div class="flex flex-col bg-surface-container-lowest rounded-xl p-3.5 shadow-sm gap-2 mt-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-tertiary-container text-[20px]" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<span class="font-label-lg text-label-lg text-on-surface">Petunjuk Bertahap</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full">Tingkat 1/2 Terbuka</span>
+</div>
+<!-- Hint 1: Unlocked -->
+<div class="p-2.5 rounded-lg bg-tertiary-fixed/30 flex items-start gap-2.5">
+<div class="w-5 h-5 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed font-label-sm text-label-sm flex-shrink-0 mt-0.5">1</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-tertiary">Faktorkan Bentuk Umum</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ubah persamaan ke bentuk perkalian faktor: <code class="px-1 py-0.5 bg-surface-container rounded font-mono text-primary font-bold">(x - p)(x - q) = 0</code>.</p>
+</div>
+</div>
+<!-- Hint 2: Locked with unlock trigger -->
+<div class="p-2.5 rounded-lg bg-surface-container-low flex items-center justify-between gap-2 transition-all" id="hint2Card">
+<div class="flex items-center gap-2.5">
+<div class="w-5 h-5 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant font-label-sm text-label-sm flex-shrink-0">2</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic" id="hint2Label">Kombinasi angka pembuat nol...</span>
+</div>
+<button class="px-2.5 py-1 bg-surface-container-highest text-primary rounded-full font-label-sm text-label-sm flex items-center gap-1 shadow-sm active:scale-95 transition-transform" id="unlockHintBtn" onclick="unlockHint2()" type="button">
+<span class="material-symbols-outlined text-[14px]">lock_open</span>
+<span>Buka Hint (-5 XP)</span>
+</button>
+</div>
+</div>
+<!-- Instant Educational Feedback Drawer (PRD Section 18) -->
+<div class="flex flex-col rounded-2xl bg-surface-container-lowest shadow-[0_12px_32px_-4px_rgba(79,70,229,0.18)] overflow-hidden mt-1 animate-in fade-in slide-in-from-bottom duration-300" id="feedbackDrawer">
+<!-- Cheerful Success Header -->
+<div class="bg-gradient-to-r from-secondary-container via-secondary-fixed to-secondary-fixed-dim p-3.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur flex items-center justify-center text-on-secondary-container shadow-sm">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">celebration</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-secondary-fixed font-bold leading-tight">Tepat Sekali, Albert!</span>
+<span class="font-label-sm text-label-sm text-on-secondary-container">Streak 7 Hari Dipertahankan 🔥</span>
+</div>
+</div>
+<div class="px-2.5 py-1 rounded-full bg-surface-container-lowest font-stat-counter text-stat-counter text-secondary shadow-sm">
+          +20 XP
+        </div>
+</div>
+<!-- Educational Reasoning Body -->
+<div class="p-4 flex flex-col gap-3">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">auto_stories</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary uppercase">Penjelasan Konsep</span>
+<p class="font-body-md text-body-md text-on-surface mt-0.5">
+              Cari dua bilangan bila dikali hasilnya <strong>+6</strong> dan bila dijumlahkan bernilai <strong>-5</strong>. Bilangan tersebut adalah <strong>-2</strong> dan <strong>-3</strong>.
+            </p>
+<div class="mt-2 p-2 rounded bg-surface-container font-mono text-body-sm text-on-surface font-semibold">
+              (x - 2)(x - 3) = 0<br/>
+              x - 2 = 0 ➔ x = 2<br/>
+              x - 3 = 0 ➔ x = 3
+            </div>
+</div>
+</div>
+<!-- Action Target Buttons: Dual tactile action -->
+<div class="flex items-center gap-2 pt-2">
+<!-- Save to Mistake Notebook -->
+<button class="flex items-center justify-center gap-1.5 px-3.5 py-3 rounded-xl bg-surface-container text-on-surface font-label-md text-label-md active:translate-y-0.5 transition-all" id="saveNoteBtn" onclick="toggleSaveNote(this)" type="button">
+<span class="material-symbols-outlined text-[18px]">bookmark_add</span>
+<span>Simpan Catatan</span>
+</button>
+<!-- Primary Game Button Next Question (Tactile 3D bottom-lip) -->
+<button class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg shadow-[0_4px_0_0_#3323cc] active:translate-y-0.5 active:shadow-[0_1px_0_0_#3323cc] transition-all tracking-wide uppercase" onclick="nextQuestion()" type="button">
+<span>Soal Berikutnya</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Motivational Micro Banner -->
+<div class="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-surface-container-high/60 text-center">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">shield</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Quest Bab 2: Selesaikan 4 soal lagi untuk membuka Peti Harta Karun.</span>
+</div>
+</div>
+</div>
+<script>
+  function selectOption(btn, choiceLetter, isCorrect) {
+    const container = document.getElementById('optionsContainer');
+    const allBtns = container.querySelectorAll('.option-btn');
+    
+    // Clear dynamic states
+    allBtns.forEach(b => {
+      b.className = "group option-btn w-full text-left p-3.5 rounded-xl bg-surface-container-lowest shadow-[0_3px_0_0_#dae2fd] active:translate-y-0.5 active:shadow-[0_1px_0_0_#dae2fd] transition-all flex items-center justify-between gap-3";
+      const badge = b.querySelector('.opt-badge');
+      if (badge) {
+        badge.className = "opt-badge w-8 h-8 rounded-lg bg-surface-container text-primary flex items-center justify-center font-label-lg text-label-lg flex-shrink-0";
+      }
+      const iconWrap = b.lastElementChild;
+      iconWrap.outerHTML = '<span class="material-symbols-outlined text-[20px] text-outline opacity-40">radio_button_unchecked</span>';
+    });
+
+    if (isCorrect) {
+      btn.className = "group option-btn is-correct w-full text-left p-3.5 rounded-xl bg-secondary-container/20 shadow-[0_3px_0_0_#00714d] active:translate-y-0.5 active:shadow-[0_1px_0_0_#00714d] transition-all flex items-center justify-between gap-3";
+      const badge = btn.querySelector('.opt-badge');
+      if (badge) badge.className = "opt-badge w-8 h-8 rounded-lg bg-secondary text-on-secondary flex items-center justify-center font-label-lg text-label-lg flex-shrink-0 shadow-sm";
+      btn.lastElementChild.outerHTML = '<div class="w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center flex-shrink-0 shadow-sm"><span class="material-symbols-outlined text-[16px] font-bold">check</span></div>';
+      document.getElementById('feedbackDrawer').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else {
+      btn.className = "group option-btn w-full text-left p-3.5 rounded-xl bg-error-container/30 shadow-[0_3px_0_0_#ba1a1a] active:translate-y-0.5 transition-all flex items-center justify-between gap-3";
+      const badge = btn.querySelector('.opt-badge');
+      if (badge) badge.className = "opt-badge w-8 h-8 rounded-lg bg-error text-on-error flex items-center justify-center font-label-lg text-label-lg flex-shrink-0";
+      btn.lastElementChild.outerHTML = '<div class="w-6 h-6 rounded-full bg-error text-on-error flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-[16px] font-bold">close</span></div>';
+    }
+  }
+
+  function unlockHint2() {
+    const card = document.getElementById('hint2Card');
+    const label = document.getElementById('hint2Label');
+    const btn = document.getElementById('unlockHintBtn');
+    
+    card.className = "p-2.5 rounded-lg bg-tertiary-fixed/30 flex items-start gap-2.5 transition-all";
+    card.innerHTML = `
+      <div class="w-5 h-5 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed font-label-sm text-label-sm flex-shrink-0 mt-0.5">2</div>
+      <div class="flex flex-col">
+        <span class="font-label-md text-label-md text-tertiary">Faktor dari Perkalian</span>
+        <p class="font-body-sm text-body-sm text-on-surface-variant">Cari dua angka: jika dikali bernilai +6, dan jika dijumlah bernilai -5. (Jawab: -2 dan -3).</p>
+      </div>
+    `;
+  }
+
+  function toggleSaveNote(btn) {
+    const isSaved = btn.getAttribute('data-saved') === 'true';
+    if (!isSaved) {
+      btn.setAttribute('data-saved', 'true');
+      btn.className = "flex items-center justify-center gap-1.5 px-3.5 py-3 rounded-xl bg-secondary-container text-on-secondary-container font-label-md text-label-md active:translate-y-0.5 transition-all";
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">bookmark_added</span><span>Tersimpan!</span>';
+    } else {
+      btn.setAttribute('data-saved', 'false');
+      btn.className = "flex items-center justify-center gap-1.5 px-3.5 py-3 rounded-xl bg-surface-container text-on-surface font-label-md text-label-md active:translate-y-0.5 transition-all";
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">bookmark_add</span><span>Simpan Catatan</span>';
+    }
+  }
+
+  function nextQuestion() {
+    const btn = event.currentTarget;
+    btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Memuat...</span>';
+    setTimeout(() => {
+      btn.innerHTML = '<span>Soal Berikutnya</span><span class="material-symbols-outlined text-[18px]">arrow_forward</span>';
+    }, 600);
+  }
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe pointer-events-none" data-active-classes="text-primary font-bold scale-105"><div class="max-w-[480px] mx-auto px-4 mb-2 pointer-events-auto"><div class="h-16 rounded-full bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_12px_32px_-4px_rgba(79,70,229,0.18)] px-2 flex items-center justify-around"><a class="flex flex-col items-center justify-center w-16 h-12 rounded-full text-on-surface-variant transition-all duration-200" data-path="petualangan" href="#"><span class="material-symbols-outlined text-[22px]">explore</span><span class="font-label-sm text-label-sm mt-0.5">Petualangan</span></a><a aria-current="page" class="flex flex-col items-center justify-center w-16 h-12 rounded-full transition-all duration-200 text-primary font-bold scale-105" data-path="latihan" href="#"><span class="material-symbols-outlined text-[22px]">bolt</span><span class="font-label-sm text-label-sm mt-0.5">Latihan</span></a><a class="flex flex-col items-center justify-center w-16 h-12 rounded-full text-on-surface-variant transition-all duration-200" data-path="bank-salah" href="#"><span class="material-symbols-outlined text-[22px]">published_with_changes</span><span class="font-label-sm text-label-sm mt-0.5">Bank Salah</span></a><a class="flex flex-col items-center justify-center w-16 h-12 rounded-full text-on-surface-variant transition-all duration-200" data-path="orang-tua" href="#"><span class="material-symbols-outlined text-[22px]">supervisor_account</span><span class="font-label-sm text-label-sm mt-0.5">Orang Tua</span></a></div></div></nav></body></html>

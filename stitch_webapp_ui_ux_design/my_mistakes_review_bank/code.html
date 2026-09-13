@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;min-height:100%;margin:0;padding:0;background-color:#faf8ff;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:calc(env(safe-area-inset-bottom, 0px) + 0.75rem);}.pt-safe{padding-top:env(safe-area-inset-top, 0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'secondary-container': '#6cf8bb', 'on-secondary-fixed': '#002113', 'surface-container-lowest': '#ffffff', 'on-error-container': '#93000a', 'on-surface': '#131b2e', 'tertiary-fixed': '#ffddb8', 'inverse-primary': '#c3c0ff', 'on-tertiary': '#ffffff', 'on-primary-fixed-variant': '#3323cc', 'secondary-fixed': '#6ffbbe', 'surface-container-highest': '#dae2fd', 'primary-container': '#4f46e5', 'inverse-surface': '#283044', 'primary-fixed': '#e2dfff', 'background': '#faf8ff', 'on-primary-container': '#dad7ff', 'on-tertiary-fixed-variant': '#653e00', 'primary-fixed-dim': '#c3c0ff', 'on-secondary-fixed-variant': '#005236', 'surface-variant': '#dae2fd', 'on-primary': '#ffffff', 'tertiary-container': '#885500', 'secondary': '#006c49', 'outline': '#777587', 'on-primary-fixed': '#0f0069', 'inverse-on-surface': '#eef0ff', 'surface': '#faf8ff', 'surface-container-low': '#f2f3ff', 'surface-bright': '#faf8ff', 'on-error': '#ffffff', 'secondary-fixed-dim': '#4edea3', 'surface-container-high': '#e2e7ff', 'on-tertiary-container': '#ffd4a4', 'surface-tint': '#4d44e3', 'surface-dim': '#d2d9f4', 'on-background': '#131b2e', 'error': '#ba1a1a', 'primary': '#3525cd', 'error-container': '#ffdad6', 'on-surface-variant': '#464555', 'on-secondary-container': '#00714d', 'tertiary-fixed-dim': '#ffb95f', 'outline-variant': '#c7c4d8', 'on-tertiary-fixed': '#2a1700', 'on-secondary': '#ffffff', 'surface-container': '#eaedff', 'tertiary': '#684000' }, borderRadius: { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, spacing: { 'space-2xl': '3rem', 'margin': '1.5rem', 'space-md': '1rem', 'space-sm': '0.5rem', 'space-xl': '2rem', 'space-xs': '0.25rem', 'gutter': '1rem', 'gutter-mobile': '0.75rem', 'space-lg': '1.5rem', 'margin-mobile': '1rem' }, fontFamily: { 'label-md': ['Plus Jakarta Sans'], 'display-lg': ['Plus Jakarta Sans'], 'label-lg': ['Plus Jakarta Sans'], 'headline-sm': ['Plus Jakarta Sans'], 'display-lg-mobile': ['Plus Jakarta Sans'], 'body-sm': ['Plus Jakarta Sans'], 'label-sm': ['Plus Jakarta Sans'], 'headline-md': ['Plus Jakarta Sans'], 'stat-counter': ['Plus Jakarta Sans'], 'body-lg': ['Plus Jakarta Sans'], 'headline-lg': ['Plus Jakarta Sans'], 'body-md': ['Plus Jakarta Sans'] }, fontSize: { 'label-md': ['12px', { lineHeight: '16px', letterSpacing: '0.02em', fontWeight: '600' }], 'display-lg': ['40px', { lineHeight: '48px', letterSpacing: '-0.03em', fontWeight: '800' }], 'label-lg': ['14px', { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '700' }], 'headline-sm': ['18px', { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' }], 'display-lg-mobile': ['32px', { lineHeight: '40px', letterSpacing: '-0.02em', fontWeight: '800' }], 'body-sm': ['12px', { lineHeight: '16px', fontWeight: '400' }], 'label-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.04em', fontWeight: '700' }], 'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '-0.015em', fontWeight: '700' }], 'stat-counter': ['20px', { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '800' }], 'body-lg': ['16px', { lineHeight: '24px', fontWeight: '400' }], 'headline-lg': ['28px', { lineHeight: '36px', letterSpacing: '-0.02em', fontWeight: '700' }], 'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-background font-body-md text-on-surface flex flex-col min-h-screen antialiased selection:bg-primary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_4px_20px_rgba(79,70,229,0.06)] pt-safe"><div class="h-20 max-w-[480px] mx-auto px-4 flex items-center justify-between gap-2"><div class="flex items-center gap-2.5 min-w-0"><img alt="QuestLearn Shield Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1VvTBVF1grtN-rq8zBVnQkgebOrjxPVc44CmGrcmgqjrSxS0TsHDpfZ2KRHYD5skbgOGwvV1V9VQ_FTnKm5d3UFpoevuKUHEkiSp3jMKvsBUN84EvRL9zGB63AJRiI1KCOOTLi76O_HkW5n_Z9i7bXkpPW8IkfdSJfQn1QO347x79xmBbVSFdItwdc9XmyuCkJMSPYHFzGzCnIVCXd68icGEeJb82mdGCU8HbJk38ptmMFczSKkdZNo1mWh"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-1"><span class="font-label-sm text-primary text-label-sm uppercase tracking-wider">QuestLearn</span><span class="font-label-sm text-outline text-label-sm">•</span><span class="font-label-sm text-outline text-label-sm truncate">Albert</span></div><span class="font-headline-sm text-headline-sm text-on-surface truncate">Bank Salah</span></div></div><div class="flex items-center gap-2 flex-shrink-0"><div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high shadow-[0_2px_8px_rgba(255,185,95,0.15)]"><span class="material-symbols-outlined text-[16px] text-tertiary-container fill-1">local_fire_department</span><span class="font-label-sm text-label-sm text-tertiary font-bold">7H</span></div><div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container shadow-[0_2px_8px_rgba(79,70,229,0.12)]"><span class="material-symbols-outlined text-[16px] text-primary fill-1">star</span><span class="font-label-sm text-label-sm text-primary font-bold">1.2k</span></div><div class="w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-primary to-secondary-container shadow-[0_2px_8px_rgba(79,70,229,0.2)] flex-shrink-0"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOKQRqRvGx52PrCxAKhwg9r7zED3Ce2NMHTQJQdv9h2jrAr1mvZ_iHsUsezLmm2QKktxjKalo0xgbDxas2w4Slw6RYPzbdsoy6dsjncMSGFQ_FT2l5GPvcnU6iD5NQ66Fh6Rf6cjHcXH8SfVnm78jexZttczmsVupzubWRgTh-VZJAhCwmkKky3A7QZTUx65zFSsGo0yUnNvbDvFykpu6l1Zu4e89TJxUuKiXrR4tziNXk3jKhQesiCQ"/></div></div></div></header><main class="flex flex-col flex-1 w-full max-w-[480px] mx-auto px-4 pt-20 pb-28 bg-surface"><div class="flex flex-col w-full space-y-4">
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-primary-container to-surface-tint p-5 text-on-primary shadow-xl shadow-primary/20">
+<div class="absolute -right-8 -top-8 w-36 h-36 rounded-full bg-surface-container-highest/15 blur-2xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col space-y-3">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-lowest/20 backdrop-blur-md font-label-sm text-label-sm text-on-primary">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">auto_fix_high</span>
+          Ruang Tumbuh &amp; Eksplorasi
+        </span>
+<div class="flex items-center gap-1 text-tertiary-fixed font-stat-counter text-stat-counter">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span>+50 XP</span>
+</div>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md font-bold tracking-tight text-on-primary flex items-center gap-1.5">
+          Bank Evaluasi Kesalahan
+          <span class="inline-block animate-bounce">🎯</span>
+</h2>
+<p class="font-body-md text-body-md text-on-primary-container mt-1 leading-relaxed">
+          Belajar dari kesalahan adalah cara tercepat menuju penguasaan materi sejati.
+        </p>
+</div>
+<div class="grid grid-cols-3 gap-2 pt-2">
+<div class="flex flex-col items-center justify-center p-2.5 rounded-xl bg-surface-container-lowest/15 backdrop-blur-md text-center">
+<span class="font-stat-counter text-stat-counter text-secondary-fixed">7</span>
+<span class="font-label-sm text-label-sm text-on-primary-container mt-0.5">Perlu Diulang</span>
+</div>
+<div class="flex flex-col items-center justify-center p-2.5 rounded-xl bg-surface-container-lowest/15 backdrop-blur-md text-center">
+<span class="font-stat-counter text-stat-counter text-secondary-container">14</span>
+<span class="font-label-sm text-label-sm text-on-primary-container mt-0.5">Dikuasai</span>
+</div>
+<div class="flex flex-col items-center justify-center p-2.5 rounded-xl bg-surface-container-lowest/15 backdrop-blur-md text-center">
+<span class="font-stat-counter text-stat-counter text-tertiary-fixed">82%</span>
+<span class="font-label-sm text-label-sm text-on-primary-container mt-0.5">Akurasi Retry</span>
+</div>
+</div>
+</div>
+</div>
+<div class="relative w-full">
+<button class="group w-full relative flex items-center justify-between p-4 rounded-2xl bg-primary text-on-primary shadow-lg shadow-primary/25 transition-all duration-150 active:translate-y-1 active:shadow-md" id="btn-start-review">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-xl bg-surface-container-lowest/20 flex items-center justify-center text-secondary-fixed group-hover:rotate-12 transition-transform">
+<span class="material-symbols-outlined text-[26px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div class="flex flex-col text-left">
+<span class="font-label-lg text-label-lg font-bold text-on-primary leading-tight">Mulai Spaced Review Hari Ini</span>
+<span class="font-body-sm text-body-sm text-on-primary-container">5 Soal Terpilih Berdasarkan Siklus Ingatan</span>
+</div>
+</div>
+<div class="flex items-center pl-2">
+<span class="w-8 h-8 rounded-full bg-surface-container-lowest/15 flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</span>
+</div>
+</button>
+</div>
+<div class="flex items-center p-3.5 rounded-2xl bg-surface-container-low shadow-sm">
+<div class="flex items-center gap-2.5 flex-1 min-w-0">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-outline font-bold uppercase tracking-wider">Jadwal Review Otomatis</span>
+<p class="font-body-sm text-body-sm text-on-surface truncate">
+<span class="text-primary font-bold">Geometri</span> (Hari ini) • <span class="font-semibold">Aljabar</span> (Besok) • <span class="font-semibold">IPA</span> (Jumat)
+        </p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px] ml-1">info</span>
+</div>
+<div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar -mx-1 px-1">
+<button class="filter-chip px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm whitespace-nowrap transition-transform active:scale-95" data-filter="all">
+      Semua (7)
+    </button>
+<button class="filter-chip px-3.5 py-1.5 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-container-highest whitespace-nowrap transition-transform active:scale-95" data-filter="math">
+      Matematika (4)
+    </button>
+<button class="filter-chip px-3.5 py-1.5 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-container-highest whitespace-nowrap transition-transform active:scale-95" data-filter="ipa">
+      IPA (2)
+    </button>
+<button class="filter-chip px-3.5 py-1.5 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-container-highest whitespace-nowrap transition-transform active:scale-95" data-filter="english">
+      B. Inggris (1)
+    </button>
+</div>
+<div class="space-y-3 pt-1">
+<div class="relative p-4 rounded-2xl bg-surface-container-lowest shadow-md shadow-primary/5 transition-all duration-200">
+<div class="flex items-start justify-between gap-2 mb-2">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest text-primary font-label-sm text-label-sm font-bold">
+            Matematika
+          </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">
+            Geometri • Teorema Pythagoras
+          </span>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold flex-shrink-0">
+<span class="material-symbols-outlined text-[12px]">priority_high</span>
+          Tinggi
+        </span>
+</div>
+<div class="flex items-center gap-2 mb-3 text-outline font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+          2 hari lalu
+        </span>
+<span>•</span>
+<span class="flex items-center gap-1 text-error font-medium">
+<span class="material-symbols-outlined text-[14px]">history</span>
+          2x percobaan salah
+        </span>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low mb-3">
+<p class="font-body-md text-body-md text-on-surface font-semibold leading-relaxed">
+          “Sebuah segitiga siku-siku memiliki panjang sisi miring 13 cm dan alas 5 cm. Berapakah tinggi segitiga tersebut?”
+        </p>
+</div>
+<div class="grid grid-cols-2 gap-2 mb-3">
+<div class="p-2.5 rounded-xl bg-error-container/40 flex flex-col">
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-error-container font-bold mb-0.5">
+<span class="material-symbols-outlined text-[15px]">cancel</span>
+            Jawabanmu:
+          </div>
+<span class="font-body-md text-body-md font-bold text-error">10 cm</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px] leading-tight mt-0.5">
+            Salah identifikasi kuadrat akar
+          </span>
+</div>
+<div class="p-2.5 rounded-xl bg-secondary-container/40 flex flex-col">
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-secondary-container font-bold mb-0.5">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+            Jawaban Tepat:
+          </div>
+<span class="font-body-md text-body-md font-bold text-secondary">12 cm</span>
+<span class="font-body-sm text-body-sm text-on-secondary-container text-[11px] leading-tight mt-0.5">
+            b = √(13² - 5²) = 12
+          </span>
+</div>
+</div>
+<div class="p-3 rounded-xl bg-tertiary-fixed/30 flex items-start gap-2.5 mb-4">
+<span class="material-symbols-outlined text-tertiary text-[20px] flex-shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">psychology_alt</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-bold text-on-tertiary-fixed">Diagnosa Pola Pikir:</span>
+<p class="font-body-sm text-body-sm text-on-tertiary-fixed-variant leading-snug">
+            Rumus a² + b² = c² terbalik substitusi sisi miring. Ingat, sisi miring (c) dikurangkan kuadratnya, bukan dijumlahkan!
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="btn-retry flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-primary text-on-primary font-label-md text-label-md shadow-sm transition-all duration-150 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+          Coba Lagi (Retry)
+        </button>
+<button class="btn-explain flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-surface-container-high text-on-surface font-label-md text-label-md transition-all duration-150 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[16px] text-tertiary">lightbulb</span>
+          Pembahasan
+        </button>
+</div>
+<div class="explanation-box hidden mt-3 p-3 rounded-xl bg-surface-container text-on-surface font-body-sm text-body-sm space-y-1.5 animate-fadeIn">
+<div class="font-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+          Langkah Penyelesaian Singkat:
+        </div>
+<p>1. Identifikasi: Sisi miring c = 13 cm, alas a = 5 cm, tinggi = b</p>
+<p>2. Teorema: a² + b² = c² → b² = c² - a²</p>
+<p>3. Hitung: b² = 169 - 25 = 144</p>
+<p>4. Akar: b = √144 = 12 cm. Mantap!</p>
+</div>
+</div>
+<div class="relative p-4 rounded-2xl bg-surface-container-lowest shadow-md shadow-primary/5 transition-all duration-200">
+<div class="flex items-start justify-between gap-2 mb-2">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container/50 text-secondary font-label-sm text-label-sm font-bold">
+            IPA Terpadu
+          </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">
+            Biologi • Reproduksi Tumbuhan
+          </span>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-highest text-primary font-label-sm text-label-sm font-bold flex-shrink-0">
+<span class="material-symbols-outlined text-[12px]">schedule</span>
+          Siap Review
+        </span>
+</div>
+<div class="flex items-center gap-2 mb-3 text-outline font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+          Kemarin
+        </span>
+<span>•</span>
+<span class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">sync_problem</span>
+          1x percobaan salah
+        </span>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low mb-3">
+<p class="font-body-md text-body-md text-on-surface font-semibold leading-relaxed">
+          “Proses penyerbukan pada bunga jagung yang memiliki serbuk sari ringan dan dibantu tiupan angin disebut...”
+        </p>
+</div>
+<div class="p-3 rounded-xl bg-tertiary-fixed/30 flex items-start gap-2.5 mb-4">
+<span class="material-symbols-outlined text-tertiary text-[20px] flex-shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">tips_and_updates</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-bold text-on-tertiary-fixed">Diagnosa Konsep:</span>
+<p class="font-body-sm text-body-sm text-on-tertiary-fixed-variant leading-snug">
+            Penyerbukan <strong>anemofili</strong> (bantuan angin) sempat tertukar dengan <strong>entomofili</strong> (bantuan serangga). Tips mnemonic: <span class="underline">A</span>nemo = <span class="underline">A</span>ngin!
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="btn-retry flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-primary text-on-primary font-label-md text-label-md shadow-sm transition-all duration-150 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+          Coba Lagi (Retry) 🔄
+        </button>
+<button class="btn-explain flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-surface-container-high text-on-surface font-label-md text-label-md transition-all duration-150 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[16px] text-tertiary">lightbulb</span>
+          Tips Kilat
+        </button>
+</div>
+<div class="explanation-box hidden mt-3 p-3 rounded-xl bg-surface-container text-on-surface font-body-sm text-body-sm space-y-1 animate-fadeIn">
+<div class="font-bold text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">eco</span>
+          Mnemonic Mudah:
+        </div>
+<p>• <strong>Anemofili:</strong> Anemometer (alat ukur angin) → Penyerbukan angin.</p>
+<p>• <strong>Entomofili:</strong> Entomology (ilmu serangga) → Penyerbukan serangga.</p>
+</div>
+</div>
+</div>
+<div class="p-4 rounded-2xl bg-gradient-to-r from-surface-container-high to-surface-container flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[22px]">military_tech</span>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg font-bold text-on-surface">Target Mingguan Albert</h4>
+<p class="font-body-sm text-body-sm text-outline">Tuntaskan 7 review sebelum evaluasi orang tua</p>
+</div>
+</div>
+<div class="w-12 h-12 relative flex items-center justify-center flex-shrink-0">
+<svg class="w-12 h-12 -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-highest stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3.5"></path>
+<path class="text-primary stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="65, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<span class="absolute font-label-sm text-label-sm font-bold text-primary">65%</span>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    const chips = document.querySelectorAll('.filter-chip');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => {
+          c.classList.remove('bg-primary', 'text-on-primary');
+          c.classList.add('bg-surface-container-high', 'text-on-surface');
+        });
+        chip.classList.remove('bg-surface-container-high', 'text-on-surface');
+        chip.classList.add('bg-primary', 'text-on-primary');
+      });
+    });
+
+    const explainBtns = document.querySelectorAll('.btn-explain');
+    explainBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.rounded-2xl');
+        const box = card.querySelector('.explanation-box');
+        if (box) {
+          box.classList.toggle('hidden');
+        }
+      });
+    });
+
+    const retryBtns = document.querySelectorAll('.btn-retry');
+    retryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.innerHTML = `<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span> Menyiapkan Latihan...`;
+        setTimeout(() => {
+          btn.innerHTML = `<span class="material-symbols-outlined text-[16px]">check</span> Siap Mulai!`;
+          btn.classList.remove('bg-primary');
+          btn.classList.add('bg-secondary');
+        }, 800);
+      });
+    });
+
+    const startReviewBtn = document.getElementById('btn-start-review');
+    if (startReviewBtn) {
+      startReviewBtn.addEventListener('click', () => {
+        startReviewBtn.classList.add('scale-95');
+        setTimeout(() => startReviewBtn.classList.remove('scale-95'), 150);
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe pointer-events-none" data-active-classes="text-primary font-bold scale-105"><div class="max-w-[480px] mx-auto px-4 mb-2 pointer-events-auto"><div class="h-16 rounded-full bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_12px_32px_-4px_rgba(79,70,229,0.18)] px-2 flex items-center justify-around"><a class="flex flex-col items-center justify-center w-16 h-12 rounded-full text-on-surface-variant transition-all duration-200" data-path="petualangan" href="#"><span class="material-symbols-outlined text-[22px]">explore</span><span class="font-label-sm text-label-sm mt-0.5">Petualangan</span></a><a class="flex flex-col items-center justify-center w-16 h-12 rounded-full text-on-surface-variant transition-all duration-200" data-path="latihan" href="#"><span class="material-symbols-outlined text-[22px]">bolt</span><span class="font-label-sm text-label-sm mt-0.5">Latihan</span></a><a aria-current="page" class="flex flex-col items-center justify-center w-16 h-12 rounded-full transition-all duration-200 text-primary font-bold scale-105" data-path="bank-salah" href="#"><span class="material-symbols-outlined text-[22px]">published_with_changes</span><span class="font-label-sm text-label-sm mt-0.5">Bank Salah</span></a><a class="flex flex-col items-center justify-center w-16 h-12 rounded-full text-on-surface-variant transition-all duration-200" data-path="orang-tua" href="#"><span class="material-symbols-outlined text-[22px]">supervisor_account</span><span class="font-label-sm text-label-sm mt-0.5">Orang Tua</span></a></div></div></nav></body></html>

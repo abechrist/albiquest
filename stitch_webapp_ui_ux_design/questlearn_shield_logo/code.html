@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" fill="none">
+  <defs>
+    <linearGradient id="shieldGrad" x1="10" y1="10" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#4338CA"/>
+    </linearGradient>
+    <linearGradient id="starGrad" x1="30" y1="30" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FCD34D"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+    <filter id="glow" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#4F46E5" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="120" height="120" rx="30" fill="#EEF2FF"/>
+  <path d="M60 16L96 32V64C96 85.5 80.5 102 60 108C39.5 102 24 85.5 24 64V32L60 16Z" fill="url(#shieldGrad)" filter="url(#glow)"/>
+  <path d="M60 36L66.5 50.5L82 52.2L70.5 63L73.6 78.5L60 70.8L46.4 78.5L49.5 63L38 52.2L53.5 50.5L60 36Z" fill="url(#starGrad)"/>
+  <circle cx="60" cy="59" r="6" fill="#FFFBEB"/>
+</svg>
