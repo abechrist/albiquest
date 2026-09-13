@@ -431,3 +431,22 @@ Spreadsheet kurikulum di-seed sesuai daftar ini dengan prioritas mapel inti dulu
 **Alternatives:** Manual zip upload atau hosting statis biasa tanpa dukungan SPA fallback rewrite.
 
 **Consequences:** AlbiQuest kini dapat diakses secara publik oleh Albert dan orang tua dari perangkat manapun di internet dengan performa CDN global, SSL aktif, dan dukungan PWA installable.
+
+---
+
+## D-024: Multi-Student Family Architecture & Quest Jasmine Blueprint
+
+**Context:** Family Expansion. Pengguna merencanakan penambahan anak kedua, **Jasmine** (SMP Kelas 8, SMP Pangudi Luhur, Agama Katolik), ke dalam webapp AlbiQuest terpadu dengan portal pemilihan karakter (*Choose Your Hero*), isolasi kurikulum Kelas 8 vs Kelas 9, dan pemantauan multi-anak di Area Orang Tua.
+
+**Decision:**
+1. **Arsitektur Multi-Hero Terpadu:**
+   - Memilih arsitektur keluarga satu webapp (domain `albiquest.vercel.app`) dan satu database Neon Serverless PostgreSQL daripada membuat webapp atau database terpisah.
+   - Portal selamat datang akan menampilkan seleksi pahlawan: **Albert** (Kelas 9) vs **Jasmine** (Kelas 8) dengan PIN masing-masing.
+2. **Cetak Biru Tersimpan:**
+   - Seluruh spesifikasi kurikulum SMP Kelas 8 (9 mapel: Matematika, IPA, B. Indo, B. Inggris, Agama Katolik, IPS, PPKn, PJOK, Prakarya/BK), teknis database, filter materi, dan desain toggle dashboard orang tua telah diarsipkan secara permanen di [QUEST_JASMINE_BLUEPRINT.md](file:///home/abechrist/Documents/Webapp%20Project/Personal%20Learning%20Adventure%20Webapp/QUEST_JASMINE_BLUEPRINT.md).
+3. **Pemicu Perintah Instan (Trigger):**
+   - Implementasi akan langsung dieksekusi secara otomatis setiap kali pengguna mengirimkan pesan: `"setup quest jasmine"`.
+
+**Alternatives:** Membuat repositori dan webapp terpisah (tidak efisien, membingungkan orang tua yang harus membuka 2 website berbeda).
+
+**Consequences:** Desain sistem keluarga tersimpan rapi dan siap dipicu kapan saja tanpa perlu mengulang diskusi dari awal.
