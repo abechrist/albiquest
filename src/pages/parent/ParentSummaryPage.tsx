@@ -44,7 +44,7 @@ export function ParentSummaryPage() {
         <span className="text-[11px] font-semibold text-slate-400">Pekan Ini</span>
       </div>
 
-      {/* 2. Kartu Fokus Siswa (Albert Tan) */}
+      {/* 2. Kartu Fokus Siswa (Albert) */}
       <div className="card relative overflow-hidden p-4 bg-white shadow-sm border border-slate-200/80">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
@@ -56,7 +56,7 @@ export function ParentSummaryPage() {
             </div>
             <div className="flex flex-col min-w-0">
               <div className="flex items-center gap-1.5 flex-wrap">
-                <h2 className="text-sm font-black text-slate-900">Albert Tan</h2>
+                <h2 className="text-sm font-black text-slate-900">Albert</h2>
                 <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-[10px] font-bold text-indigo-700">
                   SMP Kelas 9 • SMP Pangudi Luhur
                 </span>

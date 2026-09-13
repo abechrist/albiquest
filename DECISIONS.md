@@ -316,7 +316,7 @@ Spreadsheet kurikulum di-seed sesuai daftar ini dengan prioritas mapel inti dulu
    - Parent murni memiliki hak baca analitik (*Read-Only*) untuk memahami perkembangan anak.
 2. **Dashboard Cockpit Orang Tua (`ParentSummaryPage.tsx`):**
    - Mengadopsi visual tenang dan suportif sesuai Stitch `parent_overview_mastery`.
-   - Kartu Fokus Siswa: Profil Albert Tan, status keaktifan, dan tombol interaktif *Cheer* (kirim pesan semangat).
+   - Kartu Fokus Siswa: Profil Albert, status keaktifan, dan tombol interaktif *Cheer* (kirim pesan semangat).
    - 4 Metrik Kunci Mingguan: Streak Belajar (7H 🔥), Total Durasi Belajar (4j 25m ⏱️), Sesi Modul Selesai, dan Status Bank Kesalahan.
    - Saran Pendampingan Bebas Tekanan: Rekomendasi kontekstual untuk orang tua mengenai cara mendampingi Albert tanpa tuntutan yang memicu stres.
 3. **Perkembangan Kurikulum & Kesalahan (`ParentProgressPage.tsx` & `ParentMistakesPage.tsx`):**
