@@ -17,7 +17,7 @@ export function JourneyHome() {
   const { data } = useData()
   const { completed } = useProgress()
   const { active, addXP } = useProfile()
-  const { levelInfo, state, dailyMissions, claimMissionReward } = useGamification(active?.xp ?? 1250)
+  const { levelInfo, state, dailyMissions, claimMissionReward } = useGamification(active?.xp ?? 0)
 
   const subjects = data?.subjects ?? []
   const topics = data?.topics ?? []

@@ -12,7 +12,14 @@ import { useData } from '../../lib/store'
 export function ParentSummaryPage() {
   const { data } = useData()
   const { completed } = useProgress()
-  const { state } = useGamification(1250)
+  const albertSavedXP = (() => {
+    try {
+      const raw = localStorage.getItem('pla.profile_saved_albert')
+      if (raw) return JSON.parse(raw).xp ?? 0
+    } catch {}
+    return 0
+  })()
+  const { state } = useGamification(albertSavedXP)
   const examHistory = getStoredExamHistory()
 
   const [cheerSent, setCheerSent] = useState<boolean>(false)
@@ -63,7 +70,11 @@ export function ParentSummaryPage() {
               </div>
               <p className="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1">
                 <span>⏱️</span>
-                <span>Aktif belajar hari ini • Fokus belajar terjaga baik</span>
+                <span>
+                  {state.streakDays > 0
+                    ? `Aktif belajar hari ini • Streak ${state.streakDays} hari`
+                    : 'Siap memulai petualangan belajar baru'}
+                </span>
               </p>
             </div>
           </div>
@@ -120,10 +131,12 @@ export function ParentSummaryPage() {
               <span className="text-base">⏱️</span>
             </div>
             <div className="mt-2 flex items-baseline gap-1">
-              <span className="text-2xl font-black text-slate-900">4j 25m</span>
+              <span className="text-2xl font-black text-slate-900">
+                {completed.size > 0 ? `${completed.size * 15}m` : '0m'}
+              </span>
             </div>
             <span className="mt-1 text-[10px] font-bold text-emerald-600 flex items-center gap-0.5">
-              <span>✓</span> Target 4 jam tercapai
+              <span>✓</span> {completed.size > 0 ? 'Waktu aktif tercatat' : 'Siap memulai sesi'}
             </span>
           </div>
 

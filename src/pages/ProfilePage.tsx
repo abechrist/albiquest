@@ -8,7 +8,7 @@ import { usePWAInstall } from '../lib/pwa'
 
 export function ProfilePage() {
   const { active, logout } = useProfile()
-  const { levelInfo, state, badgesWithStatus } = useGamification(active?.xp ?? 1250)
+  const { levelInfo, state, badgesWithStatus } = useGamification(active?.xp ?? 0)
   const { isInstallable, isInstalled, installApp } = usePWAInstall()
 
   // Pengaturan PIN

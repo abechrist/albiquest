@@ -11,9 +11,9 @@ export interface Profile {
   xp: number
 }
 
-// Profil default
+// Profil default (Albert mulai dari Level 1 dan 0 XP)
 const PROFILES: (Profile & { pin: string })[] = [
-  { id: 'albert', name: 'Albert', role: 'student', pin: '1234', avatar: '🐉', level: 7, xp: 1250 },
+  { id: 'albert', name: 'Albert', role: 'student', pin: '1234', avatar: '🐉', level: 1, xp: 0 },
   { id: 'parent', name: 'Orang Tua', role: 'parent', pin: '9999', avatar: '🛡️', level: 0, xp: 0 },
 ]
 

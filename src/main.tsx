@@ -28,6 +28,19 @@ import { registerServiceWorker } from './lib/pwa'
 // Daftarkan PWA Service Worker untuk caching offline
 registerServiceWorker()
 
+// Reset otomatis data dummy dev untuk rilis awal Albert (Level 1, 0 XP, 0 Streak)
+if (typeof window !== 'undefined' && !localStorage.getItem('albiquest.initialized.v1')) {
+  try {
+    localStorage.removeItem('pla.profile')
+    localStorage.removeItem('pla.profile_saved_albert')
+    localStorage.removeItem('pla.gamification.v1')
+    localStorage.removeItem('pla.mistakes.v1')
+    localStorage.removeItem('pla.exam_history.v1')
+    localStorage.removeItem('pla.progress')
+    localStorage.setItem('albiquest.initialized.v1', 'true')
+  } catch {}
+}
+
 function Gate({ role, children }: { role: 'student' | 'parent'; children: React.ReactNode }) {
   const { active } = useProfile()
   if (!active) return <Navigate to={`/login?role=${role}`} replace />

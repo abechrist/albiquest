@@ -93,16 +93,13 @@ function getTodayString(): string {
 
 function getDefaultState(): GamificationState {
   return {
-    streakDays: 7, // Default Albert (Stitch design benchmark: 7H)
-    lastActiveDate: getTodayString(),
-    unlockedBadges: {
-      'badge-first-step': Date.now() - 3 * 24 * 60 * 60 * 1000,
-      'badge-streak-fire': Date.now() - 1 * 24 * 60 * 60 * 1000,
-    },
+    streakDays: 0,
+    lastActiveDate: '',
+    unlockedBadges: {},
     claimedMissions: {},
-    questionsAnsweredCount: 6,
-    lessonsCompletedCount: 2,
-    mistakesMasteredCount: 1,
+    questionsAnsweredCount: 0,
+    lessonsCompletedCount: 0,
+    mistakesMasteredCount: 0,
   }
 }
 
@@ -205,7 +202,7 @@ export function recordGamificationEvent(
     | { type: 'lesson_completed' }
     | { type: 'question_answered'; isCorrect: boolean }
     | { type: 'mistake_mastered' },
-  currentXP = 1250,
+  currentXP = 0,
 ): { state: GamificationState; newlyUnlockedBadges: Badge[] } {
   let state = touchDailyStreak(getStoredGamificationState())
 
