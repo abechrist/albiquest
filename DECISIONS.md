@@ -408,3 +408,26 @@ Spreadsheet kurikulum di-seed sesuai daftar ini dengan prioritas mapel inti dulu
 **Alternatives:** Tetap mengandalkan Google Sheets publik (rentan limitasi rate limit, tanpa skema tipe relasional dan foreign keys).
 
 **Consequences:** Database sekarang berskala enterprise di cloud PostgreSQL Neon, memiliki integritas ACID, kueri cepat dengan latensi rendah, serta tetap dapat diakses 100% saat offline melalui browser cache.
+
+---
+
+## D-023: Remote GitHub Version Control & Live Vercel Production Deployment
+
+**Context:** Production Deployment. Pengguna meminta pembuatan repositori publik di GitHub [https://github.com/abechrist/albiquest](https://github.com/abechrist/albiquest) serta deployment produksi otomatis ke Vercel dengan custom alias domain [https://albiquest.vercel.app](https://albiquest.vercel.app).
+
+**Decision:**
+1. **GitHub Repository Sync:**
+   - Dibuat repositori GitHub publik: `abechrist/albiquest`.
+   - Git remote `origin` dipetakan ke `https://github.com/abechrist/albiquest.git` dan branch `main` berhasil dipush penuh.
+2. **Vercel Single Page App (SPA) Routing Configuration:**
+   - Dibuat konfigurasi [vercel.json](file:///home/abechrist/Documents/Webapp%20Project/Personal%20Learning%20Adventure%20Webapp/vercel.json) dengan rewrite rule `/(.*) -> /index.html` untuk memastikan client-side routing React Router (seperti `/student/practice`, `/student/challenges`, `/student/exam`, `/parent`) berjalan mulus tanpa error 404 saat di-refresh.
+3. **Automated Production Build & Environment Injection:**
+   - Deployment dilakukan ke Vercel scope `multimedia2` (proyek `albiquest`).
+   - Environment variables untuk runtime dan build-time (`VITE_NEON_DATABASE_URL`) diinjeksi secara aman.
+   - Domain produksi di-alias langsung ke: **https://albiquest.vercel.app**.
+4. **Verifikasi Live Deployment:**
+   - Permintaan HTTP/2 ke `https://albiquest.vercel.app` berhasil diverifikasi dengan status `200 OK` dan header respons yang valid.
+
+**Alternatives:** Manual zip upload atau hosting statis biasa tanpa dukungan SPA fallback rewrite.
+
+**Consequences:** AlbiQuest kini dapat diakses secara publik oleh Albert dan orang tua dari perangkat manapun di internet dengan performa CDN global, SSL aktif, dan dukungan PWA installable.
