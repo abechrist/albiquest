@@ -1,0 +1,123 @@
+@import 'tailwindcss';
+
+/* ===== Stitch Luminous Quest tokens (DESIGN.md) → Tailwind v4 ===== */
+@theme {
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand — 1:1 dengan DESIGN.md */
+  --color-primary: #4f46e5;        /* Adventure Vector (indigo-600) */
+  --color-primary-deep: #3525cd;   /* primary dari YAML */
+  --color-primary-press: #3730a3;  /* bottom lip tombol utama */
+  --color-quest: #10b981;          /* Mastery Emerald (emerald-500) */
+  --color-quest-deep: #006c49;
+  --color-gold: #f59e0b;           /* Momentum Gold (amber-500) */
+  --color-alert: #f43f5e;          /* Coral/rose diagnostik */
+
+  /* Surface — dari YAML */
+  --color-canvas: #faf8ff;
+  --color-surface: #ffffff;
+  --color-surface-dim: #d2d9f4;
+  --color-surface-high: #e2e7ff;
+  --color-rise: #0f172a;           /* slate-900 utk teks kuat */
+
+  /* Type */
+  --text-display: 40px;
+  --text-display--line-height: 48px;
+  --text-display--font-weight: 800;
+  --text-display--letter-spacing: -0.03em;
+  --text-headline: 28px;
+  --text-headline--line-height: 36px;
+  --text-headline--font-weight: 700;
+  --text-headline--letter-spacing: -0.02em;
+  --text-stat: 20px;
+  --text-stat--line-height: 24px;
+  --text-stat--font-weight: 800;
+  --text-stat--letter-spacing: -0.01em;
+
+  --shadow-card: 0 1px 3px rgb(15 23 42 / 0.06), 0 1px 2px rgb(15 23 42 / 0.04);
+  --shadow-dock: 0 12px 32px -4px rgb(79 70 229 / 0.18);
+  --shadow-tactile: 0 4px 0 0 #3730a3;
+  --shadow-tactile-press: 0 1px 0 0 #3730a3;
+}
+
+/* ===== Base ===== */
+html { -webkit-tap-highlight-color: transparent; }
+body {
+  @apply bg-canvas text-slate-900 antialiased;
+  font-family: var(--font-sans);
+}
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* App canvas: mobile-first, max 480px, sentral di layar besar (DESIGN.md Layout) */
+.app-canvas {
+  max-width: 480px;
+  margin-inline: auto;
+  min-height: 100dvh;
+  padding-bottom: calc(84px + env(safe-area-inset-bottom));
+}
+
+/* ===== Components ===== */
+
+/* Tombol utama taktil: bottom lip 4px, tekan turun (DESIGN.md Level 2) */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white
+    font-bold text-sm tracking-wide px-6 py-3.5 select-none cursor-pointer transition-all
+    duration-100 w-full;
+  box-shadow: var(--shadow-tactile);
+}
+.btn-primary:active { transform: translateY(3px); box-shadow: var(--shadow-tactile-press); }
+
+.btn-quest {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-quest text-white
+    font-bold text-sm tracking-wide px-5 py-3 select-none cursor-pointer transition-all duration-100;
+  box-shadow: 0 4px 0 0 #047857;
+}
+.btn-quest:active { transform: translateY(3px); box-shadow: 0 1px 0 0 #047857; }
+
+/* Kartu resting (Level 1) */
+.card {
+  @apply bg-surface rounded-2xl border border-slate-200/70;
+  box-shadow: var(--shadow-card);
+}
+
+/* Dock bawah mengambang, frosted glass (DESIGN.md bottom nav) */
+.dock {
+  @apply fixed bottom-3 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-1.5rem)] max-w-[432px]
+    rounded-full px-2 py-2 flex items-center justify-around;
+  background: rgb(255 255 255 / 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-dock);
+  border: 1px solid rgb(226 231 255 / 0.9);
+}
+.dock-item {
+  @apply flex flex-col items-center gap-0.5 rounded-full px-4 py-1.5 text-[11px] font-semibold
+    text-slate-500 transition-colors;
+}
+.dock-item.active { @apply bg-surface-high text-primary; }
+
+/* Pills & chip kategori mapel */
+.chip {
+  @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold;
+}
+
+/* Progress tracker kapsul (Level 1 track / emerald fill) */
+.track {
+  @apply h-3 w-full rounded-full bg-slate-900/10 overflow-hidden;
+}
+.track-fill {
+  @apply h-full rounded-full bg-gradient-to-r from-quest to-emerald-400;
+  transition: width 0.4s ease;
+}
+
+/* Input PIN */
+.pin-dot {
+  @apply h-4 w-4 rounded-full border-2 border-slate-300 transition-colors;
+}
+.pin-dot.filled { @apply border-primary bg-primary; }
+
+/* Nada teks */
+.h-display { @apply font-extrabold leading-[48px] tracking-[-0.03em] text-4xl; }
+.h-headline { @apply font-bold text-[28px] leading-9 tracking-[-0.02em]; }
+.h-title { @apply font-bold text-lg leading-6 tracking-[-0.01em]; }
+.stat { @apply font-extrabold text-xl leading-6 tracking-[-0.01em]; font-variant-numeric: tabular-nums; }

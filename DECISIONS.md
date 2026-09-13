@@ -88,3 +88,62 @@ Format: per keputusan — Context / Decision / Alternatives / Consequences. Upda
 **Alternatives:** Sync progress ke Sheets (butuh API key per user, umur pendek, kompleksitas tinggi).
 
 **Consequences:** Progress tidak pindah antar perangkat; diterima karena webapp personal single-device.
+
+---
+
+## D-008: Sumber Konten Akademik — soal dari sumber resmi, tanpa guru
+
+**Context:** User menegaskan webapp dikembangkan orang tua sendiri; tidak ada guru yang terlibat dalam penyusunan konten. Soal harus dibuat/diambil dari sumber terpercaya (misal dinas pendidikan, Kemdikbud).
+
+**Decision:** Soal & materi di-seed dari sumber resmi — Kemdikbud (Pusmenjar: soal AKM/ANBK, Buku Sekolah Elektronik BSE, Rumah Belajar), Dinas Pendidikan provinsi/kota (arsip soal ujian), dan sumber terbuka lain yang kredibel. Setiap soal membawa atribusi sumber. Tidak ada soal asal-dari-pola-kreatif-bebas untuk materi ujian.
+
+**Alternatives:** Menulis soal sendiri (risiko kualitas & standar dinas tidak terpenuhi); mengambil dari situs non-resmi (validitas rendah).
+
+**Consequences:** Konten sesuai standar resmi; perlu validasi permission/atribusi saat seed; lalu lintas lisensi personal dipakai untuk penggunaan keluarga pribadi.
+
+---
+
+## D-009: Scope Mata Pelajaran — semua mapel kategori ujian SMP Kelas 9
+
+**Context:** Tujuan utama webapp: mempersiapkan Albert (Kelas 9) menghadapi ujian dalam beberapa bulan ke depan; semua mata pelajaran yang masuk kategori ujian harus tersedia.
+
+**Decision:** Daftar mapel aktif mengikuti kategori ujian SMP Kelas 9:
+- **Inti (selalu diujikan, juga masuk ANBK Literasi & Numerasi):** Bahasa Indonesia, Matematika, IPA.
+- **Ujian Sekolah (menyusul):** Bahasa Inggris, IPS, PPKn, Pendidikan Agama dan Budi Pekerti, PJOK, Seni, Informatika.
+Spreadsheet kurikulum di-seed sesuai daftar ini dengan prioritas mapel inti dulu (lihat PRD §8 — struktur tetap configurable via data).
+
+**Alternatives:** Semua mapel prioritas sama (konteks ujian tidak tercermin); hanya 3 mapel inti (kurang lengkap untuk Ujian Sekolah).
+
+**Consequences:** Fokus konten ke mapel yang benar-benar diujikan; mapel tambahan tetap bisa ditambah via Sheets tanpa perubahan kode.
+
+---
+
+## D-010: Scope Mata Pelajaran — fokus 4 mapel ujian nasional + agama Katolik
+
+**Context:** User meminta fokus ke 4 mata pelajaran ujian nasional (BIND, MTK, BING, IPA) dan agama Katolik (PABP).
+
+**Decision:**
+1. **Prioritas 1:** 4 mapel ujian nasional (BIND, MTK, BING, IPA) dengan bobot lebih besar.
+2. **Prioritas 2:** Pendidikan Agama Katolik (PABP) sebagai mapel agama.
+3. **Prioritas 3:** IPS dan PJOK sebagai mapel tambahan.
+
+**Alternatives:** Fokus ke semua mapel (terlalu banyak), atau hanya 3 mapel inti (kurang lengkap).
+
+**Consequences:** Fokus konten ke mapel yang benar-benar diujikan; mapel tambahan tetap bisa ditambah via Sheets tanpa perubahan kode.
+
+---
+
+## D-011: Cakupan mapel final — 9 mapel, 4 mapel lanjutan di phase berikutnya
+
+**Context:** User menyetujui rekomendasi 8 mapel (4 ujian nasional + IPS, PPKn, PJOK, Prakarya & BK) dan menambahkan bahwa 4 mapel lanjutan harus dilengkapi di phase berikutnya (bukan diabaikan).
+
+**Decision:** Daftar mapel final:
+1. **Phase MVP (Ujian Nasional):** Bahasa Indonesia, Matematika, Bahasa Inggris, IPA.
+2. **Agama:** Pendidikan Agama Katolik (PABP).
+3. **Phase Lanjutan (WAJIB dilengkapi):** IPS, PPKn, PJOK, Prakarya & BK.
+
+**Reminder eksplisit:** 4 mapel lanjutan (IPS, PPKn, PJOK, Prakarya & BK) JANGAN terlupakan — konten & soal harus di-seed di phase berikutnya, tidak hanya placeholder.
+
+**Alternatives:** Membatasi app hanya 4 mapel nasional (mengurangi cakupan ujian sekolah).
+
+**Consequences:** Ada 9 mapel di UI; 4 mapel lanjutan ditandai "Menyusul" sampai kontennya di-seed.
