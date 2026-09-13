@@ -239,3 +239,47 @@ Spreadsheet kurikulum di-seed sesuai daftar ini dengan prioritas mapel inti dulu
 **Alternatives:** Badge statis hardcoded; XP flat tanpa kurva level.
 
 **Consequences:** Memberikan kepuasan instan (instant gratification) yang sehat, menumbuhkan rutinitas belajar harian tanpa menimbulkan stres.
+
+---
+
+## D-016: Adaptive Learning Engine — Topic Mastery, Spaced Review, & Smart Recommendations
+
+**Context:** Phase 7 Adaptive Learning. PRD §22–23 dan agent-prompt §58 mewajibkan sistem penguasaan materi yang cerdas, personal, dan terpusat: perhitungan penguasaan materi per topik/mapel, deteksi otomatis titik lemah belajar, penjadwalan spaced repetition, serta rekomendasi harian pintar ("What should I learn today?").
+
+**Decision:**
+1. **Perhitungan Mastery Terbobot (`src/lib/adaptive.ts`):**
+   - Skor penguasaan (0–100%) dihitung terpadu: Bobot penyelesaian modul (50%) + Rasio ketuntasan kesalahan/retry di Bank Salah (50%) dengan penalti jika terdapat kesalahan yang menumpuk.
+   - Status visual standar PRD: 🟢 *Mahir* ($\ge 80\%$), 🟡 *Berkembang* ($60\% - 79\%$), 🔴 *Perlu Latihan* ($< 60\%$).
+2. **Deteksi Topik Lemah (Weak Topics):**
+   - Otomatis memfilter topik dengan skor $< 75\%$ atau kesalahan aktif di Bank Salah, dilengkapi diagnosis alasan edukatif (misal: "Terdapat 2 konsep yang belum tuntas di Bank Salah").
+3. **Spaced Review Scheduler:**
+   - Interval pengulangan berjarak (1 hari, 3 hari, 7 hari, 14 hari, 30 hari). Item yang melampaui interval ditandai `isDue: true` sebagai prioritas belajar utama.
+4. **Recommendation Engine ("What Should I Learn Today?"):**
+   - Algoritma pemeringkatan: (1) Spaced Review yang jatuh tempo, (2) Topik terlemah yang membutuhkan perbaikan segera, (3) Modul pelajaran berikutnya pada mapel Prioritas 1 (Matematika & IPA), (4) Tantangan harian.
+5. **Peta Penguasaan Materi (`/student/mastery`):**
+   - Halaman interaktif pemantauan mastery per mata pelajaran, bar visual tactile, dan tombol latihan tertarget 1-klik.
+
+**Alternatives:** Urutan kurikulum statis linear kaku tanpa memperhitungkan riwayat kesalahan siswa.
+
+**Consequences:** Siswa belajar secara efisien pada materi yang paling membutuhkan perhatian tanpa membuang waktu mengulang materi yang sudah dikuasai.
+
+---
+
+## D-017: Challenge Arena & Play Modes — Boss Battle, Speed Round, & Express Modes
+
+**Context:** Phase 8 Challenges. PRD §26–27 dan agent-prompt §59 mewajibkan atmosfer belajar yang terasa seperti perpaduan Duolingo dan Game Adventure melalui mode-mode permainan edukatif yang menantang dan menyenangkan.
+
+**Decision:**
+1. **Game Engine Terpusat (`src/lib/challenges.ts`):**
+   - **Boss Battle:** Pertarungan menghadapi *Golem Aljabar Kuno* (100 HP Boss, 3 Hati Pemain). Jawaban benar menghasilkan damage serangan, jawaban salah mengurangi nyawa. Kemenangan memberikan +150 XP.
+   - **Speed Round (Quiz Rush 60s):** Time attack 60 detik. Jawaban tepat memberikan +5 detik dan multiplier combo (hingga 2.0x). Jawaban salah memberi penalti -3 detik.
+   - **5-Minute Express Mode (PRD §26):** Sesi mikro kilat untuk jadwal sibuk: 2 Soal Inti + 1 Rangkuman Konsep + Reward +60 XP untuk menjaga daily streak.
+   - **Survival Mode:** Sudden death mode. Berapa banyak soal berturut-turut yang dapat diselesaikan sebelum 1 kesalahan mengakhiri percobaan.
+2. **Arena Tantangan Interaktif (`/student/challenges`):**
+   - Tampilan visual game-like Stitch dengan animasi getar pukulan (*hit feedback*), bar nyawa boss, indikator timer yang berubah merah berkedip saat kritis, dan layar perayaan skor.
+3. **Integrasi Kesalahan & XP:**
+   - Kesalahan saat bermain mode tantangan otomatis dicatat ke Bank Kesalahan agar siklus belajar tuntas tetap terjaga. XP kemenangan langsung tersinkronisasi ke total profil siswa.
+
+**Alternatives:** Gamifikasi hanya berupa quiz MCQ biasa tanpa elemen aksi game RPG.
+
+**Consequences:** Mengikis kejenuhan belajar mandiri siswa, melatih refleks dan ketenangan di bawah batas waktu ujian.

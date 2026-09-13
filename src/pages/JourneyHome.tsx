@@ -1,13 +1,16 @@
 import { Link } from 'react-router-dom'
+import { useAdaptiveLearning } from '../lib/adaptive'
 import { useProfile } from '../lib/auth'
 import { useGamification } from '../lib/gamification'
 import { useProgress } from '../lib/progress'
 import { useData } from '../lib/store'
 
-// "Peta Petualangan" & Dashboard Siswa — Phase 6 Gamification
-// Sesuai prd.md §12, §13, §15, dan Stitch student_dashboard_peta_petualangan:
+// "Peta Petualangan" & Dashboard Siswa — Phase 6 & Phase 7
+// Sesuai prd.md §12, §13, §15, §22–23, dan Stitch student_dashboard_peta_petualangan:
 // - Status Gamifikasi (Level, Title, XP progress bar, Streak 7H).
-// - Misi Harian (Daily Missions) dengan pelacakan live dan tombol klaim reward.
+// - Rekomendasi Adaptif Hari Ini ("What should I learn today?").
+// - Misi Harian (Daily Missions) dengan pelacakan live dan klaim reward.
+// - Quick Action Hub (Peta Penguasaan, Arena Tantangan, Bank Salah).
 // - Peta Petualangan per mata pelajaran.
 
 export function JourneyHome() {
@@ -15,6 +18,17 @@ export function JourneyHome() {
   const { completed } = useProgress()
   const { active, addXP } = useProfile()
   const { levelInfo, state, dailyMissions, claimMissionReward } = useGamification(active?.xp ?? 1250)
+
+  const subjects = data?.subjects ?? []
+  const topics = data?.topics ?? []
+  const lessons = data?.lessons ?? []
+
+  const { recommendations, weakTopics, mistakesCount } = useAdaptiveLearning(
+    subjects,
+    topics,
+    lessons,
+    completed,
+  )
 
   if (!data) return null
 
@@ -100,6 +114,118 @@ export function JourneyHome() {
           </div>
         </div>
       </section>
+
+      {/* 2b. Rekomendasi Hari Ini ("What should I learn today?" - PRD §23) */}
+      {recommendations.length > 0 && (
+        <section className="relative overflow-hidden rounded-2xl border-2 border-indigo-600 bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-900 p-4 text-white shadow-lg">
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <span className="text-xl">✨</span>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-indigo-300">
+                    Rekomendasi Hari Ini
+                  </span>
+                  <span className="rounded-full bg-indigo-500/30 px-2 py-0.5 text-[9px] font-bold text-amber-300">
+                    {recommendations[0].badgeLabel}
+                  </span>
+                </div>
+                <h2 className="text-sm font-black text-white mt-0.5">
+                  {recommendations[0].title}
+                </h2>
+              </div>
+            </div>
+            <span className="text-2xl">{recommendations[0].subjectEmoji}</span>
+          </div>
+
+          <p className="mt-2 text-xs text-indigo-200/90 leading-relaxed">
+            {recommendations[0].reason}
+          </p>
+
+          <div className="mt-3 flex items-center justify-between pt-2 border-t border-indigo-800/60">
+            <span className="text-[11px] font-semibold text-indigo-300">
+              {recommendations[0].subjectName}
+            </span>
+            <Link
+              to={recommendations[0].actionUrl}
+              className="rounded-xl border-b-2 border-indigo-700 bg-indigo-500 px-3.5 py-1.5 text-xs font-black text-white shadow-md transition-all hover:bg-indigo-400 active:translate-y-0.5"
+            >
+              {recommendations[0].actionLabel} →
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* 2c. Quick Action Navigation Hub */}
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        <Link
+          to="/student/mastery"
+          className="card flex flex-col justify-between p-3 active:scale-95 transition-transform hover:border-indigo-400 bg-white"
+        >
+          <div className="flex items-center justify-between">
+            <span className="text-xl">🎯</span>
+            {weakTopics.length > 0 && (
+              <span className="rounded-full bg-rose-100 px-1.5 py-0.2 text-[9px] font-black text-rose-600">
+                {weakTopics.length}
+              </span>
+            )}
+          </div>
+          <div className="mt-2">
+            <p className="text-xs font-bold text-slate-900 leading-tight">Peta Penguasaan</p>
+            <p className="text-[10px] text-slate-400">Mastery radar</p>
+          </div>
+        </Link>
+
+        <Link
+          to="/student/challenges"
+          className="card flex flex-col justify-between p-3 active:scale-95 transition-transform hover:border-amber-400 bg-white"
+        >
+          <div className="flex items-center justify-between">
+            <span className="text-xl">⚔️</span>
+            <span className="rounded-full bg-amber-100 px-1.5 py-0.2 text-[9px] font-black text-amber-700">
+              Boss
+            </span>
+          </div>
+          <div className="mt-2">
+            <p className="text-xs font-bold text-slate-900 leading-tight">Arena Tantangan</p>
+            <p className="text-[10px] text-slate-400">Boss & speed rush</p>
+          </div>
+        </Link>
+
+        <Link
+          to="/student/mistakes"
+          className="card flex flex-col justify-between p-3 active:scale-95 transition-transform hover:border-rose-400 bg-white"
+        >
+          <div className="flex items-center justify-between">
+            <span className="text-xl">🧠</span>
+            {mistakesCount > 0 && (
+              <span className="rounded-full bg-rose-100 px-1.5 py-0.2 text-[9px] font-black text-rose-600">
+                {mistakesCount}
+              </span>
+            )}
+          </div>
+          <div className="mt-2">
+            <p className="text-xs font-bold text-slate-900 leading-tight">Bank Salah</p>
+            <p className="text-[10px] text-slate-400">Review & retry</p>
+          </div>
+        </Link>
+
+        <Link
+          to="/student/practice"
+          className="card flex flex-col justify-between p-3 active:scale-95 transition-transform hover:border-emerald-400 bg-white"
+        >
+          <div className="flex items-center justify-between">
+            <span className="text-xl">⚡</span>
+            <span className="rounded-full bg-emerald-100 px-1.5 py-0.2 text-[9px] font-black text-emerald-700">
+              Kilat
+            </span>
+          </div>
+          <div className="mt-2">
+            <p className="text-xs font-bold text-slate-900 leading-tight">Latihan Bebas</p>
+            <p className="text-[10px] text-slate-400">Acak & mapel</p>
+          </div>
+        </Link>
+      </div>
 
       {/* 3. Misi Harian (Daily Missions Section) */}
       <section className="card p-4 space-y-3 bg-white">

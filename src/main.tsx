@@ -14,6 +14,8 @@ import { QuestionPage } from './pages/QuestionPage'
 import { PracticePage } from './pages/PracticePage'
 import { MistakesPage } from './pages/MistakesPage'
 import { ProfilePage } from './pages/ProfilePage'
+import { MasteryPage } from './pages/MasteryPage'
+import { ChallengesPage } from './pages/ChallengesPage'
 import { Placeholder } from './pages/Placeholder'
 import { ParentHome } from './pages/ParentHome'
 
@@ -42,6 +44,8 @@ createRoot(document.getElementById('root')!).render(
             <Route path="subjects/:subjectId/lessons/:lessonId/questions/:questionId" element={<QuestionPage />} />
             <Route path="practice" element={<PracticePage />} />
             <Route path="mistakes" element={<MistakesPage />} />
+            <Route path="mastery" element={<MasteryPage />} />
+            <Route path="challenges" element={<ChallengesPage />} />
             <Route path="profile" element={<ProfilePage />} />
           </Route>
 
