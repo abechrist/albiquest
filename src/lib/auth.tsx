@@ -11,10 +11,10 @@ export interface Profile {
   xp: number
 }
 
-// Profil default Phase 1.
+// Profil default
 const PROFILES: (Profile & { pin: string })[] = [
   { id: 'albert', name: 'Albert', role: 'student', pin: '1234', avatar: '🐉', level: 7, xp: 1250 },
-  { id: 'parent', name: 'Orang Tua', role: 'parent', pin: '0000', avatar: '🛡️', level: 0, xp: 0 },
+  { id: 'parent', name: 'Orang Tua', role: 'parent', pin: '9999', avatar: '🛡️', level: 0, xp: 0 },
 ]
 
 const STORAGE_KEY = 'pla.profile'
@@ -65,8 +65,23 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
   const value: AuthValue = {
     active,
     login: (id, pin) => {
-      const p = PROFILES.find((x) => x.id === id && x.pin === pin)
+      const p = PROFILES.find((x) => x.id === id)
       if (!p) return false
+
+      let customPin: string | null = null
+      try {
+        customPin = localStorage.getItem(`pla.pin.${id}`)
+      } catch {}
+
+      // Menerima 9999 atau 0000 untuk Orang Tua, 1234 untuk Siswa, dan PIN kustom dari localStorage
+      const isValid =
+        (customPin && pin === customPin) ||
+        pin === p.pin ||
+        (id === 'parent' && (pin === '9999' || pin === '0000')) ||
+        (id === 'albert' && pin === '1234')
+
+      if (!isValid) return false
+
       let savedData: { xp: number; level: number } | null = null
       try {
         const raw = localStorage.getItem(`${STORAGE_KEY}_saved_${id}`)

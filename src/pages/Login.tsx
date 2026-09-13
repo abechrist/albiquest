@@ -50,8 +50,12 @@ export function Login() {
             <span key={i} className={`pin-dot ${pin.length > i ? 'filled' : ''}`} />
           ))}
         </div>
-        <p className={`text-xs font-semibold ${error ? 'text-alert' : 'text-transparent'}`} aria-live="polite">
-          PIN salah, coba lagi
+        <p className={`text-xs font-semibold ${error ? 'text-alert' : 'text-slate-400'}`} aria-live="polite">
+          {error
+            ? 'PIN salah, silakan coba lagi'
+            : role === 'parent'
+            ? 'PIN akses: 9999 (atau 0000)'
+            : 'PIN siswa: 1234'}
         </p>
 
         <div className="grid grid-cols-3 gap-2 w-full max-w-[280px]">
