@@ -165,3 +165,77 @@ Spreadsheet kurikulum di-seed sesuai daftar ini dengan prioritas mapel inti dulu
 **Alternatives:** Google Sheets API v4 (butuh API key/OAuth & backend proxy — overkill untuk app pribadi).
 
 **Consequences:** Pemilik konten (orang tua) edit spreadsheet → otomatis terlihat di app (maks 1 jam). Mode dev tanpa spreadsheet tetap jalan via seed.
+
+---
+
+## D-013: Question Engine — Reusable Multi-Type Evaluator, Progressive Hints, dan XP Scoring
+
+**Context:** Phase 4 Question Engine. PRD §17–19 dan agent-prompt §55 mewajibkan engine soal yang modular dan mendukung 6 jenis soal: Multiple Choice (`mcq`), True/False (`true_false`), Short Answer (`short`), Numeric (`numeric`), Matching (`matching`), dan Ordering (`ordering`), disertai progressive hints, scoring XP, dan instant educational feedback.
+
+**Decision:**
+1. **Pemisahan Logika & Tampilan:**
+   - Logika evaluasi murni di `src/lib/question-evaluator.ts` (100% testable via unit test Node.js tanpa dependensi React/DOM).
+   - Hook state dan UI renderer bergaya Stitch di `src/lib/question-engine.tsx`.
+2. **Standar 6 Tipe Soal:**
+   - `mcq`: pilihan tunggal/jamak berbasis indeks atau teks, tombol taktil bergaya game dengan huruf (A, B, C, D).
+   - `true_false`: kartu besar Benar vs Salah.
+   - `short`: input teks dengan normalisasi (lowercase, trim, penghapusan tanda baca) dan pencocokan kata kunci/sinonim.
+   - `numeric`: input angka dengan penanganan pemisah desimal titik/koma dan toleransi floating point.
+   - `matching`: format pasangan "Kiri | Kanan", antarmuka pemilih dua kolom interaktif.
+   - `ordering`: susunan langkah/kronologi dengan kontrol reorder naik/turun yang intuitif.
+3. **Progressive Hints (PRD §19):**
+   - Tier 1: Petunjuk konseptual awal (tersedia/gratis).
+   - Tier 2: Petunjuk operasional detail (unlockable dengan konsekuensi -5 XP).
+4. **Scoring & Feedback Edukatif:**
+   - Base XP: Tingkat 1 (10 XP), Tingkat 2 (20 XP), Tingkat 3 (30 XP).
+   - Feedback Drawer instan bergaya Stitch: ucapan selamat & reward XP jika benar, atau pembahasan edukatif suportif & tombol coba lagi jika belum tepat.
+
+**Alternatives:** Single-choice MCQ saja (tidak memenuhi standar AKM/ANBK SMP Kelas 9); validasi di backend (bertentangan dengan arsitektur static local-first).
+
+**Consequences:** Soal interaktif kaya variasi dapat dimainkan offline, siap disambungkan ke Error Bank / My Mistakes pada Phase 5.
+
+---
+
+## D-014: Practice Arena & Error Bank (My Mistakes) — Learning Loop Terintegrasi
+
+**Context:** Phase 5 Practice & Error Bank. PRD §20–21 dan agent-prompt §56 mewajibkan siklus belajar tuntas: Practice → Mistake → Explanation → Review → Retry → Mastered. Area latihan (`/student/practice`) dan bank kesalahan (`/student/mistakes`) harus hidup, interaktif, dan terhubung secara mulus dengan Question Engine.
+
+**Decision:**
+1. **Penyimpanan Lokal Persisten:**
+   - Store `src/lib/mistakes.ts` menyimpan riwayat kesalahan ke localStorage (`pla.mistakes.v1`) secara offline-first.
+   - Setiap kali siswa menjawab salah di Question Engine (baik di pelajaran, latihan kilat, maupun review), kesalahan otomatis terekam beserta jawaban siswa, kunci jawaban, petunjuk yang dipakai, dan jumlah percobaan.
+   - Ketika siswa berhasil menjawab benar saat melakukan Retry, status soal otomatis diperbarui dari `needs_review` menjadi `mastered`.
+2. **Arena Latihan (`/student/practice`):**
+   - 3 Mode: Latihan Kilat (5 soal acak lintas mapel), Spaced Review (khusus soal di Bank Salah), dan Latihan per Mapel.
+   - Sesi latihan terpadu dengan status stamina hati, timer, dan layar perayaan skor akhir.
+3. **Bank Kesalahan (`/student/mistakes`):**
+   - Mengadopsi visual Stitch `my_mistakes_review_bank` dengan banner metrik (Perlu Diulang, Dikuasai, Akurasi Retry %).
+   - Komparasi berdampingan *Jawabanmu* (merah/salah) vs *Jawaban Tepat* (hijau/benar).
+   - Diagnosa konsep/pola pikir dan tombol modal Coba Lagi (Retry) instan.
+
+**Alternatives:** Menyimpan riwayat hanya di memori sesi (data hilang saat reload); tanpa fitur retry langsung (mengurangi efektivitas belajar mandiri).
+
+**Consequences:** Albert dapat belajar dari setiap kesalahan tanpa rasa takut gagal; metrik kesiapan ujian terakumulasi secara akurat.
+
+---
+
+## D-015: Centralized Gamification Hub — Streaks, Badges, Leveling, & Daily Missions
+
+**Context:** Phase 6 Gamification Hub. PRD §22–24 dan agent-prompt §57 mewajibkan sistem gamifikasi yang memotivasi dan tidak dangkal: daily streak tracking dengan perlindungan freeze, formula leveling non-linear progresif, sistem evaluasi lencana (badges) otomatis yang kaya konteks belajar (streak, mastery, akurasi, eksplorasi), serta misi harian yang terintegrasi dengan penambahan XP langsung.
+
+**Decision:**
+1. **Gamification Store & Engine (`src/lib/gamification.ts`):**
+   - Formula Level: $XP_{\text{needed}} = \text{round}(100 \times \text{level}^{1.4})$. Menampilkan level saat ini, sisa XP ke level berikutnya, dan persentase progres.
+   - Streak Touch System: Mencatat tanggal aktif belajar terakhir. Membedakan hari yang sama (tetap), hari berturut-turut (+1 streak), terlewat 1 hari dengan pelindung *streak freeze* (streak selamat), atau terlewat tanpa freeze (reset ke 1).
+   - Dynamic Badge Evaluator: 12 jenis lencana (e.g. *Langkah Pertama*, *Api Ketekunan*, *Master Aljabar*, *Ahli Percobaan*, *Kolektor Bintang*) dievaluasi secara otomatis berdasarkan total XP, streak, soal dijawab, dan soal bank salah yang berhasil dikuasai.
+   - Daily Missions: 3 misi harian dinamis (misal: Selesaikan 1 Sesi Latihan, Jawab Benar 3 Soal, Review 1 Kesalahan). Reward XP dapat diklaim satu kali per misi yang selesai, langsung menambah total XP profil.
+2. **Profil Siswa Interaktif (`/student/profile`):**
+   - Hero profile card dengan avatar Albert, badge level ("Penjelajah Pengetahuan"), progress bar animasi, dan 4 kartu metrik utama.
+   - Galeri Badges interaktif dengan filter (Semua, Terbuka, Terkunci), visual icon & deskripsi syarat buka.
+   - Tombol cepat akses Area Orang Tua terproteksi PIN.
+3. **Integrasi Beranda (`JourneyHome.tsx`):**
+   - Widget Misi Harian taktil langsung di beranda dengan indikator progres dan tombol "Klaim +XP" interaktif.
+
+**Alternatives:** Badge statis hardcoded; XP flat tanpa kurva level.
+
+**Consequences:** Memberikan kepuasan instan (instant gratification) yang sehat, menumbuhkan rutinitas belajar harian tanpa menimbulkan stres.

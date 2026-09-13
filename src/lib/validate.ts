@@ -13,7 +13,7 @@ import type {
   Topic,
 } from './domain'
 
-import { SheetsError } from './sheets'
+import { SheetsError } from './sheets.ts'
 
 export const SHEET_NAMES = [
   'subjects',
@@ -138,15 +138,30 @@ const validateLesson: Validator<Lesson> = (r, s, n) => ({
   sortOrder: reqInt(r, 'sort_order', s, n),
 })
 
+const optJsonArray = (r: Rec, k: string): string[] | undefined => {
+  const v = r[k]
+  if (!v || v.trim() === '' || v === '[]') return undefined
+  try {
+    const parsed: unknown = JSON.parse(v)
+    if (Array.isArray(parsed) && parsed.every((x) => typeof x === 'string')) {
+      return parsed as string[]
+    }
+  } catch {
+    // fallback if not valid JSON
+  }
+  return undefined
+}
+
 const validateQuestion: Validator<Question> = (r, s, n) => ({
   id: reqStr(r, 'id', s, n),
   lessonId: reqStr(r, 'lesson_id', s, n),
   subjectId: reqStr(r, 'subject_id', s, n),
-  type: reqEnum<QuestionType>(r, 'type', ['mcq', 'true_false', 'short', 'numeric'] as const, s, n),
+  type: reqEnum<QuestionType>(r, 'type', ['mcq', 'true_false', 'short', 'numeric', 'matching', 'ordering'] as const, s, n),
   prompt: reqStr(r, 'prompt', s, n),
   options: reqJsonArray(r, 'options', s, n),
   answer: reqJsonArray(r, 'answer', s, n),
   explanation: optStr(r, 'explanation'),
+  hints: optJsonArray(r, 'hints'),
   source: optStr(r, 'source'),
   difficulty: (() => {
     const d = reqInt(r, 'difficulty', s, n)

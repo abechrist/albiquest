@@ -3,7 +3,7 @@
 
 export type Priority = 1 | 2 | 3
 export type SubjectStatus = 'active' | 'coming'
-export type QuestionType = 'mcq' | 'true_false' | 'short' | 'numeric'
+export type QuestionType = 'mcq' | 'true_false' | 'short' | 'numeric' | 'matching' | 'ordering'
 export type LessonType = 'lesson' | 'quiz' | 'review'
 export type Difficulty = 1 | 2 | 3
 
@@ -61,11 +61,15 @@ export interface Question {
   subjectId: string
   type: QuestionType
   prompt: string
-  /** opsi hanya relevan untuk mcq */
+  /** opsi untuk mcq/matching/ordering */
   options: string[]
-  /** jawaban benar: index untuk mcq, 'true'|'false' untuk true_false, teks/kata kunci untuk lainnya */
+  /** jawaban benar: format string[] sesuai tipe soal */
   answer: string[]
   explanation: string
+  /** petunjuk bertahap (PRD §19) */
+  hints?: string[]
+  /** reward XP default (jika tidak diatur, dihitung dari difficulty) */
+  xp?: number
   /** atribusi sumber resmi (D-008) */
   source: string
   difficulty: Difficulty

@@ -1,8 +1,8 @@
 // Klien Google Sheets tanpa API key: endpoint public "Publish to web" (gviz tq),
 // dibaca read-only dari browser. Cache localStorage TTL 1 jam + fallback ke cache
 // basi saat offline (D-006: local-first).
-import { parseCsv } from './csv'
-import type { SheetName } from './validate'
+import { parseCsv } from './csv.ts'
+import type { SheetName } from './validate.ts'
 
 export class SheetsError extends Error {
   readonly kind: 'network' | 'http' | 'validation'

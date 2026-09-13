@@ -10,6 +10,10 @@ import { JourneyHome } from './pages/JourneyHome'
 import { SubjectsPage } from './pages/SubjectsPage'
 import { SubjectDetailPage } from './pages/SubjectDetailPage'
 import { LessonPage } from './pages/LessonPage'
+import { QuestionPage } from './pages/QuestionPage'
+import { PracticePage } from './pages/PracticePage'
+import { MistakesPage } from './pages/MistakesPage'
+import { ProfilePage } from './pages/ProfilePage'
 import { Placeholder } from './pages/Placeholder'
 import { ParentHome } from './pages/ParentHome'
 
@@ -35,9 +39,10 @@ createRoot(document.getElementById('root')!).render(
             <Route path="subjects" element={<SubjectsPage />} />
             <Route path="subjects/:subjectId" element={<SubjectDetailPage />} />
             <Route path="subjects/:subjectId/lessons/:lessonId" element={<LessonPage />} />
-            <Route path="practice" element={<Placeholder title="Arena Latihan" subtitle="Soal latihan menyusul di Phase 5." />} />
-            <Route path="mistakes" element={<Placeholder title="My Mistakes" subtitle="Kumpulan kesalahan untuk direview (Phase 5)." />} />
-            <Route path="profile" element={<Placeholder title="Profil Albert" subtitle="Pengaturan PIN & profil." />} />
+            <Route path="subjects/:subjectId/lessons/:lessonId/questions/:questionId" element={<QuestionPage />} />
+            <Route path="practice" element={<PracticePage />} />
+            <Route path="mistakes" element={<MistakesPage />} />
+            <Route path="profile" element={<ProfilePage />} />
           </Route>
 
           {/* Area orang tua */}
