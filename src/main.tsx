@@ -16,8 +16,11 @@ import { MistakesPage } from './pages/MistakesPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { MasteryPage } from './pages/MasteryPage'
 import { ChallengesPage } from './pages/ChallengesPage'
-import { Placeholder } from './pages/Placeholder'
+import { ExamPage } from './pages/ExamPage'
 import { ParentHome } from './pages/ParentHome'
+import { ParentSummaryPage } from './pages/parent/ParentSummaryPage'
+import { ParentProgressPage } from './pages/parent/ParentProgressPage'
+import { ParentMistakesPage } from './pages/parent/ParentMistakesPage'
 
 function Gate({ role, children }: { role: 'student' | 'parent'; children: React.ReactNode }) {
   const { active } = useProfile()
@@ -46,14 +49,15 @@ createRoot(document.getElementById('root')!).render(
             <Route path="mistakes" element={<MistakesPage />} />
             <Route path="mastery" element={<MasteryPage />} />
             <Route path="challenges" element={<ChallengesPage />} />
+            <Route path="exam" element={<ExamPage />} />
             <Route path="profile" element={<ProfilePage />} />
           </Route>
 
           {/* Area orang tua */}
           <Route path="/parent" element={<Gate role="parent"><ParentHome /></Gate>}>
-            <Route index element={<Placeholder title="Ringkasan" subtitle="Statistik belajar Albert — Phase 10." />} />
-            <Route path="progress" element={<Placeholder title="Perkembangan" subtitle="Mastery per mapel — Phase 10." />} />
-            <Route path="mistakes" element={<Placeholder title="Kesalahan Albert" subtitle="Review kesalahan — Phase 10." />} />
+            <Route index element={<ParentSummaryPage />} />
+            <Route path="progress" element={<ParentProgressPage />} />
+            <Route path="mistakes" element={<ParentMistakesPage />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />

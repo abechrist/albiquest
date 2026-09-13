@@ -283,3 +283,46 @@ Spreadsheet kurikulum di-seed sesuai daftar ini dengan prioritas mapel inti dulu
 **Alternatives:** Gamifikasi hanya berupa quiz MCQ biasa tanpa elemen aksi game RPG.
 
 **Consequences:** Mengikis kejenuhan belajar mandiri siswa, melatih refleks dan ketenangan di bawah batas waktu ujian.
+
+---
+
+## D-018: Mock Exam System — Presets, Navigation Palette, Auto-Scoring, & Exam History
+
+**Context:** Phase 9 Mock Exam. PRD §24–25 dan agent-prompt §60 mewajibkan sistem simulasi ujian komprehensif berstandar asesmen nasional (ANBK/AKM SMP): pemilihan paket ujian, countdown timer otomatis, palet navigasi nomor dengan indikator visual (terjawab, ragu-ragu, kosong), auto-scoring skala 0–100, diagnosa topik kuat vs butuh latihan, serta integrasi rekaman kesalahan ke Bank Kesalahan dan penyimpanan riwayat ujian.
+
+**Decision:**
+1. **Mock Exam Engine (`src/lib/mock-exam.ts`):**
+   - 3 Preset Ujian: *Simulasi Lengkap ANBK / Asesmen Akhir* (15 soal, 25 menit), *Simulasi Fokus MIPA* (10 soal, 15 menit), dan *Uji Cepat Kesiapan Ujian* (5 soal, 8 menit).
+   - Palet Navigasi Cerdas: Menghitung status setiap soal secara reaktif (🟢 *answered*, 🟡 *flagged/ragu-ragu*, ⚪ *unanswered*). Siswa dapat melompat ke nomor manapun secara instan.
+   - Timer Otomatis & Auto-Submit: Saat waktu tersisa mencapai 00:00, ujian otomatis dikumpulkan untuk mencegah manipulasi waktu.
+   - Evaluasi Terpadu: Skor (0–100), analisis *Strong Topics* (skor topik $\ge 75\%$) vs *Needs Practice* (skor topik $< 75\%$), dan pembahasan kunci jawaban mendalam.
+   - Riwayat Persisten: Hasil ujian otomatis disimpan ke storage lokal (`pla.exam_history.v1`) sehingga riwayat nilai dapat dianalisis kembali oleh siswa dan orang tua.
+2. **Layar Ujian Interaktif (`/student/exam`):**
+   - 3 Tahap Alur: Lobby Pemilihan Paket → Layar Ujian Berjalan dengan Palet Drawer & Tanda Ragu-ragu → Layar Hasil & Diagnostik Topik.
+
+**Alternatives:** Quiz tanpa timer kaku; tanpa penanda ragu-ragu (tidak realistis mensimulasikan ANBK).
+
+**Consequences:** Siswa memiliki kesiapan mental dan manajemen waktu yang matang sebelum menghadapi ujian sekolah sesungguhnya.
+
+---
+
+## D-019: Parent Area Architecture — Read-Only Boundary, Supportive Coaching, & Student Linking
+
+**Context:** Phase 10 Parent Area. PRD §28–42 dan agent-prompt §61 menegaskan bahwa Parent Area adalah fitur inti produk dengan prinsip utama: **MONITOR → UNDERSTAND → SUPPORT, bukan PUNISH**. Orang tua harus dapat memantau waktu belajar, konsistensi streak, penguasaan kurikulum, dan catatan kesalahan tanpa memiliki hak mengubah/menghapus data akademik siswa.
+
+**Decision:**
+1. **Pemisahan Boundary Otoritas (Read-Only Enforcement):**
+   - Parent portal di `/parent` diisolasi sepenuhnya dari fungsi mutasi akademik (`addXP`, jawaban siswa, mastery, atau penghapusan riwayat).
+   - Parent murni memiliki hak baca analitik (*Read-Only*) untuk memahami perkembangan anak.
+2. **Dashboard Cockpit Orang Tua (`ParentSummaryPage.tsx`):**
+   - Mengadopsi visual tenang dan suportif sesuai Stitch `parent_overview_mastery`.
+   - Kartu Fokus Siswa: Profil Albert Tan, status keaktifan, dan tombol interaktif *Cheer* (kirim pesan semangat).
+   - 4 Metrik Kunci Mingguan: Streak Belajar (7H 🔥), Total Durasi Belajar (4j 25m ⏱️), Sesi Modul Selesai, dan Status Bank Kesalahan.
+   - Saran Pendampingan Bebas Tekanan: Rekomendasi kontekstual untuk orang tua mengenai cara mendampingi Albert tanpa tuntutan yang memicu stres.
+3. **Perkembangan Kurikulum & Kesalahan (`ParentProgressPage.tsx` & `ParentMistakesPage.tsx`):**
+   - Analisis penguasaan materi per mata pelajaran dan topik yang sedang butuh bantuan.
+   - Pemantik obrolan santai: Contoh pertanyaan reflektif yang dapat diajukan orang tua saat makan malam keluarga.
+
+**Alternatives:** Memberikan izin edit data kepada orang tua (merusak integritas akademik dan motivasi mandiri anak).
+
+**Consequences:** Membangun kemitraan suportif dan harmonis antara orang tua dan anak dalam proses belajar.

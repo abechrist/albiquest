@@ -227,6 +227,32 @@ export function JourneyHome() {
         </Link>
       </div>
 
+      {/* 2d. Banner Simulasi Ujian ANBK (Phase 9) */}
+      <section className="card p-3.5 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white !border-slate-800 flex items-center justify-between gap-3 shadow-md">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-indigo-500/20 text-xl border border-indigo-500/30">
+            🏛️
+          </div>
+          <div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] font-bold text-amber-300 uppercase tracking-wide">
+                Simulasi ANBK & Asesmen SMP
+              </span>
+              <span className="rounded-full bg-emerald-500/20 px-1.5 py-0.2 text-[9px] font-bold text-emerald-400">
+                Resmi
+              </span>
+            </div>
+            <p className="text-xs font-black text-white mt-0.5">Uji Kesiapan & Timer Realistis</p>
+          </div>
+        </div>
+        <Link
+          to="/student/exam"
+          className="rounded-xl border-b-2 border-indigo-700 bg-indigo-600 px-3.5 py-2 text-xs font-black text-white shadow-sm hover:bg-indigo-500 active:translate-y-0.5 transition-all shrink-0"
+        >
+          Ikuti Ujian →
+        </Link>
+      </section>
+
       {/* 3. Misi Harian (Daily Missions Section) */}
       <section className="card p-4 space-y-3 bg-white">
         <div className="flex items-center justify-between">
