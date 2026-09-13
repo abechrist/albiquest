@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useProfile } from '../lib/auth'
 import { useGamification } from '../lib/gamification'
+import { usePWAInstall } from '../lib/pwa'
 
 // Halaman Profil Siswa & Koleksi Lencana (Phase 6)
 // Sesuai prd.md §15 (Gamifikasi & Badges) dan agent-prompt.md §57.
@@ -8,6 +9,7 @@ import { useGamification } from '../lib/gamification'
 export function ProfilePage() {
   const { active, logout } = useProfile()
   const { levelInfo, state, badgesWithStatus } = useGamification(active?.xp ?? 1250)
+  const { isInstallable, isInstalled, installApp } = usePWAInstall()
 
   // Pengaturan PIN
   const [showPinModal, setShowPinModal] = useState(false)
@@ -179,6 +181,27 @@ export function ProfilePage() {
         </h3>
 
         <div className="flex flex-col gap-2">
+          {isInstallable && (
+            <button
+              type="button"
+              onClick={installApp}
+              className="w-full p-3 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-bold text-xs flex items-center justify-between shadow-sm hover:from-indigo-600 hover:to-indigo-700 transition-all cursor-pointer animate-pulse"
+            >
+              <div className="flex items-center gap-2">
+                <span>📱</span>
+                <span>Pasang Aplikasi di Layar Utama (PWA)</span>
+              </div>
+              <span className="rounded-md bg-white/20 px-2 py-0.5 text-[10px]">Install</span>
+            </button>
+          )}
+
+          {isInstalled && (
+            <div className="w-full p-2.5 rounded-xl bg-emerald-50 text-emerald-800 font-semibold text-xs flex items-center gap-2 border border-emerald-200">
+              <span>✓</span>
+              <span>Aplikasi sudah terpasang di perangkat (Offline Ready)</span>
+            </div>
+          )}
+
           <button
             type="button"
             onClick={() => setShowPinModal(true)}

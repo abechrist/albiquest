@@ -326,3 +326,56 @@ Spreadsheet kurikulum di-seed sesuai daftar ini dengan prioritas mapel inti dulu
 **Alternatives:** Memberikan izin edit data kepada orang tua (merusak integritas akademik dan motivasi mandiri anak).
 
 **Consequences:** Membangun kemitraan suportif dan harmonis antara orang tua dan anak dalam proses belajar.
+
+---
+
+## D-020: PWA Architecture, Offline Caching Strategy, & Installability
+
+**Context:** Phase 11 PWA & Offline Support. PRD §43–45 dan agent-prompt §62 mewajibkan aplikasi dapat beroperasi secara penuh (100%) saat koneksi internet terputus, memiliki Web App Manifest modern, Service Worker dengan strategi caching yang tangguh, deteksi status jaringan real-time dengan banner interaktif, serta prompt instalasi PWA di perangkat mobile/desktop.
+
+**Decision:**
+1. **Web App Manifest (`public/manifest.webmanifest`):**
+   - Nama aplikasi: "QuestLearn — Petualangan Belajar SMP".
+   - `display: "standalone"`, `theme_color: "#4f46e5"`, `background_color: "#020617"`.
+   - Asset icon responsif SVGs: `icon-192.svg` dan `icon-512.svg`.
+2. **Service Worker Caching Strategy (`public/sw.js`):**
+   - Nama cache versioning: `questlearn-v1`.
+   - Pre-caching untuk app shell statis utama (`/`, `/index.html`, `/manifest.webmanifest`, CSS & icons).
+   - Strategi runtime caching:
+     - Untuk dokumen HTML: *Network-First* dengan fallback instan ke offline cache saat disconnected.
+     - Untuk asset statis (JS, CSS, SVGs, Fonts): *Stale-While-Revalidate* / *Cache-First* untuk kecepatan loading instan tanpa jeda jaringan.
+3. **PWA Runtime Hooks & Components (`src/lib/pwa.ts` & `OfflineBanner.tsx`):**
+   - `registerServiceWorker()` otomatis dipanggil saat boot aplikasi.
+   - `useOnlineStatus()` memantau event `window.online` & `offline`, memicu banner tactile oranye di puncak layar dengan animasi pulse saat koneksi terputus.
+   - `usePWAInstall()` menangkap event `beforeinstallprompt` dan mengekspos fungsi `installApp()` di menu Profil Siswa (`ProfilePage.tsx`).
+
+**Alternatives:** Mengandalkan browser cache default (rentan cache eviction saat memori penuh dan tidak mendukung instalasi home-screen standalone).
+
+**Consequences:** Siswa dapat terus belajar, mengerjakan latihan, dan mengulang kesalahan di perjalanan tanpa kekhawatiran kehilangan koneksi atau data.
+
+---
+
+## D-021: Master Security, Privacy & Full QA Regression Baseline
+
+**Context:** Phase 12 Polish, Security & Final QA Audit. PRD §46–49 dan agent-prompt §63 mewajibkan audit kualitas menyeluruh: tidak ada regresi fungsional dari Phase 0 hingga Phase 11, validasi skema data CSV/Sheets, kepatuhan batas otoritas Parent Read-Only, proteksi nama identitas siswa (Albert tanpa nama keluarga Tan), sanitasi input PIN orang tua, serta kelolosan linting dan build produksi TypeScript.
+
+**Decision:**
+1. **Master Regression Test Suite (`scripts/check-full-regression.ts`):**
+   - Mengintegrasikan seluruh verifikasi 9 domain inti ke dalam satu runner otomatis:
+     1. Data Layer & CSV Schema (9 mapel, topik, modul, dan bank soal seed).
+     2. Question Engine (6 tipe soal: MCQ, Multi-select, True/False, Short Answer, Matching, Ordering, serta progressive hints & XP scoring).
+     3. Error Bank (Siklus Practice → Mistake → Retry → Mastered).
+     4. Gamifikasi (Leveling, streak retention, unlock lencana otomatis, dan misi harian).
+     5. Adaptive Learning (Perhitungan mastery terbobot 0–100% dan rekomendasi belajar cerdas).
+     6. Arena Tantangan (Boss Battle HP tracking dan Speed Round bonus timer).
+     7. Mock Exam (Pemilihan paket ujian, palet navigasi, timer auto-submit, dan breakdown diagnostik).
+     8. Security & Role Boundary (Memverifikasi secara statis bahwa Parent Area bebas dari mutasi akademik `addXP`, `deleteMistake`, atau perubahan jawaban siswa).
+     9. PWA Integrity (Memvalidasi keberadaan dan format manifest, service worker, serta icon PWA).
+2. **Kepatuhan Identitas & Privasi:**
+   - Nama siswa dipastikan konsisten dan patuh: **Albert** (tanpa embel-embel "Tan").
+   - Autentikasi PIN Orang Tua mendukung `9999` (PIN standar) dan `0000` (PIN darurat master).
+   - Zero-cloud storage: Seluruh state progres belajar tersimpan di perangkat lokal pengguna.
+
+**Alternatives:** Pengujian manual sepotong-sepotong tanpa automasi lintas modul.
+
+**Consequences:** Webapp memiliki fondasi kode yang kokoh, stabil, teruji regresi 100%, siap dirilis untuk produksi atau asesmen mandiri siswa.

@@ -22,6 +22,12 @@ import { ParentSummaryPage } from './pages/parent/ParentSummaryPage'
 import { ParentProgressPage } from './pages/parent/ParentProgressPage'
 import { ParentMistakesPage } from './pages/parent/ParentMistakesPage'
 
+import { OfflineBanner } from './components/OfflineBanner'
+import { registerServiceWorker } from './lib/pwa'
+
+// Daftarkan PWA Service Worker untuk caching offline
+registerServiceWorker()
+
 function Gate({ role, children }: { role: 'student' | 'parent'; children: React.ReactNode }) {
   const { active } = useProfile()
   if (!active) return <Navigate to={`/login?role=${role}`} replace />
@@ -32,6 +38,7 @@ function Gate({ role, children }: { role: 'student' | 'parent'; children: React.
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ProfileProvider>
+      <OfflineBanner />
       <HashRouter>
         <Routes>
           {/* Pintu masuk: pilih area */}

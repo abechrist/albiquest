@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#4338ca" />
+    </linearGradient>
+    <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="44" fill="#0f172a" />
+  <!-- Shield Emblem -->
+  <path d="M96 26 L150 48 C150 110 96 156 96 156 C96 156 42 110 42 48 Z" fill="url(#shieldGrad)" stroke="#818cf8" stroke-width="4" />
+  <!-- Star / Compass Motif -->
+  <polygon points="96,58 105,82 130,86 112,103 116,128 96,115 76,128 80,103 62,86 87,82" fill="url(#starGrad)" />
+</svg>
