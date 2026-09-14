@@ -260,32 +260,32 @@ export function PracticePage() {
       </div>
 
       {/* Mode Latihan Utama */}
-      <div className="space-y-2.5">
-        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 px-1">
+      <div className="space-y-3">
+        <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-500 px-1">
           Pilih Mode Latihan
         </h3>
 
-        <div className="grid grid-cols-1 gap-2.5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
           {/* Mode 1: Latihan Kilat */}
           <button
             type="button"
             onClick={startQuickPractice}
-            className="group p-4 rounded-2xl bg-white border border-slate-200/80 shadow-[0_3px_0_0_#dae2fd] active:translate-y-0.5 active:shadow-[0_1px_0_0_#dae2fd] transition-all flex items-center justify-between text-left cursor-pointer"
+            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 shadow-[0_3px_0_0_#dae2fd] active:translate-y-0.5 active:shadow-[0_1px_0_0_#dae2fd] transition-all flex items-center justify-between text-left cursor-pointer hover:border-primary/40"
           >
-            <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl group-hover:scale-105 transition-transform flex-shrink-0">
+            <div className="flex items-center gap-4">
+              <div className="w-13 h-13 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-3xl group-hover:scale-105 transition-transform flex-shrink-0">
                 ⚡
               </div>
-              <div className="space-y-0.5">
-                <h4 className="text-sm font-bold text-slate-900 group-hover:text-primary transition-colors">
+              <div className="space-y-1">
+                <h4 className="text-base font-extrabold text-slate-900 group-hover:text-primary transition-colors">
                   Latihan Kilat 5 Soal
                 </h4>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs sm:text-sm text-slate-500 leading-snug">
                   Kombinasi acak soal Matematika, IPA, dan Bahasa Indonesia.
                 </p>
               </div>
             </div>
-            <span className="text-xs font-bold text-primary px-3 py-1 rounded-full bg-indigo-50 flex-shrink-0">
+            <span className="text-xs sm:text-sm font-bold text-primary px-3 py-1.5 rounded-full bg-indigo-50 flex-shrink-0">
               Mulai ➔
             </span>
           </button>
@@ -294,29 +294,29 @@ export function PracticePage() {
           <button
             type="button"
             onClick={startMistakesReview}
-            className="group p-4 rounded-2xl bg-white border border-slate-200/80 shadow-[0_3px_0_0_#dae2fd] active:translate-y-0.5 active:shadow-[0_1px_0_0_#dae2fd] transition-all flex items-center justify-between text-left cursor-pointer"
+            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 shadow-[0_3px_0_0_#dae2fd] active:translate-y-0.5 active:shadow-[0_1px_0_0_#dae2fd] transition-all flex items-center justify-between text-left cursor-pointer hover:border-rose-400"
           >
-            <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-2xl group-hover:scale-105 transition-transform flex-shrink-0">
+            <div className="flex items-center gap-4">
+              <div className="w-13 h-13 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-3xl group-hover:scale-105 transition-transform flex-shrink-0">
                 🧠
               </div>
-              <div className="space-y-0.5">
-                <div className="flex items-center gap-1.5">
-                  <h4 className="text-sm font-bold text-slate-900 group-hover:text-primary transition-colors">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <h4 className="text-base font-extrabold text-slate-900 group-hover:text-rose-600 transition-colors">
                     Spaced Review (Bank Salah)
                   </h4>
                   {stats.needsReview > 0 && (
-                    <span className="px-1.5 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-bold">
+                    <span className="px-2 py-0.5 rounded-full bg-rose-500 text-white text-xs font-black">
                       {stats.needsReview}
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs sm:text-sm text-slate-500 leading-snug">
                   Ulangi kembali soal-soal yang pernah kamu jawab kurang tepat.
                 </p>
               </div>
             </div>
-            <span className="text-xs font-bold text-rose-600 px-3 py-1 rounded-full bg-rose-50 flex-shrink-0">
+            <span className="text-xs sm:text-sm font-bold text-rose-600 px-3 py-1.5 rounded-full bg-rose-50 flex-shrink-0">
               Review ➔
             </span>
           </button>
@@ -324,12 +324,12 @@ export function PracticePage() {
       </div>
 
       {/* Mode 3: Latihan Berdasarkan Mata Pelajaran */}
-      <div className="space-y-2.5 pt-1">
-        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 px-1">
+      <div className="space-y-3 pt-2">
+        <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-500 px-1">
           Latihan per Mata Pelajaran
         </h3>
 
-        <div className="grid grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {data.subjects
             .filter((s) => s.status === 'active')
             .map((sub) => {
@@ -339,18 +339,18 @@ export function PracticePage() {
                   key={sub.id}
                   type="button"
                   onClick={() => startSubjectPractice(sub.id, sub.name)}
-                  className="p-3.5 rounded-xl bg-white border border-slate-200/80 shadow-[0_2px_0_0_#dae2fd] active:translate-y-0.5 text-left transition-all hover:border-primary/50 cursor-pointer flex flex-col justify-between h-28"
+                  className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-[0_2px_0_0_#dae2fd] active:translate-y-0.5 text-left transition-all hover:border-primary/50 cursor-pointer flex flex-col justify-between min-h-[120px]"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl">{sub.emoji}</span>
-                    <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">
+                    <span className="text-3xl">{sub.emoji}</span>
+                    <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">
                       {questionCount} Soal
                     </span>
                   </div>
 
-                  <div>
-                    <h4 className="text-xs font-bold text-slate-900 truncate">{sub.name}</h4>
-                    <span className="text-[10px] text-primary font-semibold">Mulai Latihan ➔</span>
+                  <div className="mt-2">
+                    <h4 className="text-sm font-extrabold text-slate-900 truncate">{sub.name}</h4>
+                    <span className="text-xs text-primary font-bold mt-0.5 block">Mulai Latihan ➔</span>
                   </div>
                 </button>
               )

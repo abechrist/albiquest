@@ -41,19 +41,47 @@
 }
 
 /* ===== Base ===== */
-html { -webkit-tap-highlight-color: transparent; }
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
 body {
   @apply bg-canvas text-slate-900 antialiased;
   font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
 }
 .tabular { font-variant-numeric: tabular-nums; }
 
-/* App canvas: mobile-first, max 480px, sentral di layar besar (DESIGN.md Layout) */
+/* App canvas: fluid mobile-first, expands gracefully to tablet & desktop screens */
 .app-canvas {
-  max-width: 480px;
+  width: 100%;
+  max-width: 100%;
   margin-inline: auto;
   min-height: 100dvh;
-  padding-bottom: calc(84px + env(safe-area-inset-bottom));
+  min-height: 100svh;
+  padding-bottom: calc(96px + env(safe-area-inset-bottom, 16px));
+}
+
+@media (min-width: 640px) {
+  .app-canvas {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .app-canvas {
+    max-width: 768px;
+    padding-bottom: calc(108px + env(safe-area-inset-bottom, 20px));
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-canvas {
+    max-width: 980px;
+  }
 }
 
 /* ===== Components ===== */
@@ -61,44 +89,45 @@ body {
 /* Tombol utama taktil: bottom lip 4px, tekan turun (DESIGN.md Level 2) */
 .btn-primary {
   @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white
-    font-bold text-sm tracking-wide px-6 py-3.5 select-none cursor-pointer transition-all
-    duration-100 w-full;
+    font-bold text-sm md:text-base tracking-wide px-6 py-3.5 md:py-4 select-none cursor-pointer transition-all
+    duration-100 w-full min-h-[48px];
   box-shadow: var(--shadow-tactile);
 }
 .btn-primary:active { transform: translateY(3px); box-shadow: var(--shadow-tactile-press); }
 
 .btn-quest {
   @apply inline-flex items-center justify-center gap-2 rounded-full bg-quest text-white
-    font-bold text-sm tracking-wide px-5 py-3 select-none cursor-pointer transition-all duration-100;
+    font-bold text-sm md:text-base tracking-wide px-5 py-3 md:py-3.5 select-none cursor-pointer transition-all duration-100 min-h-[48px];
   box-shadow: 0 4px 0 0 #047857;
 }
 .btn-quest:active { transform: translateY(3px); box-shadow: 0 1px 0 0 #047857; }
 
 /* Kartu resting (Level 1) */
 .card {
-  @apply bg-surface rounded-2xl border border-slate-200/70;
+  @apply bg-surface rounded-2xl border border-slate-200/80 shadow-xs;
   box-shadow: var(--shadow-card);
 }
 
 /* Dock bawah mengambang, frosted glass (DESIGN.md bottom nav) */
 .dock {
-  @apply fixed bottom-3 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-1.5rem)] max-w-[432px]
-    rounded-full px-2 py-2 flex items-center justify-around;
-  background: rgb(255 255 255 / 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  @apply fixed left-1/2 -translate-x-1/2 z-40 w-[calc(100%-1.5rem)] max-w-[460px]
+    md:max-w-xl lg:max-w-2xl rounded-full px-3 py-2 md:py-2.5 md:px-6 flex items-center justify-around;
+  bottom: max(0.75rem, calc(0.5rem + env(safe-area-inset-bottom, 0.5rem)));
+  background: rgb(255 255 255 / 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   box-shadow: var(--shadow-dock);
   border: 1px solid rgb(226 231 255 / 0.9);
 }
 .dock-item {
-  @apply flex flex-col items-center gap-0.5 rounded-full px-4 py-1.5 text-[11px] font-semibold
-    text-slate-500 transition-colors;
+  @apply flex flex-col items-center justify-center gap-0.5 md:gap-1 rounded-full px-3.5 py-1.5 md:px-5 md:py-2 text-xs md:text-sm font-bold
+    text-slate-500 transition-colors min-w-[54px] md:min-w-[72px] select-none cursor-pointer;
 }
-.dock-item.active { @apply bg-surface-high text-primary; }
+.dock-item.active { @apply bg-surface-high text-primary font-black; }
 
 /* Pills & chip kategori mapel */
 .chip {
-  @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold;
+  @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs md:text-sm font-semibold;
 }
 
 /* Progress tracker kapsul (Level 1 track / emerald fill) */

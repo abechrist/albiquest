@@ -92,18 +92,18 @@ export function MistakesPage() {
           </div>
 
           {/* 3 Metric Counters */}
-          <div className="grid grid-cols-3 gap-2 pt-2">
-            <div className="flex flex-col items-center justify-center p-2.5 rounded-xl bg-white/15 backdrop-blur-md text-center">
-              <span className="text-xl font-black text-rose-300">{stats.needsReview}</span>
-              <span className="text-[10px] text-indigo-100 mt-0.5 font-medium">Perlu Diulang</span>
+          <div className="grid grid-cols-3 gap-2.5 pt-2">
+            <div className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white/15 backdrop-blur-md text-center">
+              <span className="text-2xl sm:text-3xl font-black text-rose-300">{stats.needsReview}</span>
+              <span className="text-xs text-indigo-100 mt-1 font-bold">Perlu Diulang</span>
             </div>
-            <div className="flex flex-col items-center justify-center p-2.5 rounded-xl bg-white/15 backdrop-blur-md text-center">
-              <span className="text-xl font-black text-emerald-300">{stats.mastered}</span>
-              <span className="text-[10px] text-indigo-100 mt-0.5 font-medium">Dikuasai</span>
+            <div className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white/15 backdrop-blur-md text-center">
+              <span className="text-2xl sm:text-3xl font-black text-emerald-300">{stats.mastered}</span>
+              <span className="text-xs text-indigo-100 mt-1 font-bold">Dikuasai</span>
             </div>
-            <div className="flex flex-col items-center justify-center p-2.5 rounded-xl bg-white/15 backdrop-blur-md text-center">
-              <span className="text-xl font-black text-amber-300">{stats.retryAccuracy}%</span>
-              <span className="text-[10px] text-indigo-100 mt-0.5 font-medium">Akurasi Retry</span>
+            <div className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white/15 backdrop-blur-md text-center">
+              <span className="text-2xl sm:text-3xl font-black text-amber-300">{stats.retryAccuracy}%</span>
+              <span className="text-xs text-indigo-100 mt-1 font-bold">Akurasi Retry</span>
             </div>
           </div>
         </div>
@@ -112,24 +112,24 @@ export function MistakesPage() {
       {/* 2. Tombol Aksi Utama: Mulai Spaced Review */}
       <Link
         to="/student/practice"
-        className="group w-full relative flex items-center justify-between p-4 rounded-2xl bg-primary text-white shadow-lg shadow-primary/25 transition-all duration-150 active:translate-y-0.5 cursor-pointer"
+        className="group w-full relative flex items-center justify-between p-4 sm:p-5 rounded-2xl bg-primary text-white shadow-lg shadow-primary/25 transition-all duration-150 active:translate-y-0.5 cursor-pointer"
       >
-        <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center text-xl text-amber-300 group-hover:rotate-12 transition-transform">
+        <div className="flex items-center gap-3.5">
+          <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl text-amber-300 group-hover:rotate-12 transition-transform">
             ⚡
           </div>
           <div className="flex flex-col text-left">
-            <span className="text-sm font-bold text-white leading-tight">
+            <span className="text-base font-extrabold text-white leading-tight">
               Mulai Spaced Review Hari Ini
             </span>
-            <span className="text-xs text-indigo-100">
+            <span className="text-xs sm:text-sm text-indigo-100 mt-0.5">
               {stats.needsReview > 0
                 ? `${stats.needsReview} Soal Terpilih Siap Diulang`
                 : 'Uji Kembali Pemahaman Materi Ujian'}
             </span>
           </div>
         </div>
-        <div className="flex items-center pl-2 text-white">➔</div>
+        <div className="flex items-center pl-2 text-white text-xl font-bold">➔</div>
       </Link>
 
       {/* 3. Filter Chips per Mata Pelajaran */}
@@ -137,7 +137,7 @@ export function MistakesPage() {
         <button
           type="button"
           onClick={() => setSelectedFilter('all')}
-          className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+          className={`px-4 py-2 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
             selectedFilter === 'all'
               ? 'bg-primary text-white shadow-sm'
               : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
@@ -155,7 +155,7 @@ export function MistakesPage() {
               key={sub.id}
               type="button"
               onClick={() => setSelectedFilter(sub.id)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
                 selectedFilter === sub.id
                   ? 'bg-primary text-white shadow-sm'
                   : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
@@ -169,7 +169,7 @@ export function MistakesPage() {
 
       {/* 4. Daftar Kartu Kesalahan (Mistake Cards) */}
       {filteredMistakes.length > 0 ? (
-        <div className="space-y-3 pt-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
           {filteredMistakes.map((record) => {
             const question = data.questions.find((q) => q.id === record.questionId)
             const subject = data.subjects.find((s) => s.id === record.subjectId)
@@ -200,7 +200,7 @@ export function MistakesPage() {
             return (
               <div
                 key={record.id}
-                className="relative p-4 rounded-2xl bg-white border border-slate-200/80 shadow-md shadow-slate-100 space-y-3 transition-all"
+                className="relative p-5 rounded-2xl bg-white border border-slate-200/80 shadow-md shadow-slate-100 space-y-3.5 transition-all flex flex-col justify-between"
               >
                 {/* Baris Header Kartu */}
                 <div className="flex items-start justify-between gap-2">

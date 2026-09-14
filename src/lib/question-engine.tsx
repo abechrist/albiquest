@@ -224,7 +224,7 @@ export function McqRenderer({
   const letters = ['A', 'B', 'C', 'D', 'E']
 
   return (
-    <div className="flex flex-col gap-2.5">
+    <div className="flex flex-col gap-3">
       {question.options.map((option, idx) => {
         const optKey = String(idx)
         const isSelected = selected.includes(optKey) || selected.includes(option)
@@ -236,11 +236,11 @@ export function McqRenderer({
         let borderShadow = 'shadow-[0_3px_0_0_#dae2fd]'
         let cardBg = 'bg-white hover:bg-slate-50'
         let badgeBg = 'bg-slate-100 text-primary'
-        let textColor = 'text-slate-800'
+        let textColor = 'text-slate-800 font-medium'
 
         if (isSelected && !isSubmitted) {
           borderShadow = 'shadow-[0_3px_0_0_#3323cc]'
-          cardBg = 'bg-primary/5 border-primary/40'
+          cardBg = 'bg-primary/5 border-primary/50'
           badgeBg = 'bg-primary text-white shadow-sm'
           textColor = 'text-primary font-bold'
         } else if (isSubmitted) {
@@ -248,12 +248,12 @@ export function McqRenderer({
             borderShadow = 'shadow-[0_3px_0_0_#00714d]'
             cardBg = 'bg-emerald-50 border-emerald-400'
             badgeBg = 'bg-emerald-600 text-white shadow-sm'
-            textColor = 'text-emerald-900 font-bold'
+            textColor = 'text-emerald-950 font-bold'
           } else if (isSelected && !state.isCorrect) {
             borderShadow = 'shadow-[0_3px_0_0_#ba1a1a]'
             cardBg = 'bg-rose-50 border-rose-400'
             badgeBg = 'bg-rose-600 text-white'
-            textColor = 'text-rose-900 font-semibold'
+            textColor = 'text-rose-950 font-bold'
           }
         }
 
@@ -263,30 +263,30 @@ export function McqRenderer({
             type="button"
             disabled={isSubmitted}
             onClick={() => setMcqOption(optKey)}
-            className={`group w-full text-left p-3.5 rounded-xl border border-slate-200/70 ${cardBg} ${borderShadow} active:translate-y-0.5 transition-all flex items-center justify-between gap-3 cursor-pointer disabled:cursor-default`}
+            className={`group w-full text-left p-4 sm:p-4.5 rounded-2xl border border-slate-200/80 ${cardBg} ${borderShadow} active:translate-y-0.5 transition-all flex items-center justify-between gap-3.5 cursor-pointer disabled:cursor-default min-h-[56px]`}
           >
-            <div className="flex items-center gap-3 min-w-0">
+            <div className="flex items-center gap-3.5 min-w-0">
               <span
-                className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0 transition-colors ${badgeBg}`}
+                className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center text-sm sm:text-base font-black flex-shrink-0 transition-colors ${badgeBg}`}
               >
                 {letters[idx] ?? idx + 1}
               </span>
-              <span className={`text-sm leading-snug ${textColor}`}>{option}</span>
+              <span className={`text-sm sm:text-base leading-snug ${textColor}`}>{option}</span>
             </div>
 
             {/* Icon status */}
             <div className="flex-shrink-0">
               {isSubmitted && isAnswerTarget ? (
-                <div className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-sm">
-                  <span className="text-xs font-black">✓</span>
+                <div className="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-sm">
+                  <span className="text-sm font-black">✓</span>
                 </div>
               ) : isSubmitted && isSelected && !state.isCorrect ? (
-                <div className="w-6 h-6 rounded-full bg-rose-600 text-white flex items-center justify-center">
-                  <span className="text-xs font-black">✕</span>
+                <div className="w-7 h-7 rounded-full bg-rose-600 text-white flex items-center justify-center">
+                  <span className="text-sm font-black">✕</span>
                 </div>
               ) : (
                 <div
-                  className={`w-5 h-5 rounded-full border-2 transition-colors ${
+                  className={`w-6 h-6 rounded-full border-2 transition-colors ${
                     isSelected ? 'border-primary bg-primary/20' : 'border-slate-300'
                   }`}
                 />
@@ -317,7 +317,7 @@ export function TrueFalseRenderer({
   ]
 
   return (
-    <div className="grid grid-cols-2 gap-3">
+    <div className="grid grid-cols-2 gap-3.5">
       {choices.map((c) => {
         const isSelected = selected === c.value
         const isAnswer = String(question.answer[0]).toLowerCase() === c.value
@@ -339,10 +339,10 @@ export function TrueFalseRenderer({
             type="button"
             disabled={isSubmitted}
             onClick={() => setTrueFalseValue(c.value)}
-            className={`p-4 rounded-xl border flex flex-col items-center justify-center gap-2 cursor-pointer active:translate-y-0.5 transition-all ${btnClass}`}
+            className={`p-5 rounded-2xl border flex flex-col items-center justify-center gap-2 cursor-pointer active:translate-y-0.5 transition-all min-h-[76px] ${btnClass}`}
           >
-            <span className="text-2xl font-black">{c.icon}</span>
-            <span className="text-sm font-semibold">{c.label}</span>
+            <span className="text-3xl font-black">{c.icon}</span>
+            <span className="text-base font-bold">{c.label}</span>
           </button>
         )
       })}
@@ -362,7 +362,7 @@ export function ShortAnswerRenderer({
   const value = (state.currentAnswer as string) || ''
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2.5">
       <div className="relative">
         <input
           type="text"
@@ -373,19 +373,19 @@ export function ShortAnswerRenderer({
             if (e.key === 'Enter' && state.canSubmit) submit()
           }}
           placeholder="Tuliskan jawabanmu di sini..."
-          className="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-sm disabled:bg-slate-100"
+          className="w-full px-4 py-3.5 rounded-xl bg-white border border-slate-300 text-base focus:outline-none focus:ring-2 focus:ring-primary shadow-sm disabled:bg-slate-100 min-h-[48px]"
         />
         {value && !isSubmitted && (
           <button
             type="button"
             onClick={() => setTextValue('')}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-600"
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs sm:text-sm font-bold text-slate-400 hover:text-slate-600 p-1"
           >
             Bersihkan
           </button>
         )}
       </div>
-      <p className="text-[11px] text-slate-400">
+      <p className="text-xs text-slate-500">
         💡 Tips: Gunakan kata kunci singkat dan padat (huruf besar/kecil tidak berpengaruh).
       </p>
     </div>
@@ -404,7 +404,7 @@ export function NumericRenderer({
   const value = (state.currentAnswer as string) || ''
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2.5">
       <div className="flex items-center gap-2">
         <input
           type="number"
@@ -416,10 +416,10 @@ export function NumericRenderer({
             if (e.key === 'Enter' && state.canSubmit) submit()
           }}
           placeholder="Masukkan angka..."
-          className="flex-1 px-4 py-3 rounded-xl bg-white border border-slate-300 text-base font-semibold focus:outline-none focus:ring-2 focus:ring-primary shadow-sm tabular-nums disabled:bg-slate-100"
+          className="flex-1 px-4 py-3.5 rounded-xl bg-white border border-slate-300 text-base font-semibold focus:outline-none focus:ring-2 focus:ring-primary shadow-sm tabular-nums disabled:bg-slate-100 min-h-[48px]"
         />
       </div>
-      <p className="text-[11px] text-slate-400">
+      <p className="text-xs text-slate-500">
         Ketikkan angka penyelesaian (gunakan titik atau koma untuk pecahan desimal).
       </p>
     </div>
@@ -782,23 +782,23 @@ export function QuestionRenderer({
   return (
     <div className="space-y-4">
       {/* Kartu Soal */}
-      <div className="card p-4 space-y-3">
+      <div className="card p-5 sm:p-6 space-y-4">
         {/* Header Metadata Soal */}
-        <div className="flex items-center justify-between text-xs">
-          <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-semibold text-[11px]">
+        <div className="flex items-center justify-between text-xs sm:text-sm">
+          <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 font-bold text-xs">
             {question.difficulty === 1 ? 'Mudah' : question.difficulty === 2 ? 'Sedang' : 'Tantangan'}
           </span>
-          <div className="flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full text-[11px]">
+          <div className="flex items-center gap-1.5 font-black text-amber-600 bg-amber-50 px-3 py-1 rounded-full text-xs">
             <span>⭐</span>
             <span>+{question.difficulty * 10} XP</span>
           </div>
         </div>
 
         {/* Teks Prompt */}
-        <p className="text-sm font-semibold text-slate-900 leading-relaxed">{question.prompt}</p>
+        <p className="text-base sm:text-lg font-bold text-slate-900 leading-relaxed">{question.prompt}</p>
 
         {/* Komponen Input Spesifik Tipe Soal */}
-        <div className="pt-1">
+        <div className="pt-2">
           {question.type === 'mcq' && <McqRenderer question={question} engine={engine} />}
           {question.type === 'true_false' && (
             <TrueFalseRenderer question={question} engine={engine} />
@@ -819,7 +819,7 @@ export function QuestionRenderer({
             type="button"
             disabled={!state.canSubmit}
             onClick={submit}
-            className="w-full mt-3 py-3 px-4 rounded-xl bg-primary text-white font-bold text-sm shadow-[0_4px_0_0_#3323cc] active:translate-y-0.5 active:shadow-[0_1px_0_0_#3323cc] disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none transition-all cursor-pointer"
+            className="w-full mt-4 py-3.5 px-5 rounded-2xl bg-primary text-white font-extrabold text-sm sm:text-base shadow-[0_4px_0_0_#3323cc] active:translate-y-0.5 active:shadow-[0_1px_0_0_#3323cc] disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none transition-all cursor-pointer min-h-[50px]"
           >
             Kirim Jawaban ⚔️
           </button>

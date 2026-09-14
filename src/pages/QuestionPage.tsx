@@ -71,31 +71,31 @@ export function QuestionPage() {
   }
 
   return (
-    <div className="space-y-3 pb-8">
+    <div className="space-y-4 pb-10">
       {/* Top Navigation & Session Info Bar (Stitch Vital Signs Bar) */}
-      <div className="card p-3 space-y-2.5">
-        <div className="flex items-center justify-between gap-2">
+      <div className="card p-4 sm:p-5 space-y-3">
+        <div className="flex items-center justify-between gap-3">
           {/* Topic Chip */}
           <Link
             to={`/student/subjects/${subjectId}/lessons/${lessonId}`}
-            className="flex items-center gap-1.5 px-2.5 py-1 bg-surface-container rounded-full text-primary hover:bg-slate-200 transition-colors truncate max-w-[200px]"
+            className="flex items-center gap-2 px-3.5 py-1.5 bg-surface-container rounded-full text-primary hover:bg-slate-200 transition-colors truncate max-w-xs"
           >
-            <span className="text-xs">←</span>
-            <span className="text-[11px] font-bold uppercase tracking-wider truncate">
+            <span className="text-sm font-bold">←</span>
+            <span className="text-xs sm:text-sm font-bold uppercase tracking-wider truncate">
               {subject?.name ?? 'Mapel'} • {topic?.title ?? 'Latihan'}
             </span>
           </Link>
 
           {/* Timer & 3 Hearts Stamina */}
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex items-center gap-2.5 flex-shrink-0">
             {/* Timer */}
-            <div className="flex items-center gap-1 px-2 py-0.5 bg-slate-100 rounded-full text-slate-600 text-xs font-mono font-semibold">
+            <div className="flex items-center gap-1.5 px-3 py-1 bg-slate-100 rounded-full text-slate-700 text-xs sm:text-sm font-mono font-bold">
               <span>⏱️</span>
               <span>{formatTimer(seconds)}</span>
             </div>
 
             {/* Stamina 3 Hati */}
-            <div className="flex items-center gap-0.5 px-2 py-0.5 bg-rose-50 rounded-full text-xs">
+            <div className="flex items-center gap-1 px-2.5 py-1 bg-rose-50 rounded-full text-sm">
               <span className="text-rose-500">❤️</span>
               <span className="text-rose-500">❤️</span>
               <span className="text-rose-500">❤️</span>
@@ -104,15 +104,15 @@ export function QuestionPage() {
         </div>
 
         {/* Segmented Level Progress Bar */}
-        <div className="flex items-center justify-between gap-3 pt-0.5">
-          <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+        <div className="flex items-center justify-between gap-3 pt-1">
+          <div className="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-primary to-emerald-400 rounded-full transition-all duration-500"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
-          <span className="text-[11px] text-slate-500 flex-shrink-0">
-            Soal <strong className="text-slate-800">{questionNumber}</strong> dari {totalQuestions}
+          <span className="text-xs sm:text-sm text-slate-500 flex-shrink-0 font-medium">
+            Soal <strong className="text-slate-900 font-extrabold">{questionNumber}</strong> dari {totalQuestions}
           </span>
         </div>
       </div>

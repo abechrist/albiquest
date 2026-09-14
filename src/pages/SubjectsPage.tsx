@@ -54,9 +54,9 @@ function SubjectGroup({ prio, subjects }: { prio: 1 | 2 | 3; subjects: Subject[]
   if (!list.length) return null
   const badge = PRIO_BADGE[prio]
   return (
-    <div>
-      <p className={`chip ${badge.className} mb-2`}>{badge.label}</p>
-      <div className="space-y-2.5">
+    <div className="space-y-3">
+      <p className={`chip ${badge.className}`}>{badge.label}</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
         {list.map((s) => (
           <SubjectCard key={s.id} subject={s} />
         ))}
@@ -73,22 +73,22 @@ function SubjectCard({ subject }: { subject: Subject }) {
       disabled={comingSoon}
       aria-disabled={comingSoon}
       onClick={() => navigate(`/student/subjects/${subject.id}`)}
-      className={`card w-full flex items-center gap-3 p-3 text-left transition-transform ${comingSoon ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer active:translate-y-[1px]'}`}
+      className={`card w-full flex items-center gap-4 p-4 text-left transition-all ${comingSoon ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer hover:border-primary/40 active:translate-y-[1px]'}`}
     >
       <div
-        className="h-12 w-12 shrink-0 rounded-xl flex items-center justify-center text-2xl shadow-sm"
+        className="h-14 w-14 shrink-0 rounded-2xl flex items-center justify-center text-3xl shadow-sm"
         style={{ backgroundImage: `linear-gradient(135deg, ${subject.colorFrom}, ${subject.colorTo})` }}
       >
         {subject.emoji}
       </div>
       <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-2">
-          <p className="font-bold text-sm text-slate-900 truncate">{subject.name}</p>
-          {comingSoon && <span className="chip bg-surface-high text-primary/70 text-[10px]">Menyusul</span>}
+        <div className="flex items-center gap-2 flex-wrap">
+          <p className="font-extrabold text-base text-slate-900 truncate">{subject.name}</p>
+          {comingSoon && <span className="chip bg-surface-high text-primary/80 text-xs font-bold">Menyusul</span>}
         </div>
-        <p className="text-xs text-slate-500 truncate">{subject.description}</p>
+        <p className="text-xs sm:text-sm text-slate-500 line-clamp-2 mt-0.5">{subject.description}</p>
       </div>
-      <div className="text-slate-300 text-lg">›</div>
+      <div className="text-slate-300 text-xl font-bold">›</div>
     </button>
   )
 }

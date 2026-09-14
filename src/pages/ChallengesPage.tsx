@@ -208,24 +208,24 @@ export function ChallengesPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-slate-950 pb-24 text-slate-100 selection:bg-amber-500/30">
+    <div className="min-h-screen bg-slate-950 pb-[calc(6rem+env(safe-area-inset-bottom,24px))] text-slate-100 selection:bg-amber-500/30">
       {/* Header */}
-      <header className="sticky top-0 z-30 border-b border-slate-800/80 bg-slate-900/90 px-4 py-3.5 backdrop-blur-md">
+      <header className="sticky top-0 z-30 border-b border-slate-800/80 bg-slate-900/90 px-4 py-3.5 pt-[calc(0.875rem+env(safe-area-inset-top,0px))] backdrop-blur-md">
         <div className="mx-auto flex max-w-4xl items-center justify-between">
           <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={activeMode ? exitMode : undefined}
-              className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 text-slate-300 transition-colors hover:bg-slate-700"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 text-slate-300 transition-colors hover:bg-slate-700 cursor-pointer"
               title={activeMode ? 'Keluar Mode' : 'Kembali'}
             >
               {activeMode ? '✕' : <Link to="/student">←</Link>}
             </button>
             <div>
-              <h1 className="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+              <h1 className="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-2">
                 <span>⚔️ Arena Tantangan Petualang</span>
               </h1>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-400">
                 {activeMode
                   ? 'Tantangan sedang berlangsung!'
                   : 'Pilih mode permainan dan uji ketangkasan belajarmu'}
@@ -235,29 +235,29 @@ export function ChallengesPage() {
 
           <Link
             to="/student"
-            className="rounded-xl border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-semibold text-slate-300 hover:bg-slate-700 transition-colors"
+            className="rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 text-xs sm:text-sm font-semibold text-slate-300 hover:bg-slate-700 transition-colors"
           >
             Beranda
           </Link>
         </div>
       </header>
 
-      <main className="mx-auto max-w-4xl px-4 pt-6">
+      <main className="mx-auto max-w-4xl px-4 sm:px-6 pt-6">
         {/* ========================================================================= */}
         {/* VIEW 1: HUB PILIHAN MODE TANTANGAN                                        */}
         {/* ========================================================================= */}
         {!activeMode && (
           <div className="space-y-6">
             {/* Banner Utama */}
-            <div className="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-gradient-to-br from-amber-950/80 via-slate-900 to-slate-950 p-6 shadow-2xl">
+            <div className="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-gradient-to-br from-amber-950/80 via-slate-900 to-slate-950 p-6 sm:p-7 shadow-2xl">
               <div className="relative z-10">
-                <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-300">
+                <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-500/10 px-3.5 py-1 text-xs font-semibold text-amber-300">
                   <span>⚡ Duolingo + RPG Adventure Mode</span>
                 </div>
-                <h2 className="mt-2 text-2xl font-black text-white">
+                <h2 className="mt-3 text-2xl sm:text-3xl font-black text-white">
                   Tantang Batas Kemampuanmu!
                 </h2>
-                <p className="mt-1 text-xs text-slate-300 max-w-lg">
+                <p className="mt-1 text-xs sm:text-sm text-slate-300 max-w-lg leading-relaxed">
                   Setiap kemenangan di arena tantangan menguji refleks berpikir, memperkuat ingatan konsep, dan memberikan limpahan reward XP besar.
                 </p>
               </div>
@@ -266,27 +266,27 @@ export function ChallengesPage() {
             {/* Grid 4 Kartu Mode Permainan */}
             <div className="grid gap-4 sm:grid-cols-2">
               {/* 1. Boss Battle Aljabar */}
-              <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-rose-600/40 bg-gradient-to-br from-rose-950/30 via-slate-900 to-slate-950 p-5 shadow-lg transition-all hover:border-rose-500 hover:shadow-rose-900/20">
+              <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-rose-600/40 bg-gradient-to-br from-rose-950/30 via-slate-900 to-slate-950 p-5 sm:p-6 shadow-lg transition-all hover:border-rose-500 hover:shadow-rose-900/20">
                 <div>
                   <div className="flex items-start justify-between">
                     <span className="text-4xl">👹</span>
-                    <span className="rounded-full bg-rose-500/20 px-2.5 py-0.5 text-xs font-black text-rose-400 border border-rose-500/30">
+                    <span className="rounded-full bg-rose-500/20 px-3 py-1 text-xs font-black text-rose-400 border border-rose-500/30">
                       +150 XP ⭐
                     </span>
                   </div>
-                  <h3 className="mt-3 text-lg font-black text-white group-hover:text-rose-300 transition-colors">
+                  <h3 className="mt-3 text-lg sm:text-xl font-black text-white group-hover:text-rose-300 transition-colors">
                     Boss Battle: Golem Aljabar
                   </h3>
-                  <p className="mt-1 text-xs text-slate-400 leading-relaxed">
+                  <p className="mt-1.5 text-xs sm:text-sm text-slate-400 leading-relaxed">
                     Kalahkan penjaga gerbang aljabar kuno dengan menjawab 5 soal berturut-turut. Jaga 3 hatimu agar tidak kalah!
                   </p>
                 </div>
-                <div className="mt-5 border-t border-slate-800 pt-3 flex items-center justify-between">
-                  <span className="text-[11px] text-slate-400">100 HP Boss • 3 Nyawa</span>
+                <div className="mt-5 border-t border-slate-800 pt-3.5 flex items-center justify-between">
+                  <span className="text-xs text-slate-400 font-semibold">100 HP Boss • 3 Nyawa</span>
                   <button
                     type="button"
                     onClick={handleStartBoss}
-                    className="rounded-xl border-b-2 border-rose-700 bg-rose-600 px-4 py-2 text-xs font-black text-white shadow-md transition-all hover:bg-rose-500 active:translate-y-0.5"
+                    className="rounded-xl border-b-2 border-rose-700 bg-rose-600 px-4 py-2.5 text-xs sm:text-sm font-black text-white shadow-md transition-all hover:bg-rose-500 active:translate-y-0.5 cursor-pointer min-h-[42px]"
                   >
                     Lawan Boss ⚔️
                   </button>
@@ -294,27 +294,27 @@ export function ChallengesPage() {
               </div>
 
               {/* 2. Speed Round / Quiz Rush 60s */}
-              <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-amber-500/40 bg-gradient-to-br from-amber-950/30 via-slate-900 to-slate-950 p-5 shadow-lg transition-all hover:border-amber-400 hover:shadow-amber-900/20">
+              <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-amber-500/40 bg-gradient-to-br from-amber-950/30 via-slate-900 to-slate-950 p-5 sm:p-6 shadow-lg transition-all hover:border-amber-400 hover:shadow-amber-900/20">
                 <div>
                   <div className="flex items-start justify-between">
                     <span className="text-4xl">⚡</span>
-                    <span className="rounded-full bg-amber-500/20 px-2.5 py-0.5 text-xs font-black text-amber-400 border border-amber-500/30">
+                    <span className="rounded-full bg-amber-500/20 px-3 py-1 text-xs font-black text-amber-400 border border-amber-500/30">
                       Combo 2.0x 🔥
                     </span>
                   </div>
-                  <h3 className="mt-3 text-lg font-black text-white group-hover:text-amber-300 transition-colors">
+                  <h3 className="mt-3 text-lg sm:text-xl font-black text-white group-hover:text-amber-300 transition-colors">
                     Speed Round (Quiz Rush 60s)
                   </h3>
-                  <p className="mt-1 text-xs text-slate-400 leading-relaxed">
+                  <p className="mt-1.5 text-xs sm:text-sm text-slate-400 leading-relaxed">
                     Adu kecepatan berpikir dalam 60 detik! Tiap jawaban tepat memberi bonus +5 detik dan multiplier poin kombo.
                   </p>
                 </div>
-                <div className="mt-5 border-t border-slate-800 pt-3 flex items-center justify-between">
-                  <span className="text-[11px] text-slate-400">60 Detik • Time Attack</span>
+                <div className="mt-5 border-t border-slate-800 pt-3.5 flex items-center justify-between">
+                  <span className="text-xs text-slate-400 font-semibold">60 Detik • Time Attack</span>
                   <button
                     type="button"
                     onClick={handleStartSpeed}
-                    className="rounded-xl border-b-2 border-amber-600 bg-amber-500 px-4 py-2 text-xs font-black text-amber-950 shadow-md transition-all hover:bg-amber-400 active:translate-y-0.5"
+                    className="rounded-xl border-b-2 border-amber-600 bg-amber-500 px-4 py-2.5 text-xs sm:text-sm font-black text-amber-950 shadow-md transition-all hover:bg-amber-400 active:translate-y-0.5 cursor-pointer min-h-[42px]"
                   >
                     Mulai Rush ⏱️
                   </button>
@@ -322,27 +322,27 @@ export function ChallengesPage() {
               </div>
 
               {/* 3. 5-Minute Express Mode */}
-              <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-indigo-500/40 bg-gradient-to-br from-indigo-950/30 via-slate-900 to-slate-950 p-5 shadow-lg transition-all hover:border-indigo-400 hover:shadow-indigo-900/20">
+              <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-indigo-500/40 bg-gradient-to-br from-indigo-950/30 via-slate-900 to-slate-950 p-5 sm:p-6 shadow-lg transition-all hover:border-indigo-400 hover:shadow-indigo-900/20">
                 <div>
                   <div className="flex items-start justify-between">
                     <span className="text-4xl">⏱️</span>
-                    <span className="rounded-full bg-indigo-500/20 px-2.5 py-0.5 text-xs font-black text-indigo-300 border border-indigo-500/30">
+                    <span className="rounded-full bg-indigo-500/20 px-3 py-1 text-xs font-black text-indigo-300 border border-indigo-500/30">
                       +60 XP
                     </span>
                   </div>
-                  <h3 className="mt-3 text-lg font-black text-white group-hover:text-indigo-300 transition-colors">
+                  <h3 className="mt-3 text-lg sm:text-xl font-black text-white group-hover:text-indigo-300 transition-colors">
                     5-Minute Express (PRD §26)
                   </h3>
-                  <p className="mt-1 text-xs text-slate-400 leading-relaxed">
+                  <p className="mt-1.5 text-xs sm:text-sm text-slate-400 leading-relaxed">
                     Waktu sempit? Tuntaskan 2 soal inti + 1 kilas konsep cepat untuk mengamankan streak harian tanpa beban.
                   </p>
                 </div>
-                <div className="mt-5 border-t border-slate-800 pt-3 flex items-center justify-between">
-                  <span className="text-[11px] text-slate-400">Microlearning Ringkas</span>
+                <div className="mt-5 border-t border-slate-800 pt-3.5 flex items-center justify-between">
+                  <span className="text-xs text-slate-400 font-semibold">Microlearning Ringkas</span>
                   <button
                     type="button"
                     onClick={handleStartFiveMin}
-                    className="rounded-xl border-b-2 border-indigo-700 bg-indigo-600 px-4 py-2 text-xs font-black text-white shadow-md transition-all hover:bg-indigo-500 active:translate-y-0.5"
+                    className="rounded-xl border-b-2 border-indigo-700 bg-indigo-600 px-4 py-2.5 text-xs sm:text-sm font-black text-white shadow-md transition-all hover:bg-indigo-500 active:translate-y-0.5 cursor-pointer min-h-[42px]"
                   >
                     Mulai 5 Menit ☕
                   </button>
@@ -350,27 +350,27 @@ export function ChallengesPage() {
               </div>
 
               {/* 4. Survival Mode (Sudden Death) */}
-              <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-emerald-500/40 bg-gradient-to-br from-emerald-950/30 via-slate-900 to-slate-950 p-5 shadow-lg transition-all hover:border-emerald-400 hover:shadow-emerald-900/20">
+              <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-emerald-500/40 bg-gradient-to-br from-emerald-950/30 via-slate-900 to-slate-950 p-5 sm:p-6 shadow-lg transition-all hover:border-emerald-400 hover:shadow-emerald-900/20">
                 <div>
                   <div className="flex items-start justify-between">
                     <span className="text-4xl">🛡️</span>
-                    <span className="rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-xs font-black text-emerald-400 border border-emerald-500/30">
+                    <span className="rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-black text-emerald-400 border border-emerald-500/30">
                       Endless
                     </span>
                   </div>
-                  <h3 className="mt-3 text-lg font-black text-white group-hover:text-emerald-300 transition-colors">
+                  <h3 className="mt-3 text-lg sm:text-xl font-black text-white group-hover:text-emerald-300 transition-colors">
                     Survival Mode (Sudden Death)
                   </h3>
-                  <p className="mt-1 text-xs text-slate-400 leading-relaxed">
+                  <p className="mt-1.5 text-xs sm:text-sm text-slate-400 leading-relaxed">
                     Uji ketahanan mental. Berapa banyak soal berturut-turut yang dapat kamu selesaikan sebelum salah sekali saja?
                   </p>
                 </div>
-                <div className="mt-5 border-t border-slate-800 pt-3 flex items-center justify-between">
-                  <span className="text-[11px] text-slate-400">1 Nyawa Saja</span>
+                <div className="mt-5 border-t border-slate-800 pt-3.5 flex items-center justify-between">
+                  <span className="text-xs text-slate-400 font-semibold">1 Nyawa Saja</span>
                   <button
                     type="button"
                     onClick={handleStartSurvival}
-                    className="rounded-xl border-b-2 border-emerald-700 bg-emerald-600 px-4 py-2 text-xs font-black text-white shadow-md transition-all hover:bg-emerald-500 active:translate-y-0.5"
+                    className="rounded-xl border-b-2 border-emerald-700 bg-emerald-600 px-4 py-2.5 text-xs sm:text-sm font-black text-white shadow-md transition-all hover:bg-emerald-500 active:translate-y-0.5 cursor-pointer min-h-[42px]"
                   >
                     Mulai Survival 🛡️
                   </button>
@@ -484,29 +484,29 @@ export function ChallengesPage() {
                   </span>
                 </div>
 
-                <div className="rounded-2xl bg-slate-950 p-4 border border-slate-800">
-                  <p className="text-sm font-semibold text-white leading-relaxed">
+                <div className="rounded-2xl bg-slate-950 p-5 sm:p-6 border border-slate-800">
+                  <p className="text-base sm:text-lg font-medium text-white leading-relaxed">
                     {bossState.questions[bossState.currentIndex]?.prompt}
                   </p>
                 </div>
 
                 {/* Opsi Jawaban */}
-                <div className="grid gap-2.5">
+                <div className="grid gap-3">
                   {bossState.questions[bossState.currentIndex]?.options.map((opt, idx) => (
                     <button
                       key={idx}
                       type="button"
                       onClick={() => setSelectedOption(opt)}
-                      className={`flex items-center gap-3 w-full rounded-2xl p-3.5 text-left text-xs font-bold transition-all ${
+                      className={`flex items-center gap-3.5 w-full rounded-2xl p-4 sm:p-5 text-left text-sm sm:text-base font-semibold transition-all min-h-[56px] cursor-pointer ${
                         selectedOption === opt
                           ? 'border-2 border-rose-500 bg-rose-950/40 text-white shadow-[0_3px_0_0_#be123c]'
-                          : 'border border-slate-800 bg-slate-950/60 text-slate-300 hover:border-slate-700'
+                          : 'border border-slate-800 bg-slate-950/60 text-slate-300 hover:border-slate-700 hover:bg-slate-900/60'
                       }`}
                     >
-                      <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-slate-800 text-[11px] font-black text-slate-300">
+                      <span className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-slate-800 text-xs sm:text-sm font-black text-slate-300 shrink-0">
                         {String.fromCharCode(65 + idx)}
                       </span>
-                      <span>{opt}</span>
+                      <span className="leading-relaxed">{opt}</span>
                     </button>
                   ))}
                 </div>
@@ -515,7 +515,7 @@ export function ChallengesPage() {
                   type="button"
                   disabled={!selectedOption}
                   onClick={handleBossAnswer}
-                  className="w-full rounded-2xl border-b-4 border-rose-700 bg-rose-600 py-3 text-xs font-black text-white shadow-lg transition-all hover:bg-rose-500 active:translate-y-1 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-full rounded-2xl border-b-4 border-rose-700 bg-rose-600 py-4 text-sm sm:text-base font-black text-white shadow-lg transition-all hover:bg-rose-500 active:translate-y-1 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer min-h-[52px]"
                 >
                   Lepaskan Serangan! 💥
                 </button>
@@ -595,25 +595,25 @@ export function ChallengesPage() {
                 </div>
               </div>
             ) : (
-              <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 space-y-5">
-                <div className="rounded-2xl bg-slate-950 p-4 border border-slate-800">
-                  <p className="text-sm font-semibold text-white leading-relaxed">
+              <div className="rounded-3xl border border-slate-800 bg-slate-900 p-5 sm:p-7 space-y-6">
+                <div className="rounded-2xl bg-slate-950 p-5 sm:p-6 border border-slate-800">
+                  <p className="text-base sm:text-lg font-medium text-white leading-relaxed">
                     {speedState.questions[speedState.currentIndex]?.prompt}
                   </p>
                 </div>
 
-                <div className="grid gap-2.5 sm:grid-cols-2">
+                <div className="grid gap-3 sm:grid-cols-2">
                   {speedState.questions[speedState.currentIndex]?.options.map((opt, idx) => (
                     <button
                       key={idx}
                       type="button"
                       onClick={() => handleSpeedAnswer(opt)}
-                      className="flex items-center gap-3 w-full rounded-2xl border border-slate-800 bg-slate-950 p-4 text-left text-xs font-bold text-slate-200 transition-all hover:border-amber-400 hover:bg-amber-950/20 active:scale-98"
+                      className="flex items-center gap-3.5 w-full rounded-2xl border border-slate-800 bg-slate-950 p-4 sm:p-5 text-left text-sm sm:text-base font-semibold text-slate-200 transition-all hover:border-amber-400 hover:bg-amber-950/20 active:scale-98 cursor-pointer min-h-[56px]"
                     >
-                      <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-slate-800 text-[11px] font-black text-amber-400">
+                      <span className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-slate-800 text-xs sm:text-sm font-black text-amber-400 shrink-0">
                         {String.fromCharCode(65 + idx)}
                       </span>
-                      <span>{opt}</span>
+                      <span className="leading-relaxed">{opt}</span>
                     </button>
                   ))}
                 </div>
@@ -675,29 +675,29 @@ export function ChallengesPage() {
                 </div>
               </div>
             ) : (
-              <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 space-y-5">
-                <div className="rounded-2xl bg-slate-950 p-4 border border-slate-800">
-                  <p className="text-sm font-semibold text-white leading-relaxed">
+              <div className="rounded-3xl border border-slate-800 bg-slate-900 p-5 sm:p-7 space-y-6">
+                <div className="rounded-2xl bg-slate-950 p-5 sm:p-6 border border-slate-800">
+                  <p className="text-base sm:text-lg font-medium text-white leading-relaxed">
                     {fiveMinState.questions[fiveMinState.currentIndex]?.prompt}
                   </p>
                 </div>
 
-                <div className="grid gap-2.5">
+                <div className="grid gap-3">
                   {fiveMinState.questions[fiveMinState.currentIndex]?.options.map((opt, idx) => (
                     <button
                       key={idx}
                       type="button"
                       onClick={() => setSelectedOption(opt)}
-                      className={`flex items-center gap-3 w-full rounded-2xl p-3.5 text-left text-xs font-bold transition-all ${
+                      className={`flex items-center gap-3.5 w-full rounded-2xl p-4 sm:p-5 text-left text-sm sm:text-base font-semibold transition-all min-h-[56px] cursor-pointer ${
                         selectedOption === opt
                           ? 'border-2 border-indigo-500 bg-indigo-950/40 text-white shadow-[0_3px_0_0_#4338ca]'
-                          : 'border border-slate-800 bg-slate-950/60 text-slate-300 hover:border-slate-700'
+                          : 'border border-slate-800 bg-slate-950/60 text-slate-300 hover:border-slate-700 hover:bg-slate-900/60'
                       }`}
                     >
-                      <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-slate-800 text-[11px] font-black text-slate-300">
+                      <span className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-slate-800 text-xs sm:text-sm font-black text-slate-300 shrink-0">
                         {String.fromCharCode(65 + idx)}
                       </span>
-                      <span>{opt}</span>
+                      <span className="leading-relaxed">{opt}</span>
                     </button>
                   ))}
                 </div>
@@ -706,7 +706,7 @@ export function ChallengesPage() {
                   type="button"
                   disabled={!selectedOption}
                   onClick={handleFiveMinAnswer}
-                  className="w-full rounded-2xl border-b-4 border-indigo-700 bg-indigo-600 py-3 text-xs font-black text-white shadow-lg transition-all hover:bg-indigo-500 active:translate-y-1 disabled:opacity-40"
+                  className="w-full rounded-2xl border-b-4 border-indigo-700 bg-indigo-600 py-4 text-sm sm:text-base font-black text-white shadow-lg transition-all hover:bg-indigo-500 active:translate-y-1 disabled:opacity-40 cursor-pointer min-h-[52px]"
                 >
                   Lanjut Langkah Berikutnya →
                 </button>
@@ -720,70 +720,70 @@ export function ChallengesPage() {
         {/* ========================================================================= */}
         {activeMode === 'survival' && survivalState && (
           <div className="space-y-6">
-            <div className="rounded-3xl border border-emerald-500/30 bg-slate-900 p-5">
+            <div className="rounded-3xl border border-emerald-500/30 bg-slate-900 p-5 sm:p-6">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl">🛡️</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="text-3xl">🛡️</span>
                   <div>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase">Survival Mode</span>
-                    <h3 className="text-sm font-black text-white">Bertahan Tanpa Kesalahan</h3>
+                    <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Survival Mode</span>
+                    <h3 className="text-sm sm:text-base font-black text-white">Bertahan Tanpa Kesalahan</h3>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 rounded-2xl bg-emerald-500/10 px-3 py-1.5 border border-emerald-500/30">
-                  <span className="text-xs font-bold text-emerald-400">Streak:</span>
-                  <span className="text-lg font-black text-emerald-300">{survivalState.streakCount} 🔥</span>
+                <div className="flex items-center gap-2 rounded-2xl bg-emerald-500/10 px-3.5 py-1.5 border border-emerald-500/30">
+                  <span className="text-xs sm:text-sm font-bold text-emerald-400">Streak:</span>
+                  <span className="text-lg sm:text-xl font-black text-emerald-300">{survivalState.streakCount} 🔥</span>
                 </div>
               </div>
             </div>
 
             {survivalState.isGameOver ? (
-              <div className="rounded-3xl border-2 border-rose-500 bg-slate-900 p-8 text-center space-y-4 shadow-2xl">
+              <div className="rounded-3xl border-2 border-rose-500 bg-slate-900 p-8 sm:p-10 text-center space-y-4 shadow-2xl">
                 <span className="text-6xl inline-block">💥</span>
-                <h3 className="text-2xl font-black text-rose-400">RUN BERAKHIR!</h3>
-                <p className="text-sm text-slate-300 max-w-md mx-auto">
+                <h3 className="text-2xl sm:text-3xl font-black text-rose-400">RUN BERAKHIR!</h3>
+                <p className="text-sm sm:text-base text-slate-300 max-w-md mx-auto leading-relaxed">
                   Satu kesalahan mengakhiri percobaanmu. Rekor streak tertinggimu:
                 </p>
-                <div className="inline-flex items-center gap-2 rounded-2xl bg-slate-950 px-6 py-3 border border-slate-800">
-                  <span className="text-2xl font-black text-amber-400">{survivalState.highestStreak}</span>
-                  <span className="text-xs font-bold text-slate-400">Soal Berturut-turut</span>
+                <div className="inline-flex items-center gap-2.5 rounded-2xl bg-slate-950 px-6 py-3.5 border border-slate-800">
+                  <span className="text-2xl sm:text-3xl font-black text-amber-400">{survivalState.highestStreak}</span>
+                  <span className="text-xs sm:text-sm font-bold text-slate-400">Soal Berturut-turut</span>
                 </div>
                 <div className="pt-4 flex justify-center gap-3">
                   <button
                     type="button"
                     onClick={handleStartSurvival}
-                    className="rounded-2xl border-b-4 border-emerald-700 bg-emerald-600 px-5 py-2.5 text-xs font-black text-white hover:bg-emerald-500 active:translate-y-1"
+                    className="rounded-2xl border-b-4 border-emerald-700 bg-emerald-600 px-6 py-3 text-xs sm:text-sm font-black text-white hover:bg-emerald-500 active:translate-y-1 cursor-pointer min-h-[46px]"
                   >
                     Ulangi Run 🛡️
                   </button>
                   <button
                     type="button"
                     onClick={exitMode}
-                    className="rounded-2xl border border-slate-700 bg-slate-800 px-5 py-2.5 text-xs font-bold text-slate-300 hover:bg-slate-700"
+                    className="rounded-2xl border border-slate-700 bg-slate-800 px-6 py-3 text-xs sm:text-sm font-bold text-slate-300 hover:bg-slate-700 cursor-pointer min-h-[46px]"
                   >
                     Keluar
                   </button>
                 </div>
               </div>
             ) : (
-              <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 space-y-5">
-                <div className="rounded-2xl bg-slate-950 p-4 border border-slate-800">
-                  <p className="text-sm font-semibold text-white leading-relaxed">
+              <div className="rounded-3xl border border-slate-800 bg-slate-900 p-5 sm:p-7 space-y-6">
+                <div className="rounded-2xl bg-slate-950 p-5 sm:p-6 border border-slate-800">
+                  <p className="text-base sm:text-lg font-medium text-white leading-relaxed">
                     {survivalState.questions[survivalState.currentIndex]?.prompt}
                   </p>
                 </div>
 
-                <div className="grid gap-2.5 sm:grid-cols-2">
+                <div className="grid gap-3 sm:grid-cols-2">
                   {survivalState.questions[survivalState.currentIndex]?.options.map((opt, idx) => (
                     <button
                       key={idx}
                       type="button"
                       onClick={() => handleSurvivalAnswer(opt)}
-                      className="flex items-center gap-3 w-full rounded-2xl border border-slate-800 bg-slate-950 p-4 text-left text-xs font-bold text-slate-200 transition-all hover:border-emerald-400 hover:bg-emerald-950/20 active:scale-98"
+                      className="flex items-center gap-3.5 w-full rounded-2xl border border-slate-800 bg-slate-950 p-4 sm:p-5 text-left text-sm sm:text-base font-semibold text-slate-200 transition-all hover:border-emerald-400 hover:bg-emerald-950/20 active:scale-98 cursor-pointer min-h-[56px]"
                     >
-                      <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-slate-800 text-[11px] font-black text-emerald-400">
+                      <span className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-slate-800 text-xs sm:text-sm font-black text-emerald-400 shrink-0">
                         {String.fromCharCode(65 + idx)}
                       </span>
-                      <span>{opt}</span>
+                      <span className="leading-relaxed">{opt}</span>
                     </button>
                   ))}
                 </div>

@@ -18,34 +18,34 @@ export function StudentHome() {
 
   return (
     <div className="app-canvas">
-      {/* Top bar: streak/XP ala DESIGN.md */}
-      <header className="sticky top-0 z-30 bg-canvas/85 backdrop-blur-md px-4 pt-4 pb-2">
+      {/* Top bar: streak/XP ala DESIGN.md — dengan safe area PWA */}
+      <header className="sticky top-0 z-30 bg-canvas/90 backdrop-blur-md px-4 sm:px-6 md:px-8 pt-[calc(0.75rem+env(safe-area-inset-top,0px))] pb-3 border-b border-slate-200/50">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">{active.avatar}</span>
+          <div className="flex items-center gap-3">
+            <span className="text-3xl sm:text-4xl select-none">{active.avatar}</span>
             <div>
-              <p className="text-[11px] font-semibold text-slate-500">Petualang Level {active.level}</p>
-              <p className="h-title leading-6">{active.name}</p>
+              <p className="text-xs sm:text-sm font-bold text-slate-500">Petualang Level {active.level}</p>
+              <h1 className="text-lg sm:text-xl font-extrabold text-slate-900 leading-tight">{active.name}</h1>
             </div>
           </div>
           <button
             onClick={logout}
-            className="chip bg-surface-high text-slate-600 cursor-pointer"
+            className="chip bg-surface-high text-slate-700 hover:bg-slate-200 cursor-pointer font-bold px-3.5 py-1.5 text-xs sm:text-sm"
           >
             Keluar
           </button>
         </div>
-        <div className="mt-3 flex items-center gap-2">
-          <div className="track flex-1">
+        <div className="mt-3 flex items-center gap-2.5">
+          <div className="track flex-1 !h-3.5">
             <div className="track-fill" style={{ width: `${xpPct}%` }} />
           </div>
-          <span className="chip bg-amber-100 text-amber-700 text-[11px] tabular">
+          <span className="chip bg-amber-100 text-amber-800 text-xs sm:text-sm font-bold tabular">
             🔥 {active.xp} XP
           </span>
         </div>
       </header>
 
-      <main className="px-4 py-4">
+      <main className="px-4 sm:px-6 md:px-8 py-4 sm:py-6">
         <Outlet />
       </main>
 
@@ -53,8 +53,8 @@ export function StudentHome() {
       <nav className="dock">
         {NAV.map((n) => (
           <NavLink key={n.to} to={n.to} end={n.end} className={({ isActive }) => `dock-item ${isActive ? 'active' : ''}`}>
-            <span className="text-lg leading-none">{n.icon}</span>
-            {n.label}
+            <span className="text-xl md:text-2xl leading-none">{n.icon}</span>
+            <span>{n.label}</span>
           </NavLink>
         ))}
       </nav>

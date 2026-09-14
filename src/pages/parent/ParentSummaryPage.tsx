@@ -137,100 +137,101 @@ export function ParentSummaryPage() {
       </section>
 
       {/* 4. Capaian Pekan Ini (Grid 2x2) */}
-      <section className="space-y-2">
+      {/* 4. Capaian Pekan Ini (Grid 2x2 on phone, 4 cols on tablet) */}
+      <section className="space-y-3">
         <div className="flex items-center justify-between px-1">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
+          <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-700">
             Capaian {childName} Pekan Ini
           </h3>
-          <span className="text-[11px] font-bold text-emerald-600 flex items-center gap-0.5">
+          <span className="text-xs sm:text-sm font-bold text-emerald-600 flex items-center gap-1">
             <span>↗</span> Konsistensi Sangat Baik
           </span>
         </div>
 
-        <div className="grid grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {/* Metrik 1: Streak Belajar */}
-          <div className="card p-3.5 bg-white border border-slate-200/80">
+          <div className="card p-4 bg-white border border-slate-200/80 space-y-1">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold text-slate-500">Streak Belajar</span>
-              <span className="text-base">🔥</span>
+              <span className="text-xs sm:text-sm font-bold text-slate-500">Streak Belajar</span>
+              <span className="text-lg">🔥</span>
             </div>
-            <div className="mt-2 flex items-baseline gap-1">
-              <span className="text-2xl font-black text-slate-900">{state.streakDays}</span>
+            <div className="mt-2 flex items-baseline gap-1.5">
+              <span className="text-2xl sm:text-3xl font-black text-slate-900">{state.streakDays}</span>
               <span className="text-xs font-bold text-slate-500">Hari Berturut</span>
             </div>
-            <div className="mt-2 h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
+            <div className="mt-2 h-2 w-full rounded-full bg-slate-100 overflow-hidden">
               <div className="h-full rounded-full bg-amber-500 w-full" />
             </div>
           </div>
 
           {/* Metrik 2: Total Waktu Belajar */}
-          <div className="card p-3.5 bg-white border border-slate-200/80">
+          <div className="card p-4 bg-white border border-slate-200/80 space-y-1">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold text-slate-500">Waktu Belajar</span>
-              <span className="text-base">⏱️</span>
+              <span className="text-xs sm:text-sm font-bold text-slate-500">Waktu Belajar</span>
+              <span className="text-lg">⏱️</span>
             </div>
-            <div className="mt-2 flex items-baseline gap-1">
-              <span className="text-2xl font-black text-slate-900">
+            <div className="mt-2 flex items-baseline gap-1.5">
+              <span className="text-2xl sm:text-3xl font-black text-slate-900">
                 {completed.size > 0 ? `${completed.size * 15}m` : '0m'}
               </span>
             </div>
-            <span className="mt-1 text-[10px] font-bold text-emerald-600 flex items-center gap-0.5">
+            <span className="mt-1 text-xs font-bold text-emerald-600 flex items-center gap-1">
               <span>✓</span> {completed.size > 0 ? 'Waktu aktif tercatat' : 'Siap memulai sesi'}
             </span>
           </div>
 
           {/* Metrik 3: Sesi Selesai */}
-          <div className="card p-3.5 bg-white border border-slate-200/80">
+          <div className="card p-4 bg-white border border-slate-200/80 space-y-1">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold text-slate-500">Modul Tuntas</span>
-              <span className="text-base">📖</span>
+              <span className="text-xs sm:text-sm font-bold text-slate-500">Modul Tuntas</span>
+              <span className="text-lg">📖</span>
             </div>
-            <div className="mt-2 flex items-baseline gap-1">
-              <span className="text-2xl font-black text-slate-900">{completed.size}</span>
+            <div className="mt-2 flex items-baseline gap-1.5">
+              <span className="text-2xl sm:text-3xl font-black text-slate-900">{completed.size}</span>
               <span className="text-xs font-bold text-slate-500">Pelajaran</span>
             </div>
-            <span className="mt-1 text-[10px] text-slate-400">Rata-rata 15m per sesi</span>
+            <span className="mt-1 text-xs text-slate-400">Rata-rata 15m per sesi</span>
           </div>
 
           {/* Metrik 4: Ketuntasan Bank Salah */}
-          <div className="card p-3.5 bg-white border border-slate-200/80">
+          <div className="card p-4 bg-white border border-slate-200/80 space-y-1">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold text-slate-500">Bank Kesalahan</span>
-              <span className="text-base">🧠</span>
+              <span className="text-xs sm:text-sm font-bold text-slate-500">Bank Kesalahan</span>
+              <span className="text-lg">🧠</span>
             </div>
-            <div className="mt-2 flex items-baseline gap-1">
-              <span className="text-2xl font-black text-slate-900">{mistakesCount}</span>
+            <div className="mt-2 flex items-baseline gap-1.5">
+              <span className="text-2xl sm:text-3xl font-black text-slate-900">{mistakesCount}</span>
               <span className="text-xs font-bold text-slate-500">Perlu Review</span>
             </div>
-            <span className="mt-1 text-[10px] text-indigo-600 font-semibold">
-              Belajar dari kesalahan mandiri
+            <span className="mt-1 text-xs text-indigo-600 font-semibold">
+              Belajar mandiri aktif
             </span>
           </div>
         </div>
       </section>
 
       {/* 5. Ringkasan Penguasaan Materi per Mata Pelajaran */}
-      <section className="card p-4 bg-white border border-slate-200/80 space-y-3">
-        <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800">
+      <section className="card p-5 bg-white border border-slate-200/80 space-y-3.5">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+          <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-800">
             Penguasaan Materi Kelas {childGrade} (Mastery)
           </h3>
-          <Link to="/parent/progress" className="text-xs font-bold text-indigo-600 hover:underline">
+          <Link to="/parent/progress" className="text-xs sm:text-sm font-bold text-indigo-600 hover:underline">
             Detail →
           </Link>
         </div>
 
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
           {subjectMasteries.slice(0, 4).map((sub) => (
-            <div key={sub.subjectId} className="space-y-1">
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-bold text-slate-800 flex items-center gap-1.5">
-                  <span>{sub.subjectEmoji}</span>
+            <div key={sub.subjectId} className="p-3.5 rounded-xl bg-slate-50/70 border border-slate-100 space-y-1.5">
+              <div className="flex items-center justify-between text-xs sm:text-sm">
+                <span className="font-extrabold text-slate-800 flex items-center gap-2">
+                  <span className="text-xl">{sub.subjectEmoji}</span>
                   <span>{sub.subjectName}</span>
                 </span>
                 <span className="font-black text-slate-900">{sub.averageScore}%</span>
               </div>
-              <div className="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
+              <div className="h-2.5 w-full rounded-full bg-slate-200 overflow-hidden">
                 <div
                   className="h-full rounded-full transition-all duration-500"
                   style={{

@@ -60,14 +60,14 @@ export function Login() {
   return (
     <div className="app-canvas flex flex-col justify-between px-5 py-6">
       {/* 1. Header & Switcher Mode */}
-      <header className="flex items-center justify-between border-b border-slate-200/70 pb-4">
-        <div className="flex items-center gap-2">
-          <span className="text-2xl">⚡</span>
+      <header className="flex items-center justify-between border-b border-slate-200/70 pb-4 pt-[calc(0.5rem+env(safe-area-inset-top,0px))]">
+        <div className="flex items-center gap-3">
+          <span className="text-3xl">⚡</span>
           <div>
-            <span className="text-[10px] font-black uppercase tracking-wider text-indigo-600 block leading-tight">
+            <span className="text-xs font-black uppercase tracking-wider text-indigo-600 block leading-tight">
               AlbiQuest Hub
             </span>
-            <h1 className="text-sm font-black text-slate-900 leading-tight">
+            <h1 className="text-base sm:text-lg font-extrabold text-slate-900 leading-tight">
               Family Learning Adventure
             </h1>
           </div>
@@ -83,31 +83,31 @@ export function Login() {
               setCurrentRole('student')
             }
           }}
-          className="chip bg-surface border border-slate-200 text-slate-700 hover:bg-slate-50 cursor-pointer flex items-center gap-1.5 shadow-xs"
+          className="chip bg-surface border border-slate-200 text-slate-700 hover:bg-slate-50 cursor-pointer flex items-center gap-2 shadow-xs px-3.5 py-1.5 text-xs sm:text-sm font-bold"
         >
-          <span>{currentRole === 'student' ? '🛡️' : '🐉🌸'}</span>
-          <span className="text-[11px] font-bold">
+          <span className="text-base">{currentRole === 'student' ? '🛡️' : '🐉🌸'}</span>
+          <span>
             {currentRole === 'student' ? 'Orang Tua' : 'Pahlawan'}
           </span>
         </button>
       </header>
 
       {/* 2. Main View: Choose Your Hero OR PIN Keypad */}
-      <main className="my-auto py-4">
+      <main className="my-auto py-6">
         {currentRole === 'student' && !selectedHeroId ? (
           /* View A: Hero Selection Portal (Choose Your Hero) */
-          <div className="space-y-5 animate-fadeIn">
-            <div className="text-center space-y-1">
-              <span className="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-3 py-1 text-[11px] font-bold text-indigo-700">
+          <div className="space-y-6 animate-fadeIn">
+            <div className="text-center space-y-1.5">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 px-3.5 py-1 text-xs font-bold text-indigo-700">
                 <span>✨</span> Choose Your Hero
               </span>
-              <h2 className="text-xl font-black text-slate-900">Pilih Pahlawan Belajarmu</h2>
-              <p className="text-xs text-slate-500">
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900">Pilih Pahlawan Belajarmu</h2>
+              <p className="text-sm text-slate-600">
                 Lanjutkan petualangan akademik SMP Pangudi Luhur
               </p>
             </div>
 
-            <div className="space-y-3.5 pt-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
               {studentHeroes.map((hero) => {
                 const stats = getHeroSavedStats(hero.id)
                 const isAlbert = hero.id === 'albert'
@@ -117,7 +117,7 @@ export function Login() {
                     key={hero.id}
                     type="button"
                     onClick={() => setSelectedHeroId(hero.id)}
-                    className={`w-full text-left card relative overflow-hidden p-4 border-2 transition-all duration-200 cursor-pointer hover:shadow-md active:scale-[0.99] ${
+                    className={`w-full text-left card relative overflow-hidden p-5 border-2 transition-all duration-200 cursor-pointer hover:shadow-md active:scale-[0.99] ${
                       isAlbert
                         ? 'border-indigo-200/90 hover:border-indigo-500 bg-gradient-to-br from-indigo-50/50 via-white to-blue-50/30'
                         : 'border-pink-200/90 hover:border-pink-500 bg-gradient-to-br from-pink-50/50 via-white to-purple-50/30'
@@ -126,7 +126,7 @@ export function Login() {
                     <div className="flex items-center gap-4">
                       {/* Avatar Hero */}
                       <div
-                        className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-sm flex-shrink-0 bg-gradient-to-tr ${hero.colorTheme}`}
+                        className={`w-18 h-18 rounded-2xl flex items-center justify-center text-4xl shadow-sm flex-shrink-0 bg-gradient-to-tr ${hero.colorTheme}`}
                       >
                         {hero.avatar}
                       </div>
@@ -134,11 +134,11 @@ export function Login() {
                       {/* Detail Hero */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-1">
-                          <h3 className="text-base font-black text-slate-900 leading-snug">
+                          <h3 className="text-lg font-black text-slate-900 leading-snug">
                             {hero.name}
                           </h3>
                           <span
-                            className={`rounded-full px-2 py-0.5 text-[10px] font-black ${
+                            className={`rounded-full px-2.5 py-0.5 text-xs font-black ${
                               isAlbert
                                 ? 'bg-indigo-100 text-indigo-800'
                                 : 'bg-pink-100 text-pink-800'
@@ -148,25 +148,25 @@ export function Login() {
                           </span>
                         </div>
 
-                        <p className="text-xs font-bold text-slate-600 mt-0.5">
+                        <p className="text-sm font-bold text-slate-700 mt-0.5">
                           {hero.title}
                         </p>
-                        <p className="text-[11px] text-slate-400 truncate">
+                        <p className="text-xs text-slate-500 truncate">
                           {hero.subtitle}
                         </p>
 
-                        <div className="mt-2 flex items-center gap-2 text-[11px] font-bold">
-                          <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-slate-700">
+                        <div className="mt-2 flex items-center gap-2.5 text-xs font-bold">
+                          <span className="rounded-md bg-slate-100 px-2 py-0.5 text-slate-700">
                             Lvl {stats.level}
                           </span>
-                          <span className="text-amber-600">
+                          <span className="text-amber-700 font-black">
                             🔥 {stats.xp} XP
                           </span>
                         </div>
                       </div>
 
                       {/* Arrow */}
-                      <div className="text-slate-300 text-lg font-bold pr-1">
+                      <div className="text-slate-300 text-xl font-bold pr-1">
                         →
                       </div>
                     </div>
@@ -176,50 +176,50 @@ export function Login() {
             </div>
 
             <div className="pt-2 text-center">
-              <p className="text-[11px] text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-400">
                 Setiap pahlawan memiliki bank materi, jadwal latihan, dan progres tersendiri.
               </p>
             </div>
           </div>
         ) : (
           /* View B: PIN Keypad Entry */
-          <div className="flex flex-col items-center space-y-5 animate-fadeIn">
+          <div className="flex flex-col items-center space-y-6 animate-fadeIn">
             {/* Header Hero Aktif */}
             <div className="text-center">
               <div className="relative inline-block mb-3">
                 <div
-                  className={`w-18 h-18 rounded-3xl flex items-center justify-center text-4xl shadow-md bg-gradient-to-tr ${
+                  className={`w-20 h-20 rounded-3xl flex items-center justify-center text-5xl shadow-md bg-gradient-to-tr ${
                     activeTargetProfile?.colorTheme || 'from-indigo-600 to-emerald-400'
                   }`}
                 >
                   {activeTargetProfile?.avatar}
                 </div>
                 {activeTargetProfile?.grade && (
-                  <span className="absolute -bottom-1 -right-1 rounded-full bg-white px-2 py-0.5 text-[10px] font-black text-indigo-700 shadow-sm border border-indigo-100">
+                  <span className="absolute -bottom-1 -right-1 rounded-full bg-white px-2.5 py-0.5 text-xs font-black text-indigo-700 shadow-sm border border-indigo-100">
                     Kls {activeTargetProfile.grade}
                   </span>
                 )}
               </div>
 
-              <h2 className="text-lg font-black text-slate-900">
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900">
                 {currentRole === 'parent'
                   ? 'Area Orang Tua'
                   : `Petualangan ${activeTargetProfile?.name}`}
               </h2>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-sm text-slate-500 mt-1">
                 {activeTargetProfile?.subtitle}
               </p>
             </div>
 
             {/* PIN Dots */}
             <div className="w-full flex flex-col items-center gap-3">
-              <div className="flex gap-3.5 my-1" aria-label="PIN">
+              <div className="flex gap-4 my-2" aria-label="PIN">
                 {[0, 1, 2, 3].map((i) => (
                   <span
                     key={i}
-                    className={`pin-dot transition-all ${
+                    className={`h-5 w-5 rounded-full border-2 transition-all ${
                       pin.length > i
-                        ? '!scale-110 !bg-indigo-600 !border-indigo-600'
+                        ? '!scale-125 !bg-indigo-600 !border-indigo-600 shadow-sm'
                         : '!border-slate-300'
                     }`}
                   />
@@ -227,8 +227,8 @@ export function Login() {
               </div>
 
               <p
-                className={`text-xs font-semibold ${
-                  error ? 'text-rose-600 font-bold' : 'text-slate-400'
+                className={`text-sm font-semibold ${
+                  error ? 'text-rose-600 font-bold' : 'text-slate-500'
                 }`}
                 aria-live="polite"
               >
@@ -243,7 +243,7 @@ export function Login() {
             </div>
 
             {/* Keypad */}
-            <div className="grid grid-cols-3 gap-2.5 w-full max-w-[270px]">
+            <div className="grid grid-cols-3 gap-3 w-full max-w-[300px]">
               {digits.map((d, i) =>
                 d === '' ? (
                   <span key={i} />
@@ -252,7 +252,7 @@ export function Login() {
                     key={i}
                     type="button"
                     onClick={() => press(d as number | 'del')}
-                    className="h-13 rounded-2xl bg-white border border-slate-200/90 text-lg font-bold text-slate-800 shadow-xs hover:bg-slate-50 active:translate-y-0.5 active:bg-slate-100 transition-all cursor-pointer select-none"
+                    className="h-15 sm:h-16 rounded-2xl bg-white border border-slate-200/90 text-2xl font-black text-slate-800 shadow-xs hover:bg-slate-50 active:translate-y-0.5 active:bg-slate-100 transition-all cursor-pointer select-none min-h-[56px] flex items-center justify-center"
                   >
                     {d === 'del' ? '⌫' : d}
                   </button>
@@ -268,7 +268,7 @@ export function Login() {
                   setSelectedHeroId(null)
                   setPin('')
                 }}
-                className="text-xs font-bold text-indigo-600 hover:text-indigo-700 underline underline-offset-4 cursor-pointer mt-1"
+                className="text-sm font-bold text-indigo-600 hover:text-indigo-700 underline underline-offset-4 cursor-pointer mt-2"
               >
                 ← Pilih pahlawan lain
               </button>
@@ -278,8 +278,8 @@ export function Login() {
       </main>
 
       {/* 3. Footer Catatan */}
-      <footer className="text-center pt-2">
-        <p className="text-[11px] text-slate-400 font-medium">
+      <footer className="text-center pt-3 pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))]">
+        <p className="text-xs text-slate-400 font-medium">
           SMP Pangudi Luhur • Kurikulum Merdeka SMP
         </p>
       </footer>
