@@ -25,6 +25,7 @@ export interface Curriculum {
   title: string
   description: string
   sortOrder: number
+  grade?: number
 }
 
 export interface Competency {
@@ -33,6 +34,7 @@ export interface Competency {
   code: string
   description: string
   sortOrder: number
+  grade?: number
 }
 
 export interface Topic {
@@ -42,6 +44,7 @@ export interface Topic {
   title: string
   description: string
   sortOrder: number
+  grade?: number
 }
 
 export interface Lesson {
@@ -53,6 +56,7 @@ export interface Lesson {
   durationMin: number
   type: LessonType
   sortOrder: number
+  grade?: number
 }
 
 export interface Question {
@@ -73,6 +77,7 @@ export interface Question {
   /** atribusi sumber resmi (D-008) */
   source: string
   difficulty: Difficulty
+  grade?: number
 }
 
 export const SUBJECT_PRIORITY_LABEL: Record<Priority, string> = {

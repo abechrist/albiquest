@@ -53,6 +53,11 @@ const reqStr = (r: Rec, k: string, sheet: string, n: number) => {
   return v
 }
 const optStr = (r: Rec, k: string) => r[k] ?? ''
+const optInt = (r: Rec, k: string, fallback = 9): number => {
+  const v = r[k]
+  if (!v || !/^\d+$/.test(v)) return fallback
+  return Number(v)
+}
 const reqInt = (r: Rec, k: string, sheet: string, n: number) => {
   const v = reqStr(r, k, sheet, n)
   if (!/^\d+$/.test(v)) fail(sheet, n, `kolom "${k}" harus angka (ditemukan "${v}")`)
@@ -108,6 +113,7 @@ const validateCurriculum: Validator<Curriculum> = (r, s, n) => ({
   title: reqStr(r, 'title', s, n),
   description: reqStr(r, 'description', s, n),
   sortOrder: reqInt(r, 'sort_order', s, n),
+  grade: optInt(r, 'grade', 9),
 })
 
 const validateCompetency: Validator<Competency> = (r, s, n) => ({
@@ -116,6 +122,7 @@ const validateCompetency: Validator<Competency> = (r, s, n) => ({
   code: reqStr(r, 'code', s, n),
   description: reqStr(r, 'description', s, n),
   sortOrder: reqInt(r, 'sort_order', s, n),
+  grade: optInt(r, 'grade', 9),
 })
 
 const validateTopic: Validator<Topic> = (r, s, n) => ({
@@ -125,6 +132,7 @@ const validateTopic: Validator<Topic> = (r, s, n) => ({
   title: reqStr(r, 'title', s, n),
   description: reqStr(r, 'description', s, n),
   sortOrder: reqInt(r, 'sort_order', s, n),
+  grade: optInt(r, 'grade', 9),
 })
 
 const validateLesson: Validator<Lesson> = (r, s, n) => ({
@@ -136,6 +144,7 @@ const validateLesson: Validator<Lesson> = (r, s, n) => ({
   durationMin: reqInt(r, 'duration_min', s, n),
   type: reqEnum(r, 'type', ['lesson', 'quiz', 'review'] as const, s, n),
   sortOrder: reqInt(r, 'sort_order', s, n),
+  grade: optInt(r, 'grade', 9),
 })
 
 const optJsonArray = (r: Rec, k: string): string[] | undefined => {
@@ -168,6 +177,7 @@ const validateQuestion: Validator<Question> = (r, s, n) => ({
     if (d < 1 || d > 3) fail(s, n, 'kolom "difficulty" harus 1, 2, atau 3')
     return d as Question['difficulty']
   })(),
+  grade: optInt(r, 'grade', 9),
 })
 
 export function parseSheetRows(rows: SheetRows) {

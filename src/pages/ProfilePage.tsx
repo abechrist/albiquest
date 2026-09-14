@@ -43,7 +43,13 @@ export function ProfilePage() {
   return (
     <div className="space-y-4 pb-12">
       {/* 1. Petualang Hero Profile Card */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-600 via-primary to-indigo-900 p-5 text-white shadow-xl">
+      <div
+        className={`relative overflow-hidden rounded-2xl p-5 text-white shadow-xl ${
+          active.id === 'jasmine'
+            ? 'bg-gradient-to-br from-pink-600 via-rose-500 to-purple-800'
+            : 'bg-gradient-to-br from-indigo-600 via-primary to-indigo-900'
+        }`}
+      >
         <div className="relative z-10 flex items-center gap-4">
           <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-4xl shadow-inner flex-shrink-0">
             {active.avatar}
@@ -55,7 +61,9 @@ export function ProfilePage() {
               <span>Level {levelInfo.level} • {levelInfo.title}</span>
             </div>
             <h2 className="text-xl font-black truncate">{active.name}</h2>
-            <p className="text-xs text-indigo-100">Siswa Kelas 9 SMP Pangudi Luhur</p>
+            <p className="text-xs text-indigo-100">
+              {active.id === 'jasmine' ? 'The Phoenix Seeker' : 'The Dragon Scholar'} • Siswa Kelas {active.grade ?? 9} SMP Pangudi Luhur
+            </p>
           </div>
         </div>
 

@@ -1,19 +1,24 @@
-// Halaman Perkembangan Belajar Orang Tua (Curriculum Mastery) — Phase 10
-// Sesuai prd.md §31 & agent-prompt.md §61 (Read-only view).
-
 import { useState } from 'react'
+import { useOutletContext } from 'react-router-dom'
 import { useAdaptiveLearning } from '../../lib/adaptive'
-import { useProgress } from '../../lib/progress'
+import { getStoredCompletedLessons } from '../../lib/progress'
 import { useData } from '../../lib/store'
+import type { ParentContextType } from '../ParentHome'
 
 export function ParentProgressPage() {
+  const outletContext = useOutletContext<ParentContextType | undefined>()
+  const selectedChild = outletContext?.selectedChild || 'albert'
+  const isJasmine = selectedChild === 'jasmine'
+  const childName = isJasmine ? 'Jasmine' : 'Albert'
+  const childGrade = isJasmine ? 8 : 9
+
   const { data } = useData()
-  const { completed } = useProgress()
+  const completed = getStoredCompletedLessons(selectedChild)
   const [selectedSubjectId, setSelectedSubjectId] = useState<string>('all')
 
   const subjects = data?.subjects ?? []
-  const topics = data?.topics ?? []
-  const lessons = data?.lessons ?? []
+  const topics = (data?.topics ?? []).filter((t) => (t.grade ?? 9) === childGrade)
+  const lessons = (data?.lessons ?? []).filter((l) => (l.grade ?? 9) === childGrade)
 
   const { subjectMasteries, weakTopics } = useAdaptiveLearning(
     subjects,
@@ -29,9 +34,11 @@ export function ParentProgressPage() {
   return (
     <div className="space-y-5 pb-6">
       <div>
-        <h2 className="text-base font-black text-slate-900">Perkembangan Materi & Kurikulum</h2>
+        <h2 className="text-base font-black text-slate-900">
+          Perkembangan Materi & Kurikulum ({childName})
+        </h2>
         <p className="text-xs text-slate-500">
-          Evaluasi tingkat penguasaan kompetensi Albert pada kurikulum SMP Kelas 9
+          Evaluasi tingkat penguasaan kompetensi {childName} pada kurikulum SMP Kelas {childGrade}
         </p>
       </div>
 

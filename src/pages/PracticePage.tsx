@@ -5,12 +5,20 @@ import { seedInitialMistakesIfEmpty, useMistakes } from '../lib/mistakes.ts'
 import { QuestionRenderer, useQuestionEngine } from '../lib/question-engine.tsx'
 import { useData } from '../lib/store.tsx'
 
+import { useProfile } from '../lib/auth.tsx'
+
 // Arena Latihan (Practice Arena) — Phase 5
 // Sesuai prd.md §11 & §20, agent-prompt.md §56, dan Stitch interactive_practice_feedback.
 
 export function PracticePage() {
   const { data, loading } = useData()
-  const { mistakes, stats } = useMistakes()
+  const { active } = useProfile()
+  const { mistakes, stats } = useMistakes(active?.id)
+
+  const currentGrade = active?.grade ?? 9
+  const gradeQuestions = (data?.questions ?? []).filter(
+    (q) => (q.grade ?? 9) === currentGrade,
+  )
 
   // Sesi latihan aktif (null = di menu arena latihan)
   const [activeSession, setActiveSession] = useState<{
@@ -22,24 +30,25 @@ export function PracticePage() {
     isFinished: boolean
   } | null>(null)
 
-  // Seed contoh kesalahan jika store masih kosong agar Albert bisa langsung mencoba fitur Spaced Review
+  // Seed contoh kesalahan jika store masih kosong agar siswa bisa langsung mencoba fitur Spaced Review
   useEffect(() => {
-    if (data?.questions) {
-      seedInitialMistakesIfEmpty(data.questions)
+    if (gradeQuestions.length > 0) {
+      seedInitialMistakesIfEmpty(gradeQuestions, active?.id)
     }
-  }, [data?.questions])
+  }, [gradeQuestions, active?.id])
 
   if (loading) return <p className="py-10 text-center text-sm text-slate-400">Memuat arena latihan…</p>
   if (!data) return null
 
-  // 1. Memulai Latihan Kilat (5 soal acak)
+  // 1. Memulai Latihan Kilat (5 soal acak sesuai grade)
   const startQuickPractice = () => {
-    const shuffled = [...data.questions].sort(() => 0.5 - Math.random())
+    const pool = gradeQuestions.length > 0 ? gradeQuestions : data.questions
+    const shuffled = [...pool].sort(() => 0.5 - Math.random())
     const selected = shuffled.slice(0, Math.min(5, shuffled.length))
     if (selected.length === 0) return
 
     setActiveSession({
-      title: '⚡ Latihan Kilat (5 Soal)',
+      title: `⚡ Latihan Kilat Kelas ${currentGrade} (5 Soal)`,
       questions: selected,
       currentIndex: 0,
       totalXP: 0,
@@ -53,13 +62,13 @@ export function PracticePage() {
     const mistakeQuestionIds = new Set(
       mistakes.filter((m) => m.status === 'needs_review').map((m) => m.questionId),
     )
-    const reviewQuestions = data.questions.filter((q) => mistakeQuestionIds.has(q.id))
+    const reviewQuestions = gradeQuestions.filter((q) => mistakeQuestionIds.has(q.id))
 
     // Fallback jika tidak ada atau belum ada kesalahan aktif, gunakan 3 soal pertama
-    const questionsToUse = reviewQuestions.length > 0 ? reviewQuestions : data.questions.slice(0, 3)
+    const questionsToUse = reviewQuestions.length > 0 ? reviewQuestions : gradeQuestions.slice(0, 3)
 
     setActiveSession({
-      title: '🧠 Spaced Review (Evaluasi Kesalahan)',
+      title: `🧠 Spaced Review Kelas ${currentGrade} (Evaluasi Kesalahan)`,
       questions: questionsToUse,
       currentIndex: 0,
       totalXP: 0,
@@ -70,11 +79,11 @@ export function PracticePage() {
 
   // 3. Memulai Latihan per Mapel
   const startSubjectPractice = (subjectId: string, subjectName: string) => {
-    const subjectQuestions = data.questions.filter((q) => q.subjectId === subjectId)
+    const subjectQuestions = gradeQuestions.filter((q) => q.subjectId === subjectId)
     if (subjectQuestions.length === 0) return
 
     setActiveSession({
-      title: `🎯 Latihan ${subjectName}`,
+      title: `🎯 Latihan ${subjectName} (Kls ${currentGrade})`,
       questions: subjectQuestions,
       currentIndex: 0,
       totalXP: 0,

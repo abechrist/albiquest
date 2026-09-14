@@ -1,11 +1,26 @@
-id,topic_id,subject_id,title,description,duration_min,type,sort_order
-les-akar-1,top-persamaan-kuadrat,matematika,Akar-akar Persamaan Kuadrat,Mengenal bentuk umum dan akar persamaan kuadrat,15,lesson,1
-les-akar-2,top-persamaan-kuadrat,matematika,Memfaktorkan & Rumus ABC,Cara menentukan akar secara aljabar,20,lesson,2
-les-stat-1,top-statistika,matematika,"Rata-rata, Median, Modus",Ukuran pemusatan data tunggal,15,lesson,1
-les-eks-1,top-teks-eksposisi,bahasa-indonesia,Struktur Teks Eksposisi,"Tesis, argumentasi, penegasan ulang",10,lesson,1
-les-eks-2,top-teks-eksposisi,bahasa-indonesia,Unsur Kebahasaan Teks Eksposisi,"Konjungsi, istilah, dan kalimat persuasif",10,lesson,2
-les-listrik-2,top-listrik-dinamis,ipa,Hukum Ohm & Rangkaian,"Hambatan, arus, rangkaian seri-paralel",15,lesson,2
-les-read-1,top-read-1,bahasa-inggris,Main Idea & Detail,Menemukan ide utama dan detail pendukung,10,lesson,1
-les-read-2,top-read-1,bahasa-inggris,Inference & Vocabulary,Menarik kesimpulan dan makna kata,10,lesson,2
-les-pak-1,top-pak-1,pendidikan-agama-katolik,Yesus dalam Injil,Gambaran Yesus di empat Injil,10,lesson,1
-les-pak-2,top-pak-1,pendidikan-agama-katolik,Teladan Hidup Yesus,"Kasih, pengampunan, dan pelayanan",10,lesson,2
+id,topic_id,subject_id,title,description,duration_min,type,sort_order,grade
+les-akar-1,top-persamaan-kuadrat,matematika,Akar-akar Persamaan Kuadrat,Mengenal bentuk umum dan akar persamaan kuadrat,15,lesson,1,9
+les-akar-2,top-persamaan-kuadrat,matematika,Memfaktorkan & Rumus ABC,Cara menentukan akar secara aljabar,20,lesson,2,9
+les-stat-1,top-statistika,matematika,"Rata-rata, Median, Modus",Ukuran pemusatan data tunggal,15,lesson,1,9
+les-eks-1,top-teks-eksposisi,bahasa-indonesia,Struktur Teks Eksposisi,"Tesis, argumentasi, penegasan ulang",10,lesson,1,9
+les-eks-2,top-teks-eksposisi,bahasa-indonesia,Unsur Kebahasaan Teks Eksposisi,"Konjungsi, istilah, dan kalimat persuasif",10,lesson,2,9
+les-listrik-2,top-listrik-dinamis,ipa,Hukum Ohm & Rangkaian,"Hambatan, arus, rangkaian seri-paralel",15,lesson,2,9
+les-read-1,top-read-1,bahasa-inggris,Main Idea & Detail,Menemukan ide utama dan detail pendukung,10,lesson,1,9
+les-read-2,top-read-1,bahasa-inggris,Inference & Vocabulary,Menarik kesimpulan dan makna kata,10,lesson,2,9
+les-pak-1,top-pak-1,pendidikan-agama-katolik,Yesus dalam Injil,Gambaran Yesus di empat Injil,10,lesson,1,9
+les-pak-2,top-pak-1,pendidikan-agama-katolik,Teladan Hidup Yesus,"Kasih, pengampunan, dan pelayanan",10,lesson,2,9
+les-ips-1,top-ips-globalisasi,ips,Hakikat Globalisasi & Dampaknya,"Perkembangan iptek, komunikasi, dan ekonomi dunia",12,lesson,1,9
+les-ppkn-1,top-ppkn-pancasila,ppkn,Penerapan Nilai Pancasila,"Nilai dasar, instrumental, dan praksis dalam kehidupan",12,lesson,1,9
+les-pjok-1,top-pjok-kebugaran,pjok,Prinsip Latihan Kebugaran,"Denyut nadi maksimal, daya tahan kardio, dan peregangan",10,lesson,1,9
+les-prakarya-1,top-prakarya-kerajinan,prakarya-bk,Eksplorasi Bahan Keras & Karier,"Karakteristik kayu, bambu, logam, serta mengenali potensi diri",12,lesson,1,9
+les-k8-pola-1,top-k8-pola-bilangan,matematika,Pola Bilangan Aritmetika,"Suku pertama, beda, dan rumus suku ke-n",15,lesson,1,8
+les-k8-pyth-1,top-k8-pythagoras,matematika,Penerapan Teorema Pythagoras,Panjang sisi segitiga siku-siku dan tripel Pythagoras,15,lesson,1,8
+les-k8-newton-1,top-k8-gerak-newton,ipa,"Hukum I, II, dan III Newton","Inersia, gaya percepatan, serta aksi dan reaksi",15,lesson,1,8
+les-k8-cerna-1,top-k8-pencernaan,ipa,Saluran & Enzim Pencernaan,"Mulut, lambung, usus halus, dan fungsi enzim pencernaan",15,lesson,1,8
+les-k8-berita-1,top-k8-teks-berita,bahasa-indonesia,Unsur Teks Berita ADIKSIMBA,"Apa, Di mana, Kapan, Siapa, Mengapa, dan Bagaimana",12,lesson,1,8
+les-k8-recount-1,top-k8-recount-text,bahasa-inggris,Understanding Recount Text,"Orientation, series of events, and personal reaction",12,lesson,1,8
+les-k8-pak-1,top-k8-pak-kerajaan,pendidikan-agama-katolik,Perumpamaan Kerajaan Allah,Makna perumpamaan penabur dan biji sesawi,10,lesson,1,8
+les-k8-asean-1,top-k8-asean-geo,ips,Mengenal Negara-negara ASEAN,"Letak geografis, iklim tropis, dan batas wilayah ASEAN",12,lesson,1,8
+les-k8-ppkn-1,top-k8-ppkn-pancasila,ppkn,Fungsi Pancasila Sebagai Pandangan Hidup,Pedoman tingkah laku dan moral bangsa Indonesia,12,lesson,1,8
+les-k8-pjok-1,top-k8-pjok-basket,pjok,Kombinasi Passing Bola Basket,"Chest pass, bounce pass, dan overhead pass",10,lesson,1,8
+les-k8-prakarya-1,top-k8-prakarya-lunak,prakarya-bk,Karakteristik Bahan Lunak Alam & Buatan,"Tanah liat, sabun batangan, plastisin, dan lilin",10,lesson,1,8

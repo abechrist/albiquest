@@ -1,11 +1,8 @@
-// Progress belajar per perangkat (D-003: lokal tanpa sync).
-// ponytail: kalau nanti butuh tanggal/XP per penyelesaian (Phase 6), ganti
-// string[] jadi Record<lessonId, {at: string; xp: number}> — localStorage
-// lama cukup diabaikan (data tidak kritis).
+// Progress belajar per perangkat terisolasi per siswa (albert vs jasmine).
+// D-003: lokal tanpa sync, namespaced per hero.
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import type { ReactNode } from 'react'
-
-const KEY = 'pla.progress'
+import { useProfile } from './auth'
 
 interface ProgressValue {
   completed: Set<string>
@@ -15,25 +12,71 @@ interface ProgressValue {
 
 const Ctx = createContext<ProgressValue>({ completed: new Set(), complete: () => {}, count: 0 })
 
-function load(): string[] {
+/** Ambil daftar lesson id yang telah diselesaikan untuk siswa tertentu */
+export function getStoredCompletedLessons(studentId = 'albert'): Set<string> {
+  if (typeof window === 'undefined' || !window.localStorage) return new Set()
   try {
-    const raw = localStorage.getItem(KEY)
-    if (!raw) return []
+    const key = `pla.progress_${studentId}`
+    const raw =
+      localStorage.getItem(key) ||
+      (studentId === 'albert' ? localStorage.getItem('pla.progress') : null)
+    if (!raw) return new Set()
     const v: unknown = JSON.parse(raw)
-    return Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : []
+    const list = Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : []
+    return new Set(list)
   } catch {
-    return []
+    return new Set()
   }
 }
 
 export function ProgressProvider({ children }: { children: ReactNode }) {
-  const [ids, setIds] = useState<string[]>(load)
+  const { active } = useProfile()
+  const studentId = active?.id || 'albert'
+  const key = `pla.progress_${studentId}`
+
+  const [ids, setIds] = useState<string[]>(() => {
+    try {
+      const raw =
+        localStorage.getItem(key) ||
+        (studentId === 'albert' ? localStorage.getItem('pla.progress') : null)
+      if (!raw) return []
+      const v: unknown = JSON.parse(raw)
+      return Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : []
+    } catch {
+      return []
+    }
+  })
+
+  // Sinkronisasi ulang saat profil / pahlawan aktif berganti
   useEffect(() => {
-    localStorage.setItem(KEY, JSON.stringify(ids))
-  }, [ids])
+    try {
+      const raw =
+        localStorage.getItem(key) ||
+        (studentId === 'albert' ? localStorage.getItem('pla.progress') : null)
+      if (!raw) {
+        setIds([])
+      } else {
+        const v: unknown = JSON.parse(raw)
+        setIds(Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : [])
+      }
+    } catch {
+      setIds([])
+    }
+  }, [key, studentId])
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(key, JSON.stringify(ids))
+      if (studentId === 'albert') {
+        localStorage.setItem('pla.progress', JSON.stringify(ids))
+      }
+    } catch {}
+  }, [ids, key, studentId])
+
   const complete = useCallback((lessonId: string) => {
     setIds((prev) => (prev.includes(lessonId) ? prev : [...prev, lessonId]))
   }, [])
+
   const value = useMemo<ProgressValue>(
     () => ({ completed: new Set(ids), complete, count: ids.length }),
     [ids, complete],

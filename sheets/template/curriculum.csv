@@ -1,8 +1,21 @@
-id,subject_id,title,description,sort_order
-cur-mtk-1,matematika,Bilangan & Aljabar,"Persamaan, fungsi, dan penerapannya",1
-cur-mtk-2,matematika,Geometri & Statistika,"Bangun ruang, data, dan peluang",2
-cur-bindo-1,bahasa-indonesia,Teks & Literasi,Struktur dan unsur berbagai teks,1
-cur-bing-1,bahasa-inggris,Reading & Grammar,Pemahaman teks dan tata bahasa,1
-cur-ipa-1,ipa,IPA Terpadu Kelas 9,"Fisika, kimia, biologi terpadu",1
-cur-pak-1,pendidikan-agama-katolik,Pribadi Yesus Kristus,Injil dan teladan hidup Yesus,1
-cur-bing-1,bahasa-inggris,Reading & Grammar,Pemahaman teks dan tata bahasa,1
+id,subject_id,title,description,sort_order,grade
+cur-mtk-1,matematika,Bilangan & Aljabar,"Persamaan, fungsi, dan penerapannya",1,9
+cur-mtk-2,matematika,Geometri & Statistika,"Bangun ruang, data, dan peluang",2,9
+cur-bindo-1,bahasa-indonesia,Teks & Literasi,Struktur dan unsur berbagai teks,1,9
+cur-bing-1,bahasa-inggris,Reading & Grammar,Pemahaman teks dan tata bahasa,1,9
+cur-ipa-1,ipa,IPA Terpadu Kelas 9,"Fisika, kimia, biologi terpadu",1,9
+cur-pak-1,pendidikan-agama-katolik,Pribadi Yesus Kristus,Injil dan teladan hidup Yesus,1,9
+cur-ips-1,ips,Dinamika Keruangan & Interaksi Sosial,Perubahan keruangan dan pengaruhnya terhadap kehidupan,1,9
+cur-ppkn-1,ppkn,Kedaulatan & Konstitusi,Dinamika perwujudan Pancasila dan kedaulatan NKRI,1,9
+cur-pjok-1,pjok,Kebugaran Jasmani & Pola Hidup Sehat,"Aktivitas kebugaran, pola makan sehat, dan keselamatan",1,9
+cur-prakarya-1,prakarya-bk,"Kerajinan, Teknologi & Perencanaan Karier","Prinsip desain, rekayasa sederhana, dan pemahaman bakat",1,9
+cur-mtk-k8-1,matematika,Aljabar & Pola Bilangan Kelas 8,"Pola bilangan, relasi, fungsi, dan koordinat Kartesius",10,8
+cur-mtk-k8-2,matematika,Geometri & Teorema Pythagoras Kelas 8,Teorema Pythagoras dan bangun ruang sisi datar,11,8
+cur-ipa-k8-1,ipa,"Gerak, Usaha & Sistem Tubuh Kelas 8","Hukum gerak Newton, pesawat sederhana, dan sistem pencernaan",10,8
+cur-bindo-k8-1,bahasa-indonesia,Informasi & Teks Persuasi Kelas 8,"Teks berita ADIKSIMBA, slogan, poster, dan iklan komersial",10,8
+cur-bing-k8-1,bahasa-inggris,Past Experiences & Comparisons Kelas 8,"Recount text, degree of comparison, and descriptive text",10,8
+cur-pak-k8-1,pendidikan-agama-katolik,Warta Kerajaan Allah & Sakramen Kelas 8,"Pribadi Yesus, perumpamaan, dan sakramen Gereja Katolik",10,8
+cur-ips-k8-1,ips,Keruangan ASEAN & Kehidupan Bangsa Kelas 8,Interaksi keruangan negara ASEAN dan pengaruh dinamika sosial,10,8
+cur-ppkn-k8-1,ppkn,Pancasila & Kesadaran Konstitusi Kelas 8,Kedudukan Pancasila dan ketaatan tata perundangan nasional,10,8
+cur-pjok-k8-1,pjok,Permainan Bola & Kebugaran Remaja Kelas 8,"Teknik bola basket, kebugaran jasmani, dan pola hidup sehat",10,8
+cur-prakarya-k8-1,prakarya-bk,Kerajinan Bahan Lunak & Potensi Remaja Kelas 8,Karya bahan lunak alam/buatan dan pengenalan minat bakat,10,8

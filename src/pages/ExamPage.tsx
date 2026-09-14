@@ -18,15 +18,24 @@ import { useData } from '../lib/store'
 
 export function ExamPage() {
   const { data } = useData()
-  const { addXP } = useProfile()
-  const questions = data?.questions ?? []
+  const { active, addXP } = useProfile()
+  const currentGrade = active?.grade ?? 9
+  const questions = (data?.questions ?? []).filter(
+    (q) => (q.grade ?? 9) === currentGrade,
+  )
 
   // View mode: 'lobby' | 'exam' | 'result'
   const [view, setView] = useState<'lobby' | 'exam' | 'result'>('lobby')
   const [selectedPreset, setSelectedPreset] = useState<ExamPreset>(EXAM_PRESETS[0])
   const [session, setSession] = useState<ExamSessionState | null>(null)
   const [result, setResult] = useState<ExamResultSummary | null>(null)
-  const [history, setHistory] = useState<ExamResultSummary[]>(getStoredExamHistory)
+  const [history, setHistory] = useState<ExamResultSummary[]>(() =>
+    getStoredExamHistory(active?.id),
+  )
+
+  useEffect(() => {
+    setHistory(getStoredExamHistory(active?.id))
+  }, [active?.id])
 
   // Modals & UI states
   const [showSubmitModal, setShowSubmitModal] = useState<boolean>(false)
@@ -39,11 +48,11 @@ export function ExamPage() {
       const summary = evaluateExamSubmission(currentSession)
       addXP(summary.earnedXP)
       setResult(summary)
-      setHistory(getStoredExamHistory())
+      setHistory(getStoredExamHistory(active?.id))
       setView('result')
       setShowSubmitModal(false)
     },
-    [session, addXP],
+    [session, addXP, active?.id],
   )
 
   // Timer countdown
@@ -141,7 +150,7 @@ export function ExamPage() {
             <div className="relative overflow-hidden rounded-3xl border border-indigo-500/30 bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950 p-6 shadow-2xl">
               <div className="relative z-10">
                 <div className="inline-flex items-center gap-1.5 rounded-full border border-indigo-400/30 bg-indigo-500/10 px-3 py-1 text-xs font-semibold text-indigo-300">
-                  <span>📝 Standar Asesmen Nasional SMP Kelas 9</span>
+                  <span>📝 Standar Asesmen Nasional SMP Kelas {currentGrade}</span>
                 </div>
                 <h2 className="mt-2 text-2xl font-black text-white">
                   Siap Hadapi Ujian dengan Percaya Diri!

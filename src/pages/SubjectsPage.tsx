@@ -11,8 +11,11 @@ const PRIO_BADGE: Record<1 | 2 | 3, { label: string; className: string }> = {
   3: { label: '➕ Tambahan', className: 'bg-slate-200 text-slate-600' },
 }
 
+import { useProfile } from '../lib/auth'
+
 export function SubjectsPage() {
   const { data, error, loading, reload } = useData()
+  const { active } = useProfile()
   const isSheets = resolveSource().kind === 'sheets'
 
   return (
@@ -20,7 +23,9 @@ export function SubjectsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="h-headline">Mata Pelajaran</h2>
-          <p className="text-sm text-slate-500 mt-0.5">Semua mapel untuk ujian Kelas 9</p>
+          <p className="text-sm text-slate-500 mt-0.5">
+            Materi kurikulum lengkap SMP Kelas {active?.grade ?? 9}
+          </p>
         </div>
         <span className={`chip ${isSheets ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-500'}`}>
           {isSheets ? '📡 Google Sheets' : '🧪 Data contoh (lokal)'}

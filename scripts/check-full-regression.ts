@@ -157,9 +157,11 @@ assert.ok(lvl1.level >= 5)
 assert.ok(lvl1.progressPct >= 0 && lvl1.progressPct <= 100)
 
 // Streak verification
+const yDate = new Date(Date.now() - 86400000)
+const yesterdayStr = `${yDate.getFullYear()}-${String(yDate.getMonth() + 1).padStart(2, '0')}-${String(yDate.getDate()).padStart(2, '0')}`
 const stateYesterday = {
   streakDays: 5,
-  lastActiveDate: '2026-09-12',
+  lastActiveDate: yesterdayStr,
   unlockedBadges: {},
   claimedMissions: {},
   questionsAnsweredCount: 0,
@@ -275,6 +277,37 @@ assert.ok(fs.existsSync(path.resolve('public/icon-192.svg')), 'icon-192.svg haru
 assert.ok(fs.existsSync(path.resolve('public/icon-512.svg')), 'icon-512.svg harus ada')
 console.log('   ✓ PWA & Offline Asset Integrity: PASS')
 
+// -----------------------------------------------------------------------------
+// 10. AUDIT QUEST JASMINE & MULTI-STUDENT HERO SYSTEM
+// -----------------------------------------------------------------------------
+console.log('10. [QUEST JASMINE & MULTI-STUDENT] Hero Profiles, Grade 8/9 Isolation...')
+const authContent = fs.readFileSync(path.resolve('src/lib/auth.tsx'), 'utf-8')
+
+assert.ok(authContent.includes("id: 'albert'"), 'Profil Albert harus terdaftar')
+assert.ok(authContent.includes("grade: 9"), 'Albert harus berada di SMP Kelas 9')
+assert.ok(authContent.includes("pin: '1234'"), 'PIN default Albert harus 1234')
+
+assert.ok(authContent.includes("id: 'jasmine'"), 'Profil Jasmine harus terdaftar')
+assert.ok(authContent.includes("grade: 8"), 'Jasmine harus berada di SMP Kelas 8')
+assert.ok(authContent.includes("pin: '5678'"), 'PIN default Jasmine harus 5678')
+assert.ok(authContent.includes("avatar: '🌸'"), 'Avatar Jasmine harus 🌸')
+
+assert.ok(authContent.includes("id: 'parent'"), 'Profil Orang Tua harus terdaftar')
+assert.ok(authContent.includes("pin: '9999'"), 'PIN Orang Tua harus 9999')
+
+// Kurikulum dan soal Kelas 8 vs Kelas 9
+const k8Curriculum = data.curriculum.filter((c) => (c.grade ?? 9) === 8)
+const k9Curriculum = data.curriculum.filter((c) => (c.grade ?? 9) === 9)
+assert.ok(k8Curriculum.length >= 10, 'Kurikulum Kelas 8 harus memiliki minimal 10 item')
+assert.ok(k9Curriculum.length >= 10, 'Kurikulum Kelas 9 harus memiliki minimal 10 item')
+
+const k8Questions = data.questions.filter((q) => (q.grade ?? 9) === 8)
+const k9Questions = data.questions.filter((q) => (q.grade ?? 9) === 9)
+assert.ok(k8Questions.length >= 10, 'Bank soal Kelas 8 harus memiliki minimal 10 soal')
+assert.ok(k9Questions.length >= 10, 'Bank soal Kelas 9 harus memiliki minimal 10 soal')
+
+console.log('   ✓ Quest Jasmine & Multi-Student Isolation: PASS')
+
 console.log('\n=================================================================')
-console.log('🎉 SEMUA 9 AUDIT REGRESI & SECURITY LOLOS 100% (ALL PASS)!')
+console.log('🎉 SEMUA 10 AUDIT REGRESI & QUEST JASMINE LOLOS 100% (ALL PASS)!')
 console.log('=================================================================')

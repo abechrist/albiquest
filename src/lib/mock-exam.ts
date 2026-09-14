@@ -247,15 +247,32 @@ export function evaluateExamSubmission(
   return summary
 }
 
+function getActiveExamStudentId(): string {
+  if (typeof window === 'undefined') return 'albert'
+  try {
+    const raw = localStorage.getItem('pla.profile')
+    if (raw) {
+      const p = JSON.parse(raw)
+      if (p?.id && (p.id === 'albert' || p.id === 'jasmine')) return p.id
+    }
+  } catch {}
+  return 'albert'
+}
+
 /**
- * Menyimpan riwayat hasil ujian ke localStorage
+ * Menyimpan riwayat hasil ujian ke localStorage (per siswa)
  */
-export function saveExamResult(summary: ExamResultSummary): void {
+export function saveExamResult(summary: ExamResultSummary, studentId?: string): void {
   try {
     if (typeof window === 'undefined' || !window.localStorage) return
-    const existing = getStoredExamHistory()
+    const sid = studentId || getActiveExamStudentId()
+    const key = `pla.exam_history_${sid}.v1`
+    const existing = getStoredExamHistory(sid)
     const updated = [summary, ...existing].slice(0, 20) // simpan 20 riwayat terakhir
-    localStorage.setItem(EXAM_HISTORY_KEY, JSON.stringify(updated))
+    localStorage.setItem(key, JSON.stringify(updated))
+    if (sid === 'albert') {
+      localStorage.setItem(EXAM_HISTORY_KEY, JSON.stringify(updated))
+    }
     window.dispatchEvent(new CustomEvent('pla:exam-updated'))
   } catch (err) {
     console.error('Gagal menyimpan riwayat ujian:', err)
@@ -263,12 +280,16 @@ export function saveExamResult(summary: ExamResultSummary): void {
 }
 
 /**
- * Mengambil daftar riwayat ujian yang pernah dikerjakan
+ * Mengambil daftar riwayat ujian yang pernah dikerjakan (per siswa)
  */
-export function getStoredExamHistory(): ExamResultSummary[] {
+export function getStoredExamHistory(studentId?: string): ExamResultSummary[] {
   try {
     if (typeof window === 'undefined' || !window.localStorage) return []
-    const raw = localStorage.getItem(EXAM_HISTORY_KEY)
+    const sid = studentId || getActiveExamStudentId()
+    const key = `pla.exam_history_${sid}.v1`
+    const raw =
+      localStorage.getItem(key) ||
+      (sid === 'albert' ? localStorage.getItem(EXAM_HISTORY_KEY) : null)
     if (!raw) return []
     return JSON.parse(raw) as ExamResultSummary[]
   } catch {

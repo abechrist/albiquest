@@ -1,32 +1,41 @@
 // Dashboard Ringkasan Orang Tua (Parent Cockpit) — Phase 10
 // Sesuai prd.md §28–30, agent-prompt.md §61, dan Stitch parent_overview_mastery.
+// Mendukung Multi-Student Family Adventure (Albert Kelas 9 & Jasmine Kelas 8).
 
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useOutletContext } from 'react-router-dom'
 import { useAdaptiveLearning } from '../../lib/adaptive'
-import { useGamification } from '../../lib/gamification'
+import { getStoredGamificationState } from '../../lib/gamification'
 import { getStoredExamHistory } from '../../lib/mock-exam'
-import { useProgress } from '../../lib/progress'
+import { getStoredCompletedLessons } from '../../lib/progress'
 import { useData } from '../../lib/store'
+import type { ParentContextType } from '../ParentHome'
 
 export function ParentSummaryPage() {
+  const outletContext = useOutletContext<ParentContextType | undefined>()
+  const selectedChild = outletContext?.selectedChild || 'albert'
+  const isJasmine = selectedChild === 'jasmine'
+  const childName = isJasmine ? 'Jasmine' : 'Albert'
+  const childGrade = isJasmine ? 8 : 9
+  const childAvatar = isJasmine ? '🌸' : '👦🏻'
+
   const { data } = useData()
-  const { completed } = useProgress()
-  const albertSavedXP = (() => {
-    try {
-      const raw = localStorage.getItem('pla.profile_saved_albert')
-      if (raw) return JSON.parse(raw).xp ?? 0
-    } catch {}
-    return 0
-  })()
-  const { state } = useGamification(albertSavedXP)
-  const examHistory = getStoredExamHistory()
+  const completed = getStoredCompletedLessons(selectedChild)
+
+
+  const state = getStoredGamificationState(selectedChild)
+  const examHistory = getStoredExamHistory(selectedChild)
+
+  // Data Sibling Co-op
+  const albertState = getStoredGamificationState('albert')
+  const jasmineState = getStoredGamificationState('jasmine')
+  const familyStreak = Math.max(albertState.streakDays, jasmineState.streakDays)
 
   const [cheerSent, setCheerSent] = useState<boolean>(false)
 
   const subjects = data?.subjects ?? []
-  const topics = data?.topics ?? []
-  const lessons = data?.lessons ?? []
+  const topics = (data?.topics ?? []).filter((t) => (t.grade ?? 9) === childGrade)
+  const lessons = (data?.lessons ?? []).filter((l) => (l.grade ?? 9) === childGrade)
 
   const { subjectMasteries, weakTopics, mistakesCount } = useAdaptiveLearning(
     subjects,
@@ -51,21 +60,33 @@ export function ParentSummaryPage() {
         <span className="text-[11px] font-semibold text-slate-400">Pekan Ini</span>
       </div>
 
-      {/* 2. Kartu Fokus Siswa (Albert) */}
+      {/* 2. Kartu Fokus Siswa Terpilih (Albert / Jasmine) */}
       <div className="card relative overflow-hidden p-4 bg-white shadow-sm border border-slate-200/80">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
             <div className="relative flex-shrink-0">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-600 to-emerald-400 text-2xl shadow-sm">
-                👦🏻
+              <div
+                className={`flex h-12 w-12 items-center justify-center rounded-2xl text-2xl shadow-sm ${
+                  isJasmine
+                    ? 'bg-gradient-to-tr from-pink-500 to-rose-400'
+                    : 'bg-gradient-to-tr from-indigo-600 to-emerald-400'
+                }`}
+              >
+                {childAvatar}
               </div>
               <span className="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full bg-emerald-500 ring-2 ring-white" />
             </div>
             <div className="flex flex-col min-w-0">
               <div className="flex items-center gap-1.5 flex-wrap">
-                <h2 className="text-sm font-black text-slate-900">Albert</h2>
-                <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-[10px] font-bold text-indigo-700">
-                  SMP Kelas 9 • SMP Pangudi Luhur
+                <h2 className="text-sm font-black text-slate-900">{childName}</h2>
+                <span
+                  className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                    isJasmine
+                      ? 'bg-pink-100 text-pink-700'
+                      : 'bg-indigo-100 text-indigo-700'
+                  }`}
+                >
+                  SMP Kelas {childGrade} • SMP Pangudi Luhur
                 </span>
               </div>
               <p className="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1">
@@ -83,7 +104,7 @@ export function ParentSummaryPage() {
             type="button"
             onClick={handleSendCheer}
             className="flex-shrink-0 flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-800 shadow-sm transition-all hover:bg-amber-200 active:scale-95 cursor-pointer"
-            title="Kirim Pesan Semangat ke Albert"
+            title={`Kirim Pesan Semangat ke ${childName}`}
           >
             <span className="text-lg">🎉</span>
           </button>
@@ -92,16 +113,34 @@ export function ParentSummaryPage() {
         {cheerSent && (
           <div className="mt-3 flex items-center gap-2 rounded-xl bg-emerald-50 p-2.5 text-xs font-semibold text-emerald-800 transition-all border border-emerald-200 animate-fadeIn">
             <span>✨</span>
-            <span>Pesan semangat telah terkirim ke beranda petualangan Albert!</span>
+            <span>Pesan semangat telah terkirim ke beranda petualangan {childName}!</span>
           </div>
         )}
       </div>
 
-      {/* 3. Capaian Pekan Ini (Grid 2x2 Sesuai Stitch) */}
+      {/* 3. Sibling Co-op & Family Streak Banner */}
+      <section className="rounded-2xl border border-indigo-200 bg-gradient-to-r from-indigo-50/80 via-purple-50/60 to-pink-50/80 p-3.5 flex items-center justify-between gap-3 shadow-xs">
+        <div className="flex items-center gap-3">
+          <span className="text-2xl flex-shrink-0">🤝</span>
+          <div>
+            <div className="flex items-center gap-2">
+              <h4 className="text-xs font-black text-slate-900">Family Learning Co-op</h4>
+              <span className="rounded-full bg-amber-200/80 px-2 py-0.5 text-[10px] font-black text-amber-900">
+                🔥 Family Streak: {familyStreak} Hari
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-600 mt-0.5">
+              Albert (Kls 9: {albertState.streakDays}H) & Jasmine (Kls 8: {jasmineState.streakDays}H) saling memotivasi!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Capaian Pekan Ini (Grid 2x2) */}
       <section className="space-y-2">
         <div className="flex items-center justify-between px-1">
           <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
-            Capaian Pekan Ini
+            Capaian {childName} Pekan Ini
           </h3>
           <span className="text-[11px] font-bold text-emerald-600 flex items-center gap-0.5">
             <span>↗</span> Konsistensi Sangat Baik
@@ -170,11 +209,11 @@ export function ParentSummaryPage() {
         </div>
       </section>
 
-      {/* 4. Ringkasan Penguasaan Materi per Mata Pelajaran */}
+      {/* 5. Ringkasan Penguasaan Materi per Mata Pelajaran */}
       <section className="card p-4 bg-white border border-slate-200/80 space-y-3">
         <div className="flex items-center justify-between border-b border-slate-100 pb-2">
           <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800">
-            Penguasaan Materi (Mastery)
+            Penguasaan Materi Kelas {childGrade} (Mastery)
           </h3>
           <Link to="/parent/progress" className="text-xs font-bold text-indigo-600 hover:underline">
             Detail →
@@ -205,18 +244,18 @@ export function ParentSummaryPage() {
         </div>
       </section>
 
-      {/* 5. Rekomendasi Pendampingan Orang Tua (PRD §40) */}
+      {/* 6. Rekomendasi Pendampingan Orang Tua (PRD §40) */}
       <section className="rounded-2xl border border-indigo-200 bg-gradient-to-br from-indigo-50 via-white to-indigo-50/40 p-4 space-y-2">
         <div className="flex items-center gap-2">
           <span className="text-xl">💡</span>
           <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-900">
-            Saran Pendampingan Pekan Ini (Tanpa Tekanan)
+            Saran Pendampingan {childName} (Tanpa Tekanan)
           </h3>
         </div>
         <p className="text-xs text-slate-700 leading-relaxed">
           {weakTopics.length > 0
-            ? `Albert saat ini sedang memperkuat materi ${weakTopics[0].title}. Dukung Albert dengan memberi apresiasi atas ketekunannya dan sediakan waktu istirahat yang cukup.`
-            : 'Progres belajar Albert berjalan sangat harmonis. Berikan pujian hangat saat makan malam atas kedisiplinannya menjaga streak belajar!'}
+            ? `${childName} saat ini sedang memperkuat materi ${weakTopics[0].title}. Dukung ${childName} dengan memberi apresiasi atas ketekunannya dan sediakan waktu istirahat yang cukup.`
+            : `Progres belajar ${childName} di Kelas ${childGrade} berjalan sangat harmonis. Berikan pujian hangat saat makan malam atas kedisiplinannya menjaga streak belajar!`}
         </p>
         <div className="pt-2 border-t border-indigo-100 flex items-center justify-between text-[11px] text-indigo-800">
           <span>Prinsip: Pantau • Pahami • Dukung</span>
@@ -226,12 +265,12 @@ export function ParentSummaryPage() {
         </div>
       </section>
 
-      {/* 6. Riwayat Simulasi Ujian Terkini */}
+      {/* 7. Riwayat Simulasi Ujian Terkini */}
       {examHistory.length > 0 && (
         <section className="card p-4 bg-white border border-slate-200/80 space-y-3">
           <div className="flex items-center justify-between border-b border-slate-100 pb-2">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800">
-              Hasil Simulasi Ujian ANBK Terakhir
+              Hasil Simulasi Ujian {childName} Terakhir
             </h3>
             <span className="text-[10px] text-slate-400">Tersimpan Otomatis</span>
           </div>

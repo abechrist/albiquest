@@ -19,9 +19,10 @@ export function JourneyHome() {
   const { active, addXP } = useProfile()
   const { levelInfo, state, dailyMissions, claimMissionReward } = useGamification(active?.xp ?? 0)
 
+  const currentGrade = active?.grade ?? 9
   const subjects = data?.subjects ?? []
-  const topics = data?.topics ?? []
-  const lessons = data?.lessons ?? []
+  const topics = (data?.topics ?? []).filter((t) => (t.grade ?? 9) === currentGrade)
+  const lessons = (data?.lessons ?? []).filter((l) => (l.grade ?? 9) === currentGrade)
 
   const { recommendations, weakTopics, mistakesCount } = useAdaptiveLearning(
     subjects,
@@ -37,9 +38,9 @@ export function JourneyHome() {
     .sort((a, b) => a.sortOrder - b.sortOrder)
 
   const rows = activeSubjects.map((s) => {
-    const lessons = data.lessons.filter((l) => l.subjectId === s.id)
-    const done = lessons.filter((l) => completed.has(l.id)).length
-    return { subject: s, done, total: lessons.length }
+    const subjectLessons = lessons.filter((l) => l.subjectId === s.id)
+    const done = subjectLessons.filter((l) => completed.has(l.id)).length
+    return { subject: s, done, total: subjectLessons.length }
   })
 
   const doneAll = rows.reduce((n, r) => n + r.done, 0)
@@ -54,16 +55,26 @@ export function JourneyHome() {
           <div className="space-y-1">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100 text-[10px] font-bold text-slate-600 uppercase tracking-wider">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              <span>Kelas 9 SMP • Persiapan Ujian</span>
+              <span>
+                {currentGrade === 8
+                  ? 'Kelas 8 SMP • Fase D Pertengahan'
+                  : 'Kelas 9 SMP • Persiapan ANBK & Ujian'}
+              </span>
             </div>
             <h1 className="text-base font-black text-slate-900 leading-tight">
-              Selamat Belajar, {active?.name ?? 'Albert'}! 👋
+              Selamat Belajar, {active?.name ?? 'Petualang'}! 👋
             </h1>
             <p className="text-xs text-slate-500">
-              Selesaikan misi harian untuk mengumpulkan XP dan lencana petualang.
+              {active?.id === 'jasmine'
+                ? 'Kumpulkan kristal pengetahuan Kelas 8 dan raih lencana The Phoenix!'
+                : 'Selesaikan misi harian untuk mengumpulkan XP dan lencana naga petualang.'}
             </p>
           </div>
-          <div className="w-11 h-11 rounded-xl bg-indigo-50 flex items-center justify-center text-2xl flex-shrink-0">
+          <div
+            className={`w-11 h-11 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 shadow-xs ${
+              active?.id === 'jasmine' ? 'bg-pink-100' : 'bg-indigo-50'
+            }`}
+          >
             {active?.avatar ?? '🐉'}
           </div>
         </div>

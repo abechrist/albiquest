@@ -6,15 +6,18 @@ import { Link } from 'react-router-dom'
 import { useAdaptiveLearning } from '../lib/adaptive'
 import { useProgress } from '../lib/progress'
 import { useData } from '../lib/store'
+import { useProfile } from '../lib/auth'
 
 export function MasteryPage() {
   const { data } = useData()
   const { completed } = useProgress()
+  const { active } = useProfile()
   const [selectedSubjectId, setSelectedSubjectId] = useState<string>('all')
 
+  const currentGrade = active?.grade ?? 9
   const subjects = data?.subjects ?? []
-  const topics = data?.topics ?? []
-  const lessons = data?.lessons ?? []
+  const topics = (data?.topics ?? []).filter((t) => (t.grade ?? 9) === currentGrade)
+  const lessons = (data?.lessons ?? []).filter((l) => (l.grade ?? 9) === currentGrade)
 
   const {
     subjectMasteries,

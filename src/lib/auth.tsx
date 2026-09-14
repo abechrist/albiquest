@@ -9,12 +9,49 @@ export interface Profile {
   avatar: string
   level: number
   xp: number
+  grade?: number
 }
 
-// Profil default (Albert mulai dari Level 1 dan 0 XP)
-const PROFILES: (Profile & { pin: string })[] = [
-  { id: 'albert', name: 'Albert', role: 'student', pin: '1234', avatar: '🐉', level: 1, xp: 0 },
-  { id: 'parent', name: 'Orang Tua', role: 'parent', pin: '9999', avatar: '🛡️', level: 0, xp: 0 },
+// Profil hero & peran resmi AlbiQuest
+export const PROFILES: (Profile & { pin: string; title: string; subtitle: string; colorTheme: string })[] = [
+  {
+    id: 'albert',
+    name: 'Albert',
+    role: 'student',
+    grade: 9,
+    pin: '1234',
+    avatar: '🐉',
+    title: 'The Dragon Scholar',
+    subtitle: 'SMP Kelas 9 • Persiapan Kelulusan & ANBK',
+    colorTheme: 'from-blue-600 to-indigo-700',
+    level: 1,
+    xp: 0,
+  },
+  {
+    id: 'jasmine',
+    name: 'Jasmine',
+    role: 'student',
+    grade: 8,
+    pin: '5678',
+    avatar: '🌸',
+    title: 'The Phoenix Seeker',
+    subtitle: 'SMP Kelas 8 • Fase D Pertengahan',
+    colorTheme: 'from-pink-500 via-rose-500 to-purple-600',
+    level: 1,
+    xp: 0,
+  },
+  {
+    id: 'parent',
+    name: 'Orang Tua',
+    role: 'parent',
+    pin: '9999',
+    avatar: '🛡️',
+    title: 'Parent Guardian',
+    subtitle: 'Area Monitoring & Pendampingan',
+    colorTheme: 'from-slate-700 to-indigo-900',
+    level: 0,
+    xp: 0,
+  },
 ]
 
 const STORAGE_KEY = 'pla.profile'
@@ -73,12 +110,13 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
         customPin = localStorage.getItem(`pla.pin.${id}`)
       } catch {}
 
-      // Menerima 9999 atau 0000 untuk Orang Tua, 1234 untuk Siswa, dan PIN kustom dari localStorage
+      // Menerima 9999 atau 0000 untuk Orang Tua, 1234 untuk Albert, 5678 untuk Jasmine, dan PIN kustom dari localStorage
       const isValid =
         (customPin && pin === customPin) ||
         pin === p.pin ||
         (id === 'parent' && (pin === '9999' || pin === '0000')) ||
-        (id === 'albert' && pin === '1234')
+        (id === 'albert' && pin === '1234') ||
+        (id === 'jasmine' && pin === '5678')
 
       if (!isValid) return false
 
@@ -92,6 +130,7 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
         name: p.name,
         role: p.role,
         avatar: p.avatar,
+        grade: p.grade,
         level: savedData?.level ?? p.level,
         xp: savedData?.xp ?? p.xp,
       })

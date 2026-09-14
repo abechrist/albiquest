@@ -84,6 +84,7 @@ export async function fetchDataSetFromNeon(connectionUrl: string): Promise<DataS
       title: c.title,
       description: c.description,
       sortOrder: Number(c.sort_order),
+      grade: c.grade ? Number(c.grade) : 9,
     }))
 
     const competencies: Competency[] = rawCompetencies.map((comp: any) => ({
@@ -92,6 +93,7 @@ export async function fetchDataSetFromNeon(connectionUrl: string): Promise<DataS
       code: comp.code,
       description: comp.description,
       sortOrder: Number(comp.sort_order),
+      grade: comp.grade ? Number(comp.grade) : 9,
     }))
 
     const topics: Topic[] = rawTopics.map((t: any) => ({
@@ -101,6 +103,7 @@ export async function fetchDataSetFromNeon(connectionUrl: string): Promise<DataS
       title: t.title,
       description: t.description,
       sortOrder: Number(t.sort_order),
+      grade: t.grade ? Number(t.grade) : 9,
     }))
 
     const lessons: Lesson[] = rawLessons.map((l: any) => ({
@@ -112,6 +115,7 @@ export async function fetchDataSetFromNeon(connectionUrl: string): Promise<DataS
       durationMin: Number(l.duration_min),
       type: l.type,
       sortOrder: Number(l.sort_order),
+      grade: l.grade ? Number(l.grade) : 9,
     }))
 
     const questions: Question[] = rawQuestions.map((q: any) => ({
@@ -127,6 +131,7 @@ export async function fetchDataSetFromNeon(connectionUrl: string): Promise<DataS
       xp: q.xp ? Number(q.xp) : undefined,
       source: q.source,
       difficulty: Number(q.difficulty) as 1 | 2 | 3,
+      grade: q.grade ? Number(q.grade) : 9,
     }))
 
     const result: DataSet = {

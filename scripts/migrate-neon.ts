@@ -41,9 +41,11 @@ async function migrate() {
         subject_id VARCHAR(64) NOT NULL REFERENCES subjects(id) ON DELETE CASCADE,
         title VARCHAR(255) NOT NULL,
         description TEXT NOT NULL,
-        sort_order INT NOT NULL
+        sort_order INT NOT NULL,
+        grade INT DEFAULT 9
       );
     `
+    await sql`ALTER TABLE curriculum ADD COLUMN IF NOT EXISTS grade INT DEFAULT 9;`
 
     // 3. topics
     await sql`
@@ -53,9 +55,11 @@ async function migrate() {
         subject_id VARCHAR(64) NOT NULL REFERENCES subjects(id) ON DELETE CASCADE,
         title VARCHAR(255) NOT NULL,
         description TEXT NOT NULL,
-        sort_order INT NOT NULL
+        sort_order INT NOT NULL,
+        grade INT DEFAULT 9
       );
     `
+    await sql`ALTER TABLE topics ADD COLUMN IF NOT EXISTS grade INT DEFAULT 9;`
 
     // 4. competencies
     await sql`
@@ -64,9 +68,11 @@ async function migrate() {
         topic_id VARCHAR(64) NOT NULL,
         code VARCHAR(64) NOT NULL,
         description TEXT NOT NULL,
-        sort_order INT NOT NULL
+        sort_order INT NOT NULL,
+        grade INT DEFAULT 9
       );
     `
+    await sql`ALTER TABLE competencies ADD COLUMN IF NOT EXISTS grade INT DEFAULT 9;`
 
     // 5. lessons
     await sql`
@@ -78,9 +84,11 @@ async function migrate() {
         description TEXT NOT NULL,
         duration_min INT NOT NULL,
         type VARCHAR(32) NOT NULL,
-        sort_order INT NOT NULL
+        sort_order INT NOT NULL,
+        grade INT DEFAULT 9
       );
     `
+    await sql`ALTER TABLE lessons ADD COLUMN IF NOT EXISTS grade INT DEFAULT 9;`
 
     // 6. questions
     await sql`
@@ -96,11 +104,13 @@ async function migrate() {
         hints JSONB,
         xp INT,
         source VARCHAR(255) NOT NULL,
-        difficulty INT NOT NULL
+        difficulty INT NOT NULL,
+        grade INT DEFAULT 9
       );
     `
+    await sql`ALTER TABLE questions ADD COLUMN IF NOT EXISTS grade INT DEFAULT 9;`
 
-    console.log('✓ Skema tabel berhasil dibuat / diverifikasi.')
+    console.log('✓ Skema tabel berhasil dibuat / diverifikasi dengan kolom grade.')
 
     console.log('2. Mengonversi seed data...')
     const data = parseSheetRows(seedRows)
@@ -128,13 +138,14 @@ async function migrate() {
     // B. Sync Curriculum
     for (const c of data.curriculum) {
       await sql`
-        INSERT INTO curriculum (id, subject_id, title, description, sort_order)
-        VALUES (${c.id}, ${c.subjectId}, ${c.title}, ${c.description}, ${c.sortOrder})
+        INSERT INTO curriculum (id, subject_id, title, description, sort_order, grade)
+        VALUES (${c.id}, ${c.subjectId}, ${c.title}, ${c.description}, ${c.sortOrder}, ${c.grade ?? 9})
         ON CONFLICT (id) DO UPDATE SET
           subject_id = EXCLUDED.subject_id,
           title = EXCLUDED.title,
           description = EXCLUDED.description,
-          sort_order = EXCLUDED.sort_order;
+          sort_order = EXCLUDED.sort_order,
+          grade = EXCLUDED.grade;
       `
     }
     console.log(`   ✓ ${data.curriculum.length} Kurikulum tersinkronisasi.`)
@@ -142,14 +153,15 @@ async function migrate() {
     // C. Sync Topics
     for (const t of data.topics) {
       await sql`
-        INSERT INTO topics (id, curriculum_id, subject_id, title, description, sort_order)
-        VALUES (${t.id}, ${t.curriculumId}, ${t.subjectId}, ${t.title}, ${t.description}, ${t.sortOrder})
+        INSERT INTO topics (id, curriculum_id, subject_id, title, description, sort_order, grade)
+        VALUES (${t.id}, ${t.curriculumId}, ${t.subjectId}, ${t.title}, ${t.description}, ${t.sortOrder}, ${t.grade ?? 9})
         ON CONFLICT (id) DO UPDATE SET
           curriculum_id = EXCLUDED.curriculum_id,
           subject_id = EXCLUDED.subject_id,
           title = EXCLUDED.title,
           description = EXCLUDED.description,
-          sort_order = EXCLUDED.sort_order;
+          sort_order = EXCLUDED.sort_order,
+          grade = EXCLUDED.grade;
       `
     }
     console.log(`   ✓ ${data.topics.length} Topik tersinkronisasi.`)
@@ -157,13 +169,14 @@ async function migrate() {
     // D. Sync Competencies
     for (const comp of data.competencies) {
       await sql`
-        INSERT INTO competencies (id, topic_id, code, description, sort_order)
-        VALUES (${comp.id}, ${comp.topicId}, ${comp.code}, ${comp.description}, ${comp.sortOrder})
+        INSERT INTO competencies (id, topic_id, code, description, sort_order, grade)
+        VALUES (${comp.id}, ${comp.topicId}, ${comp.code}, ${comp.description}, ${comp.sortOrder}, ${comp.grade ?? 9})
         ON CONFLICT (id) DO UPDATE SET
           topic_id = EXCLUDED.topic_id,
           code = EXCLUDED.code,
           description = EXCLUDED.description,
-          sort_order = EXCLUDED.sort_order;
+          sort_order = EXCLUDED.sort_order,
+          grade = EXCLUDED.grade;
       `
     }
     console.log(`   ✓ ${data.competencies.length} Kompetensi tersinkronisasi.`)
@@ -171,8 +184,8 @@ async function migrate() {
     // E. Sync Lessons
     for (const l of data.lessons) {
       await sql`
-        INSERT INTO lessons (id, topic_id, subject_id, title, description, duration_min, type, sort_order)
-        VALUES (${l.id}, ${l.topicId}, ${l.subjectId}, ${l.title}, ${l.description}, ${l.durationMin}, ${l.type}, ${l.sortOrder})
+        INSERT INTO lessons (id, topic_id, subject_id, title, description, duration_min, type, sort_order, grade)
+        VALUES (${l.id}, ${l.topicId}, ${l.subjectId}, ${l.title}, ${l.description}, ${l.durationMin}, ${l.type}, ${l.sortOrder}, ${l.grade ?? 9})
         ON CONFLICT (id) DO UPDATE SET
           topic_id = EXCLUDED.topic_id,
           subject_id = EXCLUDED.subject_id,
@@ -180,7 +193,8 @@ async function migrate() {
           description = EXCLUDED.description,
           duration_min = EXCLUDED.duration_min,
           type = EXCLUDED.type,
-          sort_order = EXCLUDED.sort_order;
+          sort_order = EXCLUDED.sort_order,
+          grade = EXCLUDED.grade;
       `
     }
     console.log(`   ✓ ${data.lessons.length} Modul Pelajaran tersinkronisasi.`)
@@ -188,7 +202,7 @@ async function migrate() {
     // F. Sync Questions
     for (const q of data.questions) {
       await sql`
-        INSERT INTO questions (id, lesson_id, subject_id, type, prompt, options, answer, explanation, hints, xp, source, difficulty)
+        INSERT INTO questions (id, lesson_id, subject_id, type, prompt, options, answer, explanation, hints, xp, source, difficulty, grade)
         VALUES (
           ${q.id},
           ${q.lessonId},
@@ -201,7 +215,8 @@ async function migrate() {
           ${q.hints ? JSON.stringify(q.hints) : null},
           ${q.xp ?? null},
           ${q.source},
-          ${q.difficulty}
+          ${q.difficulty},
+          ${q.grade ?? 9}
         )
         ON CONFLICT (id) DO UPDATE SET
           lesson_id = EXCLUDED.lesson_id,
@@ -214,7 +229,8 @@ async function migrate() {
           hints = EXCLUDED.hints,
           xp = EXCLUDED.xp,
           source = EXCLUDED.source,
-          difficulty = EXCLUDED.difficulty;
+          difficulty = EXCLUDED.difficulty,
+          grade = EXCLUDED.grade;
       `
     }
     console.log(`   ✓ ${data.questions.length} Bank Soal tersinkronisasi.`)

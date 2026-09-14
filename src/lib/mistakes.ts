@@ -37,11 +37,27 @@ function isBrowser(): boolean {
   return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined'
 }
 
-/** Ambil seluruh data kesalahan dari storage */
-export function getStoredMistakes(): MistakeRecord[] {
-  if (!isBrowser()) return [...memoryStore]
+export function getActiveMistakesStudentId(): string {
+  if (typeof window === 'undefined') return 'albert'
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY)
+    const raw = localStorage.getItem('pla.profile')
+    if (raw) {
+      const p = JSON.parse(raw)
+      if (p?.id && (p.id === 'albert' || p.id === 'jasmine')) return p.id
+    }
+  } catch {}
+  return 'albert'
+}
+
+/** Ambil seluruh data kesalahan dari storage (per siswa) */
+export function getStoredMistakes(studentId?: string): MistakeRecord[] {
+  if (!isBrowser()) return [...memoryStore]
+  const sid = studentId || getActiveMistakesStudentId()
+  const key = `pla.mistakes_${sid}.v1`
+  try {
+    const raw =
+      window.localStorage.getItem(key) ||
+      (sid === 'albert' ? window.localStorage.getItem(STORAGE_KEY) : null)
     if (!raw) return []
     const parsed = JSON.parse(raw)
     return Array.isArray(parsed) ? parsed : []
@@ -50,14 +66,19 @@ export function getStoredMistakes(): MistakeRecord[] {
   }
 }
 
-/** Simpan seluruh data kesalahan ke storage */
-export function saveMistakes(mistakes: MistakeRecord[]): void {
+/** Simpan seluruh data kesalahan ke storage (per siswa) */
+export function saveMistakes(mistakes: MistakeRecord[], studentId?: string): void {
   if (!isBrowser()) {
     memoryStore = [...mistakes]
     return
   }
+  const sid = studentId || getActiveMistakesStudentId()
+  const key = `pla.mistakes_${sid}.v1`
   try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(mistakes))
+    window.localStorage.setItem(key, JSON.stringify(mistakes))
+    if (sid === 'albert') {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(mistakes))
+    }
     window.dispatchEvent(new Event(MISTAKES_EVENT))
   } catch (err) {
     console.error('Gagal menyimpan data mistakes:', err)
@@ -71,14 +92,17 @@ export function recordQuestionResult({
   isCorrect,
   hintUsed = false,
   attempts = 1,
+  studentId,
 }: {
   question: Question
   studentAnswer: unknown
   isCorrect: boolean
   hintUsed?: boolean
   attempts?: number
+  studentId?: string
 }): { record?: MistakeRecord; status: 'recorded_mistake' | 'marked_mastered' | 'unmodified' } {
-  const current = getStoredMistakes()
+  const sid = studentId || getActiveMistakesStudentId()
+  const current = getStoredMistakes(sid)
   const existingIndex = current.findIndex((m) => m.questionId === question.id)
 
   if (!isCorrect) {
@@ -94,7 +118,7 @@ export function recordQuestionResult({
         timestamp: Date.now(),
       }
       current[existingIndex] = updated
-      saveMistakes(current)
+      saveMistakes(current, sid)
       return { record: updated, status: 'recorded_mistake' }
     } else {
       const created: MistakeRecord = {
@@ -111,7 +135,7 @@ export function recordQuestionResult({
         reviewCount: 0,
       }
       current.unshift(created)
-      saveMistakes(current)
+      saveMistakes(current, sid)
       return { record: created, status: 'recorded_mistake' }
     }
   } else {
@@ -125,7 +149,7 @@ export function recordQuestionResult({
         lastReviewedAt: Date.now(),
       }
       current[existingIndex] = updated
-      saveMistakes(current)
+      saveMistakes(current, sid)
       return { record: updated, status: 'marked_mastered' }
     }
   }
@@ -134,15 +158,16 @@ export function recordQuestionResult({
 }
 
 /** Ringkasan statistik Bank Kesalahan */
-export function getMistakesStats(mistakes = getStoredMistakes()): {
+export function getMistakesStats(mistakes?: MistakeRecord[]): {
   needsReview: number
   mastered: number
   total: number
   retryAccuracy: number
 } {
-  const needsReview = mistakes.filter((m) => m.status === 'needs_review').length
-  const mastered = mistakes.filter((m) => m.status === 'mastered').length
-  const total = mistakes.length
+  const list = mistakes ?? getStoredMistakes()
+  const needsReview = list.filter((m) => m.status === 'needs_review').length
+  const mastered = list.filter((m) => m.status === 'mastered').length
+  const total = list.length
 
   // Akurasi retry = persentase kesalahan yang berhasil dikuasai
   const retryAccuracy = total > 0 ? Math.round((mastered / total) * 100) : 100
@@ -155,25 +180,26 @@ export function getMistakesStats(mistakes = getStoredMistakes()): {
   }
 }
 
-/** Seed beberapa contoh kesalahan awal (jika storage masih kosong) agar Albert dapat langsung mencoba Bank Salah */
-export function seedInitialMistakesIfEmpty(questions: Question[]): void {
-  const current = getStoredMistakes()
+/** Seed beberapa contoh kesalahan awal (jika storage masih kosong) agar siswa dapat langsung mencoba Bank Salah */
+export function seedInitialMistakesIfEmpty(questions: Question[], studentId?: string): void {
+  const sid = studentId || getActiveMistakesStudentId()
+  const current = getStoredMistakes(sid)
   if (current.length > 0 || questions.length === 0) return
 
   // Contoh: ambil 2 soal untuk dijadikan riwayat latihan awal
-  const sample1 = questions.find((q) => q.id === 'q-pk-1')
-  const sample2 = questions.find((q) => q.id === 'q-st-1')
+  const sample1 = questions.find((q) => q.id === 'q-pk-1' || q.id === 'q-k8-pola-1')
+  const sample2 = questions.find((q) => q.id === 'q-st-1' || q.id === 'q-k8-newton-1')
 
   const initial: MistakeRecord[] = []
 
   if (sample1) {
     initial.push({
-      id: 'mst-init-1',
+      id: `mst-init-1-${sid}`,
       questionId: sample1.id,
       subjectId: sample1.subjectId,
       lessonId: sample1.lessonId,
       timestamp: Date.now() - 2 * 24 * 60 * 60 * 1000, // 2 hari lalu
-      studentAnswer: ['1'], // salah pilih (-2 dan -3)
+      studentAnswer: ['1'],
       correctAnswer: sample1.answer,
       attempts: 2,
       hintUsed: true,
@@ -184,12 +210,12 @@ export function seedInitialMistakesIfEmpty(questions: Question[]): void {
 
   if (sample2) {
     initial.push({
-      id: 'mst-init-2',
+      id: `mst-init-2-${sid}`,
       questionId: sample2.id,
       subjectId: sample2.subjectId,
       lessonId: sample2.lessonId,
       timestamp: Date.now() - 1 * 24 * 60 * 60 * 1000, // kemarin
-      studentAnswer: '5', // salah median
+      studentAnswer: '5',
       correctAnswer: sample2.answer,
       attempts: 1,
       hintUsed: false,
@@ -199,17 +225,24 @@ export function seedInitialMistakesIfEmpty(questions: Question[]): void {
   }
 
   if (initial.length > 0) {
-    saveMistakes(initial)
+    saveMistakes(initial, sid)
   }
 }
 
 /** Hook React untuk berlangganan state Bank Kesalahan */
-export function useMistakes() {
-  const [mistakes, setMistakes] = useState<MistakeRecord[]>(getStoredMistakes)
+export function useMistakes(studentId?: string) {
+  const resolvedStudentId = studentId || getActiveMistakesStudentId()
+  const [mistakes, setMistakes] = useState<MistakeRecord[]>(() =>
+    getStoredMistakes(resolvedStudentId),
+  )
+
+  useEffect(() => {
+    setMistakes(getStoredMistakes(resolvedStudentId))
+  }, [resolvedStudentId])
 
   useEffect(() => {
     const handleUpdate = () => {
-      setMistakes(getStoredMistakes())
+      setMistakes(getStoredMistakes(resolvedStudentId))
     }
 
     if (typeof window !== 'undefined') {
@@ -223,15 +256,15 @@ export function useMistakes() {
         window.removeEventListener('storage', handleUpdate)
       }
     }
-  }, [])
+  }, [resolvedStudentId])
 
   const recordResult = useCallback(
     (params: Parameters<typeof recordQuestionResult>[0]) => {
-      const res = recordQuestionResult(params)
-      setMistakes(getStoredMistakes())
+      const res = recordQuestionResult({ ...params, studentId: resolvedStudentId })
+      setMistakes(getStoredMistakes(resolvedStudentId))
       return res
     },
-    [],
+    [resolvedStudentId],
   )
 
   const stats = getMistakesStats(mistakes)

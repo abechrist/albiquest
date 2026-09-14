@@ -1,11 +1,19 @@
 // Halaman Analisis Kesalahan Belajar untuk Orang Tua — Phase 10
 // Sesuai prd.md §35 & §41 (Filosofi: MONITOR -> UNDERSTAND -> SUPPORT, bukan PUNISH).
+// Mendukung Multi-Student (Albert Kelas 9 & Jasmine Kelas 8).
 
+import { useOutletContext } from 'react-router-dom'
 import { getMistakesStats, getStoredMistakes } from '../../lib/mistakes'
+import type { ParentContextType } from '../ParentHome'
 
 export function ParentMistakesPage() {
-  const mistakes = getStoredMistakes()
-  const stats = getMistakesStats()
+  const outletContext = useOutletContext<ParentContextType | undefined>()
+  const selectedChild = outletContext?.selectedChild || 'albert'
+  const isJasmine = selectedChild === 'jasmine'
+  const childName = isJasmine ? 'Jasmine' : 'Albert'
+
+  const mistakes = getStoredMistakes(selectedChild)
+  const stats = getMistakesStats(mistakes)
 
   const pendingMistakes = mistakes.filter((m) => m.status === 'needs_review')
   const masteredMistakes = mistakes.filter((m) => m.status === 'mastered')
@@ -13,9 +21,11 @@ export function ParentMistakesPage() {
   return (
     <div className="space-y-5 pb-6">
       <div>
-        <h2 className="text-base font-black text-slate-900">Analisis Catatan Belajar & Kesalahan</h2>
+        <h2 className="text-base font-black text-slate-900">
+          Analisis Catatan Belajar & Kesalahan ({childName})
+        </h2>
         <p className="text-xs text-slate-500">
-          Memahami tantangan belajar Albert untuk memberikan dukungan yang tepat tanpa memicu rasa cemas
+          Memahami tantangan belajar {childName} untuk memberikan dukungan yang tepat tanpa memicu rasa cemas
         </p>
       </div>
 
@@ -41,7 +51,7 @@ export function ParentMistakesPage() {
           <span className="text-xl">☕</span>
           <div>
             <h3 className="text-xs font-bold uppercase tracking-wider text-amber-900">
-              Tips Obrolan Santai dengan Albert
+              Tips Obrolan Santai dengan {childName}
             </h3>
             <p className="text-[11px] text-amber-800">
               Gunakan pertanyaan reflektif saat santai keluarga, bukan interogasi akademik
@@ -53,7 +63,7 @@ export function ParentMistakesPage() {
           <div className="rounded-xl bg-white/90 p-3 border border-amber-100">
             <span className="font-bold text-amber-900 block">💬 Contoh Pertanyaan 1:</span>
             <p className="italic text-slate-600 mt-0.5">
-              &quot;Ayah/Ibu lihat di aplikasi kamu tadi seru banget ngerjain soal Aljabar. Bagian mana yang paling menantang buatmu?&quot;
+              &quot;Ayah/Ibu lihat di aplikasi kamu tadi seru banget ngerjain soal latihan. Bagian mana yang paling menantang buatmu?&quot;
             </p>
           </div>
           <div className="rounded-xl bg-white/90 p-3 border border-amber-100">
@@ -68,7 +78,7 @@ export function ParentMistakesPage() {
       {/* Pola Kesalahan yang Sedang Dihadapi */}
       <section className="space-y-3">
         <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
-          Konsep yang Sedang Diulang Albert ({pendingMistakes.length} Soal)
+          Konsep yang Sedang Diulang {childName} ({pendingMistakes.length} Soal)
         </h3>
 
         {pendingMistakes.length === 0 ? (
@@ -76,7 +86,7 @@ export function ParentMistakesPage() {
             <span className="text-3xl">✨</span>
             <h4 className="text-sm font-bold text-slate-800">Semua Kesalahan Sudah Dikuasai!</h4>
             <p className="text-xs text-slate-500 max-w-sm mx-auto">
-              Albert telah berhasil menuntaskan seluruh latihan di Bank Kesalahan. Pemahaman konsepnya sangat solid saat ini.
+              {childName} telah berhasil menuntaskan seluruh latihan di Bank Kesalahan. Pemahaman konsepnya sangat solid saat ini.
             </p>
           </div>
         ) : (
@@ -99,7 +109,7 @@ export function ParentMistakesPage() {
                 </p>
                 <div className="rounded-lg bg-slate-50 p-2 text-[11px] text-slate-600 border border-slate-100">
                   <span className="font-bold text-slate-700">Catatan Pendamping: </span>
-                  Albert perlu waktu latihan tenang untuk memahami konsep ini secara mandiri tanpa terburu-buru.
+                  {childName} perlu waktu latihan tenang untuk memahami konsep ini secara mandiri tanpa terburu-buru.
                 </div>
               </div>
             ))}

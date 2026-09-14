@@ -106,15 +106,31 @@ function getDefaultState(): GamificationState {
 // In-memory fallback untuk environment non-browser
 let memoryState: GamificationState = getDefaultState()
 
-export function getStoredGamificationState(): GamificationState {
+export function getActiveStudentId(): string {
+  if (typeof window === 'undefined') return 'albert'
+  try {
+    const raw = localStorage.getItem('pla.profile')
+    if (raw) {
+      const p = JSON.parse(raw)
+      if (p?.id && (p.id === 'albert' || p.id === 'jasmine')) return p.id
+    }
+  } catch {}
+  return 'albert'
+}
+
+export function getStoredGamificationState(studentId?: string): GamificationState {
   if (typeof window === 'undefined' || typeof window.localStorage === 'undefined') {
     return memoryState
   }
+  const sid = studentId || getActiveStudentId()
+  const key = `pla.gamification_${sid}.v1`
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY)
+    const raw =
+      window.localStorage.getItem(key) ||
+      (sid === 'albert' ? window.localStorage.getItem(STORAGE_KEY) : null)
     if (!raw) {
       const initial = getDefaultState()
-      saveGamificationState(initial)
+      saveGamificationState(initial, sid)
       return initial
     }
     const parsed = JSON.parse(raw)
@@ -124,13 +140,18 @@ export function getStoredGamificationState(): GamificationState {
   }
 }
 
-export function saveGamificationState(state: GamificationState): void {
+export function saveGamificationState(state: GamificationState, studentId?: string): void {
   if (typeof window === 'undefined' || typeof window.localStorage === 'undefined') {
     memoryState = state
     return
   }
+  const sid = studentId || getActiveStudentId()
+  const key = `pla.gamification_${sid}.v1`
   try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+    window.localStorage.setItem(key, JSON.stringify(state))
+    if (sid === 'albert') {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+    }
     window.dispatchEvent(new Event(GAMIFICATION_EVENT))
   } catch (err) {
     console.error('Gagal menyimpan state gamifikasi:', err)
@@ -203,8 +224,10 @@ export function recordGamificationEvent(
     | { type: 'question_answered'; isCorrect: boolean }
     | { type: 'mistake_mastered' },
   currentXP = 0,
+  studentId?: string,
 ): { state: GamificationState; newlyUnlockedBadges: Badge[] } {
-  let state = touchDailyStreak(getStoredGamificationState())
+  const sid = studentId || getActiveStudentId()
+  let state = touchDailyStreak(getStoredGamificationState(sid))
 
   let qCount = state.questionsAnsweredCount
   let lCount = state.lessonsCompletedCount
@@ -240,7 +263,7 @@ export function recordGamificationEvent(
     unlockedBadges: unlocked,
   }
 
-  saveGamificationState(updated)
+  saveGamificationState(updated, sid)
   return { state: updated, newlyUnlockedBadges }
 }
 
@@ -283,12 +306,19 @@ export function getDailyMissions(state = getStoredGamificationState()): Mission[
 }
 
 /** Hook React untuk Gamifikasi */
-export function useGamification(currentXP = 1250) {
-  const [state, setState] = useState<GamificationState>(getStoredGamificationState)
+export function useGamification(currentXP = 1250, studentId?: string) {
+  const resolvedStudentId = studentId || getActiveStudentId()
+  const [state, setState] = useState<GamificationState>(() =>
+    getStoredGamificationState(resolvedStudentId),
+  )
+
+  useEffect(() => {
+    setState(getStoredGamificationState(resolvedStudentId))
+  }, [resolvedStudentId])
 
   useEffect(() => {
     const handleUpdate = () => {
-      setState(getStoredGamificationState())
+      setState(getStoredGamificationState(resolvedStudentId))
     }
     if (typeof window !== 'undefined') {
       window.addEventListener(GAMIFICATION_EVENT, handleUpdate)
@@ -300,7 +330,7 @@ export function useGamification(currentXP = 1250) {
         window.removeEventListener('storage', handleUpdate)
       }
     }
-  }, [])
+  }, [resolvedStudentId])
 
   const levelInfo = useMemo(() => calculateLevel(currentXP), [currentXP])
   const dailyMissions = useMemo(() => getDailyMissions(state), [state])
@@ -316,7 +346,7 @@ export function useGamification(currentXP = 1250) {
   // Klaim hadiah misi harian (anti-exploit: hanya bisa klaim jika selesai & belum pernah diklaim)
   const claimMissionReward = useCallback(
     (missionId: string, rewardXP: number, onRewardGranted: (xp: number) => void): boolean => {
-      const currentState = getStoredGamificationState()
+      const currentState = getStoredGamificationState(resolvedStudentId)
       const missions = getDailyMissions(currentState)
       const targetMission = missions.find((m) => m.id === missionId)
 
@@ -332,21 +362,21 @@ export function useGamification(currentXP = 1250) {
         },
       }
 
-      saveGamificationState(updated)
+      saveGamificationState(updated, resolvedStudentId)
       setState(updated)
       onRewardGranted(rewardXP)
       return true
     },
-    [],
+    [resolvedStudentId],
   )
 
   const recordEvent = useCallback(
     (event: Parameters<typeof recordGamificationEvent>[0]) => {
-      const res = recordGamificationEvent(event, currentXP)
+      const res = recordGamificationEvent(event, currentXP, resolvedStudentId)
       setState(res.state)
       return res
     },
-    [currentXP],
+    [currentXP, resolvedStudentId],
   )
 
   return {

@@ -9,10 +9,13 @@ import { useData } from '../lib/store'
 const TYPE_ICON: Record<Lesson['type'], string> = { lesson: '📖', quiz: '⚔️', review: '🧠' }
 const TYPE_LABEL: Record<Lesson['type'], string> = { lesson: 'Materi', quiz: 'Kuis', review: 'Review' }
 
+import { useProfile } from '../lib/auth'
+
 export function SubjectDetailPage() {
   const { subjectId = '' } = useParams()
   const { data, loading } = useData()
   const { completed } = useProgress()
+  const { active } = useProfile()
   const navigate = useNavigate()
 
   if (loading) return <p className="py-10 text-center text-sm text-slate-400">Memuat…</p>
@@ -31,7 +34,10 @@ export function SubjectDetailPage() {
     )
   }
 
-  const lessons = data.lessons.filter((l) => l.subjectId === subject.id)
+  const currentGrade = active?.grade ?? 9
+  const lessons = data.lessons.filter(
+    (l) => l.subjectId === subject.id && (l.grade ?? 9) === currentGrade,
+  )
   const doneCount = lessons.filter((l) => completed.has(l.id)).length
   const total = lessons.length
   const pct = total ? Math.round((doneCount / total) * 100) : 0
@@ -51,7 +57,12 @@ export function SubjectDetailPage() {
           {subject.emoji}
         </div>
         <div className="min-w-0">
-          <h2 className="h-title">{subject.name}</h2>
+          <div className="flex items-center gap-2">
+            <h2 className="h-title">{subject.name}</h2>
+            <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-black text-slate-600">
+              Kelas {currentGrade}
+            </span>
+          </div>
           <p className="text-xs text-slate-500">{subject.description}</p>
         </div>
       </div>
@@ -69,11 +80,11 @@ export function SubjectDetailPage() {
 
       {/* Kurikulum → topik → pelajaran */}
       {data.curriculum
-        .filter((c) => c.subjectId === subject.id)
+        .filter((c) => c.subjectId === subject.id && (c.grade ?? 9) === currentGrade)
         .sort((a, b) => a.sortOrder - b.sortOrder)
         .map((cur) => {
           const topics = data.topics
-            .filter((t) => t.curriculumId === cur.id)
+            .filter((t) => t.curriculumId === cur.id && (t.grade ?? 9) === currentGrade)
             .sort((a, b) => a.sortOrder - b.sortOrder)
           return (
             <section key={cur.id} className="space-y-2.5">

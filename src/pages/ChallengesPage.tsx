@@ -24,8 +24,11 @@ import { useData } from '../lib/store'
 
 export function ChallengesPage() {
   const { data } = useData()
-  const { addXP } = useProfile()
-  const questions = data?.questions ?? []
+  const { active, addXP } = useProfile()
+  const currentGrade = active?.grade ?? 9
+  const questions = (data?.questions ?? []).filter(
+    (q) => (q.grade ?? 9) === currentGrade,
+  )
 
   // Active game mode state
   const [activeMode, setActiveMode] = useState<ChallengeModeType | null>(null)

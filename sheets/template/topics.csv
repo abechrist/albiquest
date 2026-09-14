@@ -1,7 +1,22 @@
-id,curriculum_id,subject_id,title,description,sort_order
-top-persamaan-kuadrat,cur-mtk-1,matematika,Persamaan Kuadrat,"Bentuk umum, akar, dan aplikasi",1
-top-statistika,cur-mtk-2,matematika,Statistika & Peluang,"Penyajian data, ukuran pemusatan, peluang",2
-top-teks-eksposisi,cur-bindo-1,bahasa-indonesia,Teks Eksposisi,"Struktur, unsur kebahasaan, dan isi",1
-top-listrik-dinamis,cur-ipa-1,ipa,Listrik Dinamis,"Arus, tegangan, hambatan, rangkaian",1
-top-read-1,cur-bing-1,bahasa-inggris,Reading Comprehension,"Ide utama, detail, dan inferensi teks",1
-top-pak-1,cur-pak-1,pendidikan-agama-katolik,Siapakah Yesus?,"Injil, pribadi, dan teladan Yesus",1
+id,curriculum_id,subject_id,title,description,sort_order,grade
+top-persamaan-kuadrat,cur-mtk-1,matematika,Persamaan Kuadrat,"Bentuk umum, akar, dan aplikasi",1,9
+top-statistika,cur-mtk-2,matematika,Statistika & Peluang,"Penyajian data, ukuran pemusatan, peluang",2,9
+top-teks-eksposisi,cur-bindo-1,bahasa-indonesia,Teks Eksposisi,"Struktur, unsur kebahasaan, dan isi",1,9
+top-listrik-dinamis,cur-ipa-1,ipa,Listrik Dinamis,"Arus, tegangan, hambatan, rangkaian",1,9
+top-read-1,cur-bing-1,bahasa-inggris,Reading Comprehension,"Ide utama, detail, dan inferensi teks",1,9
+top-pak-1,cur-pak-1,pendidikan-agama-katolik,Siapakah Yesus?,"Injil, pribadi, dan teladan Yesus",1,9
+top-ips-globalisasi,cur-ips-1,ips,Globalisasi & Perubahan Sosial,"Dampak positif, negatif, dan sikap menghadapi globalisasi",1,9
+top-ppkn-pancasila,cur-ppkn-1,ppkn,Dinamika Pancasila Sebagai Dasar Negara,Penerapan Pancasila era awal kemerdekaan hingga reformasi,1,9
+top-pjok-kebugaran,cur-pjok-1,pjok,Kebugaran Jasmani & Daya Tahan,"Komponen kekuatan, kelenturan, dan daya tahan jantung",1,9
+top-prakarya-kerajinan,cur-prakarya-1,prakarya-bk,Kerajinan Bahan Keras & Rencana Karier,"Bahan alam, buatan, serta pemetaan minat masa depan",1,9
+top-k8-pola-bilangan,cur-mtk-k8-1,matematika,Pola Bilangan & Barisan,"Barisan aritmetika, pola konfigurasi objek, dan rumus suku ke-n",1,8
+top-k8-pythagoras,cur-mtk-k8-2,matematika,Teorema Pythagoras,Hubungan sisi segitiga siku-siku dan tripel Pythagoras,2,8
+top-k8-gerak-newton,cur-ipa-k8-1,ipa,Gerak Benda & Hukum Newton,"Hukum I, II, dan III Newton dalam kehidupan sehari-hari",1,8
+top-k8-pencernaan,cur-ipa-k8-1,ipa,Sistem Pencernaan Manusia,"Organ pencernaan, enzim pengurai, dan nutrisi makanan",2,8
+top-k8-teks-berita,cur-bindo-k8-1,bahasa-indonesia,Teks Berita (5W+1H),"Unsur ADIKSIMBA, kepala berita, tubuh berita, dan fakta faktual",1,8
+top-k8-recount-text,cur-bing-k8-1,bahasa-inggris,Recount Text,"Personal experiences, past tense, and chronological events",1,8
+top-k8-pak-kerajaan,cur-pak-k8-1,pendidikan-agama-katolik,Kerajaan Allah & Sakramen,Perumpamaan Yesus dan sakramen inisiasi umat beriman,1,8
+top-k8-asean-geo,cur-ips-k8-1,ips,Interaksi Keruangan ASEAN,"Karakteristik geografis, sumber daya alam, dan kerja sama anggota ASEAN",1,8
+top-k8-ppkn-pancasila,cur-ppkn-k8-1,ppkn,Kedudukan & Fungsi Pancasila,Pancasila sebagai dasar negara dan pandangan hidup bangsa Indonesia,1,8
+top-k8-pjok-basket,cur-pjok-k8-1,pjok,Bola Basket & Kebugaran Jasmani,"Teknik passing, dribble, dan latihan daya tahan jasmani Kelas 8",1,8
+top-k8-prakarya-lunak,cur-prakarya-k8-1,prakarya-bk,Kerajinan Bahan Lunak & Minat Bakat,"Eksplorasi tanah liat, sabun, lilin, serta pemetaan potensi diri",1,8

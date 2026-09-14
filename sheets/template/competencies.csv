@@ -1,7 +1,22 @@
-id,topic_id,code,description,sort_order
-comp-pk-2,top-persamaan-kuadrat,9.2.1,Menentukan akar-akar persamaan kuadrat,1
-comp-pk-2,top-persamaan-kuadrat,9.2.2,Menyelesaikan masalah kontekstual persamaan kuadrat,2
-comp-st-1,top-statistika,9.6.1,Menyajikan data dan menentukan ukuran pemusatan,1
-comp-te-1,top-teks-eksposisi,9.1.1,Mengidentifikasi struktur teks eksposisi,1
-comp-rd-1,top-read-1,9.3.1,Menemukan ide utama dan detail teks,1
-comp-pk-1,top-pak-1,9.1.1,Menjelaskan pribadi Yesus Kristus dalam Injil,1
+id,topic_id,code,description,sort_order,grade
+comp-pk-2,top-persamaan-kuadrat,9.2.1,Menentukan akar-akar persamaan kuadrat,1,9
+comp-pk-2-b,top-persamaan-kuadrat,9.2.2,Menyelesaikan masalah kontekstual persamaan kuadrat,2,9
+comp-st-1,top-statistika,9.6.1,Menyajikan data dan menentukan ukuran pemusatan,1,9
+comp-te-1,top-teks-eksposisi,9.1.1,Mengidentifikasi struktur teks eksposisi,1,9
+comp-rd-1,top-read-1,9.3.1,Menemukan ide utama dan detail teks,1,9
+comp-pk-1,top-pak-1,9.1.1,Menjelaskan pribadi Yesus Kristus dalam Injil,1,9
+comp-ips-1,top-ips-globalisasi,9.3.1,Menganalisis dampak globalisasi dalam kehidupan bermasyarakat,1,9
+comp-ppkn-1,top-ppkn-pancasila,9.1.1,Mendeskripsikan penerapan Pancasila dari masa ke masa,1,9
+comp-pjok-1,top-pjok-kebugaran,9.4.1,Mempraktikkan latihan kebugaran jasmani yang terkait kesehatan,1,9
+comp-prak-1,top-prakarya-kerajinan,9.1.1,Memahami desain dan perencanaan karya kerajinan fungsi hias,1,9
+comp-k8-pola,top-k8-pola-bilangan,8.1.1,Menentukan pola barisan bilangan dan konfigurasi objek,1,8
+comp-k8-pyth,top-k8-pythagoras,8.6.1,Membuktikan dan menerapkan teorema Pythagoras,1,8
+comp-k8-newton,top-k8-gerak-newton,8.1.1,Menganalisis gerak lurus dan pengaruh gaya berdasarkan Hukum Newton,1,8
+comp-k8-cerna,top-k8-pencernaan,8.5.1,Menganalisis sistem pencernaan dan zat makanan pada manusia,1,8
+comp-k8-berita,top-k8-teks-berita,8.1.1,Mengidentifikasi unsur-unsur teks berita yang didengar dan dibaca,1,8
+comp-k8-recount,top-k8-recount-text,8.4.1,Memahami makna teks recount lisan dan tulis terkait pengalaman pribadi,1,8
+comp-k8-pak,top-k8-pak-kerajaan,8.1.1,Memahami warta Kerajaan Allah dalam perumpamaan dan tindakan Yesus,1,8
+comp-k8-asean,top-k8-asean-geo,8.1.1,Menjelaskan kondisi keruangan dan potensi negara-negara ASEAN,1,8
+comp-k8-ppkn,top-k8-ppkn-pancasila,8.1.1,Mendeskripsikan kedudukan dan fungsi Pancasila bagi bangsa Indonesia,1,8
+comp-k8-pjok,top-k8-pjok-basket,8.1.1,Mempraktikkan gerak spesifik passing dan dribble bola basket,1,8
+comp-k8-prakarya,top-k8-prakarya-lunak,8.1.1,Memahami prinsip perancangan karya kerajinan dari bahan lunak,1,8

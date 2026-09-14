@@ -8,6 +8,8 @@ import {
 import { QuestionRenderer, useQuestionEngine } from '../lib/question-engine.tsx'
 import { useData } from '../lib/store.tsx'
 
+import { useProfile } from '../lib/auth.tsx'
+
 // Bank Kesalahan / My Mistakes — Phase 5
 // Mengadopsi desain visual Stitch my_mistakes_review_bank:
 // - Hero header dengan statistik (Perlu Diulang, Dikuasai, Akurasi Retry).
@@ -18,7 +20,8 @@ import { useData } from '../lib/store.tsx'
 
 export function MistakesPage() {
   const { data, loading } = useData()
-  const { mistakes, stats } = useMistakes()
+  const { active } = useProfile()
+  const { mistakes, stats } = useMistakes(active?.id)
 
   // Filter mapel yang sedang dipilih ('all' atau subjectId)
   const [selectedFilter, setSelectedFilter] = useState<string>('all')
@@ -31,10 +34,12 @@ export function MistakesPage() {
 
   // Seed contoh kesalahan awal jika store masih kosong
   useEffect(() => {
-    if (data?.questions) {
-      seedInitialMistakesIfEmpty(data.questions)
+    if (data?.questions && active?.id) {
+      const currentGrade = active?.grade ?? 9
+      const gradeQuestions = data.questions.filter((q) => (q.grade ?? 9) === currentGrade)
+      seedInitialMistakesIfEmpty(gradeQuestions, active.id)
     }
-  }, [data?.questions])
+  }, [data?.questions, active?.id, active?.grade])
 
   if (loading) return <p className="py-10 text-center text-sm text-slate-400">Memuat Bank Kesalahan…</p>
   if (!data) return null
